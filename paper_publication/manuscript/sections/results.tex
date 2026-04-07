@@ -1,0 +1,202 @@
+% ===========================================================================
+\section{Results}
+% ===========================================================================
+
+\subsection{Image Census and Exclusions}
+
+A total of 325 $t = 0$ images were processed across two exposure conditions and two independent experiments (EXP1, $n = 158$; EXP2, $n = 167$). Manual review identified 40~images (12.3\%) containing no visible wound, which were excluded from accuracy analysis (Table~\ref{tab:nowound}). Two images remained unannotated. The remaining 285~wound-bearing images formed the validation cohort.
+
+\begin{table}[t]
+  \centering
+  \caption{Distribution of no-wound images by condition and experiment.}\label{tab:nowound}
+  \begin{tabular}{lrrr}
+    \toprule
+    Condition & EXP1 & EXP2 & Total \\
+    \midrule
+    Candesartan & 29 & 1 & 30 \\
+    ALK5i       &  9 & 1 & 10 \\
+    \midrule
+    \textbf{Total} & 38 & 2 & 40 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Wound Detection Accuracy}
+
+Of 285 wound-bearing images, the algorithm correctly segmented 282 (98.9\%) as judged by expert review. Only 3~images were incorrectly segmented. Performance was consistent across conditions and experiments (Table~\ref{tab:accuracy}).
+
+\begin{table}[t]
+  \centering
+  \caption{Detection accuracy by exposure and experiment (wound-bearing images only).}\label{tab:accuracy}
+  \begin{tabular}{lccc}
+    \toprule
+    Condition & EXP1 & EXP2 & Total \\
+    \midrule
+    Candesartan & 67/67 (100\%) & 93/94 (98.9\%) & 160/161 (99.4\%) \\
+    ALK5i       & 51/53 (96.2\%) & 71/71 (100\%) & 122/124 (98.4\%) \\
+    \midrule
+    \textbf{Total} & 118/120 (98.3\%) & 164/165 (99.4\%) & 282/285 (98.9\%) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Automatic Quality-Control Evaluation}
+
+The automatic QC flag was evaluated against human verdicts across all 323 annotated images (Table~\ref{tab:qc_confusion}). The QC algorithm achieved 94.4\% agreement with the human reviewer (Cohen's $\kappa = 0.69$). It identified all 282~correctly segmented images (sensitivity~$= 1.00$, NPV~$= 1.00$) but flagged only 23 of 41~problematic images as invalid (specificity~$= 0.56$). The 18~false positives (QC valid, human incorrect) were predominantly no-wound images (16 of 18) that the variance-based QC could not distinguish from valid segmentations.
+
+On wound-bearing images only ($n = 285$), the QC algorithm correctly classified 283 of 285~images (accuracy~$= 99.3\%$), missing 2~incorrect segmentations while producing no false negatives.
+
+\begin{table}[t]
+  \centering
+  \caption{QC confusion matrix (all 323 annotated images).}\label{tab:qc_confusion}
+  \begin{tabular}{lrr}
+    \toprule
+    & Human: Correct & Human: Incorrect \\
+    \midrule
+    QC: Valid   & 282 (TP) & 18 (FP) \\
+    QC: Invalid &   0 (FN) & 23 (TN) \\
+    \bottomrule
+  \end{tabular}
+  \smallskip\\
+  {\small Sensitivity $= 1.00$; Specificity $= 0.56$; PPV $= 0.94$; NPV $= 1.00$.}
+\end{table}
+
+\subsection{Pixel-Level Segmentation Quality}
+
+For 5~images with expert-drawn polygon annotations, pixel-level metrics were computed against human ground truth (Table~\ref{tab:dice}). The mean Dice coefficient was 0.91 (SD~$= 0.06$), indicating high spatial overlap. The high recall (0.97) relative to precision (0.87) indicates the algorithm tends to slightly over-segment rather than miss wound area.
+
+\begin{table}[t]
+  \centering
+  \caption{Pixel-level segmentation metrics ($n = 5$).}\label{tab:dice}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Metric & Mean & SD & Min & Max \\
+    \midrule
+    Dice       & 0.909 & 0.057 & 0.843 & 0.998 \\
+    IoU        & 0.837 & 0.099 & 0.729 & 0.997 \\
+    Precision  & 0.868 & 0.123 & 0.729 & 1.000 \\
+    Recall     & 0.969 & 0.070 & 0.844 & 1.000 \\
+    Accuracy   & 0.954 & 0.029 & 0.921 & 0.999 \\
+    Hausdorff$_{95}$ (px) & 45.6 & 27.8 & 0.0 & 76.0 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Quality Control and Sample Accounting}
+
+Table~\ref{tab:qc_pass} summarizes QC pass rates and the sample accounting for the downstream analysis cohort. The analysis was restricted to ALK5i and DMSO at 0.1~mM concentration with validated trajectories, yielding a final cohort of 38~trajectories (Line~1: 10~ALK5i, 8~DMSO; Line~2: 5~ALK5i, 15~DMSO).
+
+\begin{table}[t]
+  \centering
+  \caption{QC pass rates and sample accounting for the analysis cohort.}\label{tab:qc_pass}
+  \begin{tabular}{llrrr}
+    \toprule
+    Cell Line & Condition & QC Pass Rate (\%) & $n_\text{final}$ & Exclusion (\%) \\
+    \midrule
+    Line 1 & ALK5i & 96.9 & 10 & 68.8 \\
+    Line 1 & DMSO  & 100.0 & 8  & 83.3 \\
+    Line 2 & ALK5i & 81.3  & 5  & 84.4 \\
+    Line 2 & DMSO  & 93.8  & 15 & 76.6 \\
+    \bottomrule
+  \end{tabular}
+  \smallskip\\
+  {\small Exclusion percentage reflects filtering by concentration (0.1~mM), QC, and availability.}
+\end{table}
+
+\subsection{Wound Healing Dynamics}
+
+\subsubsection{Descriptive Statistics}
+
+Table~\ref{tab:descriptive} presents the mean wound edge displacement and closure speed at $t = 24$~h by cell line and condition. Edge displacement ranged from 16.6 to 22.5~pixels across groups, corresponding to closure speeds of 0.74--1.05~\pxh.
+
+\begin{table}[t]
+  \centering
+  \caption{Wound closure metrics at $t = 24$~h by cell line and condition (mean $\pm$ SD).}\label{tab:descriptive}
+  \begin{tabular}{llrrrr}
+    \toprule
+    Cell Line & Condition & $n$ & Distance (px) & Speed (\pxh) \\
+    \midrule
+    Line 1 & ALK5i & 10 & $17.3 \pm 9.2$ & $0.74 \pm 0.37$ \\
+    Line 1 & DMSO  &  8 & $20.6 \pm 4.8$ & $0.86 \pm 0.20$ \\
+    \addlinespace
+    Line 2 & ALK5i &  5 & $16.6 \pm 6.9$ & $0.83 \pm 0.35$ \\
+    Line 2 & DMSO  & 15 & $22.5 \pm 19.3$ & $1.05 \pm 0.98$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Pairwise Comparisons}
+
+No pairwise comparison between ALK5i and DMSO reached statistical significance after Bonferroni correction (Table~\ref{tab:pairwise}). Effect sizes were consistently negative (Cohen's $d$ ranging from $-0.26$ to $-0.43$), suggesting a trend toward reduced closure with ALK5 inhibition that did not reach significance at the available sample sizes.
+
+\begin{table}[t]
+  \centering
+  \caption{Pairwise comparisons of ALK5i versus DMSO (Welch's $t$-test, Bonferroni-corrected).}\label{tab:pairwise}
+  \begin{tabular}{llrrrrr}
+    \toprule
+    Cell Line & Metric & $t$-statistic & Cohen's $d$ & 95\% CI & $p_\text{corr}$ \\
+    \midrule
+    Line 1 & Speed (px/h)  & $-0.87$ & $-0.39$ & [$-0.39$, $0.15$] & $0.800$ \\
+    Line 2 & Speed (px/h)  & $-0.76$ & $-0.26$ & [$-0.81$, $0.36$] & $0.914$ \\
+    \addlinespace
+    Line 1 & Distance (px) & $-0.98$ & $-0.43$ & [$-9.94$, $3.32$] & $0.689$ \\
+    Line 2 & Distance (px) & $-1.02$ & $-0.34$ & [$-17.4$, $5.53$] & $0.646$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Mixed-Effects Model}
+
+The linear mixed-effects model (distance $\sim$ time $\times$ condition $\times$ cell line, random intercepts and slopes per trajectory) revealed no statistically significant fixed effects (Table~\ref{tab:mixed}). The main time effect showed a positive but non-significant slope ($\beta = 0.77$, $p = 0.411$), and neither condition, cell line, nor their interactions with time were significant. The random intercept variance was significant ($\sigma^2_\text{group} = 9.63$, $p < 0.001$), indicating substantial between-trajectory heterogeneity.
+
+\begin{table}[t]
+  \centering
+  \caption{Mixed-effects model coefficients for wound edge displacement.}\label{tab:mixed}
+  \begin{tabular}{lrrrr}
+    \toprule
+    Term & Estimate & 95\% CI & $p$-value \\
+    \midrule
+    Intercept & 1.55 & [$-4.64$, $7.75$] & 0.623 \\
+    Condition [DMSO] & 1.24 & [$-8.29$, $10.8$] & 0.798 \\
+    Cell line [Line 2] & 0.93 & [$-8.67$, $10.5$] & 0.849 \\
+    Condition $\times$ Cell line & 2.82 & [$-10.3$, $15.9$] & 0.673 \\
+    Time ($t$) & 0.77 & [$-1.07$, $2.61$] & 0.411 \\
+    $t \times$ Condition [DMSO] & 0.10 & [$-2.66$, $2.86$] & 0.944 \\
+    $t \times$ Cell line [Line 2] & 0.07 & [$-3.00$, $3.15$] & 0.963 \\
+    $t \times$ Condition $\times$ Cell line & $-0.15$ & [$-4.13$, $3.84$] & 0.942 \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Random effects}} \\
+    Group variance & 9.63 & [$5.14$, $14.1$] & $<$\textbf{0.001} \\
+    Group $\times$ $t$ covariance & 0.06 & [$-2.78$, $2.91$] & 0.965 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Time-Course Profiles}
+
+Wound closure trajectories followed a characteristic pattern across all conditions: an initial lag phase (0--4~h) with minimal closure, followed by a progressive closure phase that did not plateau within 24~hours (Figure~\ref{fig:fig1}D). Edge displacement increased approximately linearly after the lag phase. Closure slopes were similar across conditions: ALK5i Line~1, $0.77 \pm 0.46$; DMSO Line~1, $0.87 \pm 0.22$; ALK5i Line~2, $0.91 \pm 0.45$; DMSO Line~2, $0.80 \pm 0.29$~px/h (mean $\pm$ SD; see Figure~\ref{fig:fig2}C).
+
+\subsubsection{Assumption Checks}
+
+Shapiro--Wilk tests for normality of the closure distance distribution indicated non-normality in the Line~2 DMSO group ($W = 0.57$, $p < 0.001$), likely driven by high between-trajectory variability in this group (SD~$= 19.3$~px). All other groups were consistent with normality ($p > 0.05$). Levene's test for homogeneity of variances was non-significant within both cell lines (Line~1: $F = 3.34$, $p = 0.086$; Line~2: $F = 0.22$, $p = 0.648$), supporting the use of Welch's $t$-test which does not assume equal variances.
+
+\subsection{Figures}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig1_model_quality.png}
+  \caption{\textbf{Automated wound boundary detection and closure dynamics.}
+  (A--C)~Representative phase-contrast images of a wound healing assay at three timepoints ($t = 0$, mid, and $t = 24$~h) with computationally detected wound boundaries overlaid as semi-transparent filled regions. Boundaries are shown cumulatively: earlier timepoints appear as faint dashed outlines, the current timepoint as a solid fill. Representative trajectory: ALK5i, EXP2. Images were acquired at a calibrated scale of 1.24\um/pixel.
+  (D)~Normalized wound area over time, expressed as a fraction of the $t = 0$ wound area. Error bands represent 95\% confidence intervals.
+  Sample sizes: Line~1 ALK5i $n = 10$; Line~1 DMSO $n = 8$; Line~2 ALK5i $n = 5$; Line~2 DMSO $n = 15$.}\label{fig:fig1}
+\end{figure}
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{figures/fig2_wound_dynamics.png}
+  \caption{\textbf{Wound healing dynamics across experimental conditions.}
+  (A)~Mean wound closure speed (px/h) at $t = 24$~h. (B)~Mean wound closure distance (px) at $t = 24$~h.
+  (C)~Time-series of wound edge displacement over the full observation period. Error bars represent 95\% confidence intervals.
+  Statistical comparisons: Welch's $t$-test with Bonferroni correction.
+  Sample sizes as in Figure~\ref{fig:fig1}.}\label{fig:fig2}
+\end{figure}

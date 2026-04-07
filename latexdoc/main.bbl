@@ -1,0 +1,491 @@
+\begin{thebibliography}{63}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Liang et~al.(2007)Liang, Park, and Guan]{Liang2007}
+Chung-Chi Liang, Andrea~Y Park, and Jun-Lin Guan.
+\newblock In vitro scratch assay: a convenient and inexpensive method for
+  analysis of cell migration in vitro.
+\newblock \emph{Nature Protocols}, 2\penalty0 (2):\penalty0 329--333, 2007.
+\newblock \doi{10.1038/nprot.2007.30}.
+
+\bibitem[Jonkman et~al.(2014)Jonkman, Cathcart, Xu, et~al.]{Jonkman2014}
+James E~A Jonkman, Jenny~A Cathcart, Fuchun Xu, et~al.
+\newblock An introduction to the wound healing assay using live-cell
+  microscopy.
+\newblock \emph{Cell Adhesion and Migration}, 8\penalty0 (5):\penalty0
+  440--451, 2014.
+\newblock \doi{10.4161/cam.36224}.
+
+\bibitem[Grada et~al.(2017)Grada, Otero-Vinas, Prieto-Castrillo,
+  et~al.]{Grada2017}
+Adnan Grada, Marta Otero-Vinas, Francisco Prieto-Castrillo, et~al.
+\newblock Research techniques made simple: analysis of collective cell
+  migration using the wound healing assay.
+\newblock \emph{Journal of Investigative Dermatology}, 137\penalty0
+  (2):\penalty0 e11--e16, 2017.
+\newblock \doi{10.1016/j.jid.2016.11.020}.
+
+\bibitem[Yarrow et~al.(2004)Yarrow, Perlman, Westwood, and
+  Mitchison]{Yarrow2004}
+Julie~C Yarrow, Zachary~E Perlman, Nicholas~J Westwood, and Timothy~J
+  Mitchison.
+\newblock A high-throughput cell migration assay using scratch wound healing, a
+  comparison of image-based readout methods.
+\newblock \emph{BMC Biotechnology}, 4:\penalty0 21, 2004.
+\newblock \doi{10.1186/1472-6750-4-21}.
+
+\bibitem[Ashby and Zijlstra(2012)]{Ashby2012}
+William~J Ashby and Andries Zijlstra.
+\newblock Established and novel methods of interrogating two-dimensional cell
+  migration.
+\newblock \emph{Integrative Biology}, 4\penalty0 (11):\penalty0 1338--1350,
+  2012.
+\newblock \doi{10.1039/c2ib20154b}.
+
+\bibitem[Pinto et~al.(2023)]{Pinto2023}
+Beatriz~I Pinto et~al.
+\newblock Comparison of in vitro scratch wound assay experimental procedures.
+\newblock \emph{Biochemistry and Biophysics Reports}, 33:\penalty0 101423,
+  2023.
+\newblock \doi{10.1016/j.bbrep.2023.101423}.
+
+\bibitem[Stamm et~al.(2016)Stamm, Reimers, et~al.]{Stamm2016}
+Agathe Stamm, Kerstin Reimers, et~al.
+\newblock In vitro wound healing assays --- state of the art.
+\newblock \emph{BioNanoMaterials}, 17\penalty0 (1-2):\penalty0 79--87, 2016.
+\newblock \doi{10.1515/bnm-2016-0002}.
+
+\bibitem[Geb{\"a}ck et~al.(2009)Geb{\"a}ck, Schulz, Koumoutsakos, and
+  Detmar]{Gebaeck2009}
+Tobias Geb{\"a}ck, Marcel M~P Schulz, Petros Koumoutsakos, and Michael Detmar.
+\newblock {TScratch}: a novel and simple software tool for automated analysis
+  of monolayer wound healing assays.
+\newblock \emph{BioTechniques}, 46\penalty0 (4):\penalty0 265--274, 2009.
+\newblock \doi{10.2144/000113083}.
+
+\bibitem[Suarez-Arnedo et~al.(2020)Suarez-Arnedo, Torres~Figueroa, Clavijo,
+  et~al.]{Suarez2020}
+Alejandra Suarez-Arnedo, Felipe Torres~Figueroa, Carolina Clavijo, et~al.
+\newblock An {ImageJ} plugin for the high throughput image analysis of in vitro
+  scratch wound healing assays.
+\newblock \emph{PLOS ONE}, 15\penalty0 (7):\penalty0 e0232565, 2020.
+\newblock \doi{10.1371/journal.pone.0232565}.
+
+\bibitem[Vargas et~al.(2016)Vargas, Angeli, Pastrello, et~al.]{Vargas2016}
+Alexander Vargas, Michael Angeli, Chiara Pastrello, et~al.
+\newblock Robust quantitative scratch assay.
+\newblock \emph{Bioinformatics}, 32\penalty0 (9):\penalty0 1439--1440, 2016.
+\newblock \doi{10.1093/bioinformatics/btv746}.
+
+\bibitem[Nunes~Viana et~al.(2017)Nunes~Viana, Leite~Oliveira, Nunes, and
+  Santos~de Oliveira]{Nunes2017}
+Marcos Nunes~Viana, Luis~Felipe Leite~Oliveira, Romulo~A Nunes, and Eduardo~L
+  Santos~de Oliveira.
+\newblock {AIM}: a computational tool for the automatic quantification of
+  scratch wound healing assays.
+\newblock \emph{Applied Sciences}, 7\penalty0 (12):\penalty0 1237, 2017.
+\newblock \doi{10.3390/app7121237}.
+
+\bibitem[McQuin et~al.(2018)McQuin, Goodman, Chernyshev, et~al.]{McQuin2018}
+Claire McQuin, Allen Goodman, Vasiliy Chernyshev, et~al.
+\newblock {CellProfiler~3.0}: next-generation image processing for biology.
+\newblock \emph{PLOS Biology}, 16\penalty0 (7):\penalty0 e2005970, 2018.
+\newblock \doi{10.1371/journal.pbio.2005970}.
+
+\bibitem[Martinotti et~al.(2025)]{Martinotti2025}
+Simone Martinotti et~al.
+\newblock A novel method for evaluating and visualizing scratch wound healing
+  assays using level-set and image sector analysis.
+\newblock \emph{PNAS Nexus}, 4\penalty0 (11):\penalty0 pgaf355, 2025.
+\newblock \doi{10.1093/pnasnexus/pgaf355}.
+
+\bibitem[Treloar and Simpson(2013)]{Treloar2013}
+Katrina~K Treloar and Matthew~J Simpson.
+\newblock Sensitivity of edge detection methods for quantifying cell migration
+  assays.
+\newblock \emph{PLOS ONE}, 8\penalty0 (6):\penalty0 e67389, 2013.
+\newblock \doi{10.1371/journal.pone.0067389}.
+
+\bibitem[Ronneberger et~al.(2015)Ronneberger, Fischer, and
+  Brox]{Ronneberger2015}
+Olaf Ronneberger, Philipp Fischer, and Thomas Brox.
+\newblock {U-Net}: convolutional networks for biomedical image segmentation.
+\newblock In \emph{Medical Image Computing and Computer-Assisted Intervention
+  (MICCAI)}, volume 9351 of \emph{Lecture Notes in Computer Science}, pages
+  234--241, 2015.
+\newblock \doi{10.1007/978-3-319-24574-4_28}.
+
+\bibitem[Do{\u{g}}ru et~al.(2024)Do{\u{g}}ru, {\"O}zdemir, {\"O}zdemir, and
+  Ercan]{Dogru2024}
+Devran Do{\u{g}}ru, G{\"o}khan~D {\"O}zdemir, Mehmet~A {\"O}zdemir, and Utku~K
+  Ercan.
+\newblock An automated in vitro wound healing microscopy image analysis
+  approach utilizing {U-net}-based deep learning methodology.
+\newblock \emph{BMC Medical Imaging}, 24:\penalty0 152, 2024.
+\newblock \doi{10.1186/s12880-024-01332-2}.
+
+\bibitem[Naser et~al.(2025)]{Naser2025}
+Majd~A Naser et~al.
+\newblock Automated segmentation of hepatic tumor cell migration using {U-Net}
+  models.
+\newblock \emph{Lecture Notes in Computer Science (Springer)}, 2025.
+\newblock \doi{10.1007/978-3-032-09044-7_30}.
+
+\bibitem[Lehmann et~al.(2024)]{Lehmann2024}
+Tim Lehmann et~al.
+\newblock Virtually objective quantification of in vitro wound healing scratch
+  assays with the {Segment Anything Model}, 2024.
+
+\bibitem[Oldenburg et~al.(2021)]{Oldenburg2021}
+Johannes Oldenburg et~al.
+\newblock Methodology for comprehensive cell-level analysis of wound healing
+  experiments using deep learning in {MATLAB}.
+\newblock \emph{BMC Molecular and Cell Biology}, 22:\penalty0 1, 2021.
+\newblock \doi{10.1186/s12860-021-00369-3}.
+
+\bibitem[Haeger et~al.(2013)Haeger, Wolf, Zegers, and Friedl]{Haeger2013}
+Anna Haeger, Katarina Wolf, Mirjam~M Zegers, and Peter Friedl.
+\newblock Collective cell migration: implications for wound healing and cancer
+  invasion.
+\newblock \emph{Burns and Trauma}, 1\penalty0 (1):\penalty0 21--28, 2013.
+\newblock \doi{10.4103/2321-3868.113331}.
+
+\bibitem[Ele et~al.(2020)Ele, Richter, Gros, et~al.]{Ele2020}
+A~Ele, K~Richter, K~Gros, et~al.
+\newblock Cellular dynamics of myogenic cell migration: molecular mechanisms
+  and implications for skeletal muscle cell therapies.
+\newblock \emph{EMBO Molecular Medicine}, 12\penalty0 (12):\penalty0 e12357,
+  2020.
+\newblock \doi{10.15252/emmm.202012357}.
+
+\bibitem[Goetsch et~al.(2013)Goetsch, Snyman, Myburgh, and
+  Niesler]{Goetsch2013}
+Keith~P Goetsch, C~Snyman, Kathryn~H Myburgh, and Carola~U Niesler.
+\newblock In vitro myoblast motility models: investigating migration dynamics
+  for the study of skeletal muscle repair.
+\newblock \emph{Journal of Muscle Research and Cell Motility}, 34\penalty0
+  (5-6):\penalty0 333--342, 2013.
+\newblock \doi{10.1007/s10974-013-9364-7}.
+
+\bibitem[Webster and Fan(2013)]{Webster2013}
+Marie~T Webster and Chen-Ming Fan.
+\newblock c-{MET} regulates myoblast motility and myocyte fusion during adult
+  skeletal muscle regeneration.
+\newblock \emph{Development}, 140\penalty0 (22):\penalty0 4586--4596, 2013.
+\newblock \doi{10.1242/dev.098210}.
+
+\bibitem[Kowalski et~al.(2017)Kowalski, Kolbowicz, Krzeminski,
+  et~al.]{Kowalski2017}
+Kamil Kowalski, Magdalena Kolbowicz, Pawel Krzeminski, et~al.
+\newblock Stem cells migration during skeletal muscle regeneration --- the role
+  of {Sdf-1/Cxcr4} and {Sdf-1/Cxcr7} axis.
+\newblock \emph{Cell Adhesion and Migration}, 11\penalty0 (4):\penalty0
+  384--398, 2017.
+\newblock \doi{10.1080/19336918.2016.1227911}.
+
+\bibitem[Goetsch et~al.(2011)Goetsch, Myburgh, and Niesler]{Goetsch2011}
+Keith~P Goetsch, Kathryn~H Myburgh, and Carola~U Niesler.
+\newblock Optimization of the scratch assay for in vitro skeletal muscle wound
+  healing analysis.
+\newblock \emph{Analytical Biochemistry}, 411\penalty0 (1):\penalty0 158--160,
+  2011.
+\newblock \doi{10.1016/j.ab.2010.12.012}.
+
+\bibitem[Yoshida et~al.(2013)Yoshida, Tabony, Galvez, et~al.]{Yoshida2013}
+Tadashi Yoshida, Alexander~M Tabony, Sheridan Galvez, et~al.
+\newblock Angiotensin {II} inhibits satellite cell proliferation and prevents
+  skeletal muscle regeneration.
+\newblock \emph{Journal of Biological Chemistry}, 288\penalty0 (33):\penalty0
+  23823--23832, 2013.
+\newblock \doi{10.1074/jbc.M112.449074}.
+
+\bibitem[Yoshida et~al.(2010)Yoshida, Semprun-Prieto, Sukhanov, and
+  Delafontaine]{Yoshida2010}
+Tadashi Yoshida, Laura Semprun-Prieto, Sergiy Sukhanov, and Patrice
+  Delafontaine.
+\newblock Regulation of muscle satellite cell activation and chemotaxis by
+  angiotensin {II}.
+\newblock \emph{PLOS ONE}, 5\penalty0 (12):\penalty0 e15212, 2010.
+\newblock \doi{10.1371/journal.pone.0015212}.
+
+\bibitem[Lemos et~al.(2019)Lemos, Babaeijandaghi, Low, et~al.]{Lemos2019}
+Diogo~R Lemos, Farshad Babaeijandaghi, Mark Low, et~al.
+\newblock Angiotensin-{II} drives human satellite cells toward hypertrophy and
+  myofibroblast trans-differentiation by two independent pathways.
+\newblock \emph{International Journal of Molecular Sciences}, 20\penalty0
+  (19):\penalty0 4912, 2019.
+\newblock \doi{10.3390/ijms20194912}.
+
+\bibitem[Cohn et~al.(2007)Cohn, van Erp, Habashi, et~al.]{Cohn2007}
+Ronald~D Cohn, Christel van Erp, Jennifer~P Habashi, et~al.
+\newblock Angiotensin {II} type 1 receptor blockade attenuates
+  {TGF-beta}-induced failure of muscle regeneration in multiple myopathic
+  states.
+\newblock \emph{Nature Medicine}, 13\penalty0 (2):\penalty0 204--210, 2007.
+\newblock \doi{10.1038/nm1536}.
+
+\bibitem[Bedair et~al.(2008)Bedair, Karthikeyan, Quintero, et~al.]{Bedair2008}
+Hamid~S Bedair, Thirumaaran Karthikeyan, Alejandro Quintero, et~al.
+\newblock Angiotensin {II} receptor blockade administered after injury improves
+  muscle regeneration and decreases fibrosis in normal skeletal muscle.
+\newblock \emph{American Journal of Sports Medicine}, 36\penalty0 (8):\penalty0
+  1548--1554, 2008.
+\newblock \doi{10.1177/0363546508315470}.
+
+\bibitem[Kurosaka et~al.(2009)Kurosaka, Suzuki, Hosono, et~al.]{Kurosaka2009}
+Masatsugu Kurosaka, Taku Suzuki, Koji Hosono, et~al.
+\newblock Reduced angiogenesis and delay in wound healing in angiotensin {II}
+  type 1a receptor-deficient mice.
+\newblock \emph{Biomedicine and Pharmacotherapy}, 63\penalty0 (9):\penalty0
+  627--634, 2009.
+\newblock \doi{10.1016/j.biopha.2009.01.001}.
+
+\bibitem[Cabello-Verrugio et~al.(2015)Cabello-Verrugio, Morales, Rivera,
+  et~al.]{Cabello2015}
+Claudio Cabello-Verrugio, Maria~G Morales, Juan~C Rivera, et~al.
+\newblock Renin--angiotensin system: an old player with novel functions in
+  skeletal muscle.
+\newblock \emph{Medicinal Research Reviews}, 35\penalty0 (3):\penalty0
+  437--463, 2015.
+\newblock \doi{10.1002/med.21343}.
+
+\bibitem[Li et~al.(2004)Li, Foster, Deasy, et~al.]{Li2004}
+Ying Li, William Foster, Bridget~M Deasy, et~al.
+\newblock Transforming growth factor-{beta}1 induces the differentiation of
+  myogenic cells into fibrotic cells in injured skeletal muscle.
+\newblock \emph{American Journal of Pathology}, 164\penalty0 (3):\penalty0
+  1007--1019, 2004.
+\newblock \doi{10.1016/s0002-9440(10)63188-4}.
+
+\bibitem[Loiselle et~al.(2009)Loiselle, Bowers, Paul, et~al.]{Loiselle2009}
+Ann~E Loiselle, Shawn L~K Bowers, Brandon~T Paul, et~al.
+\newblock Transforming growth factor-{beta}1 induces transdifferentiation of
+  myoblasts into myofibroblasts via up-regulation of sphingosine
+  kinase-1/{S1P3} axis.
+\newblock \emph{Molecular Biology of the Cell}, 20\penalty0 (15):\penalty0
+  3505--3513, 2009.
+\newblock \doi{10.1091/mbc.e09-09-0812}.
+
+\bibitem[McFarland et~al.(2001)]{McFarland2001}
+D~C McFarland et~al.
+\newblock {TGF}-beta inhibits muscle differentiation through functional
+  repression of myogenic transcription factors by {Smad3}.
+\newblock \emph{Genes and Development}, 15\penalty0 (22):\penalty0 2950--2966,
+  2001.
+\newblock \doi{10.1101/gad.925901}.
+
+\bibitem[Girardi et~al.(2021)]{Girardi2021}
+Fabio Girardi et~al.
+\newblock {TGFbeta} signaling curbs cell fusion and muscle regeneration.
+\newblock \emph{Nature Communications}, 12:\penalty0 750, 2021.
+\newblock \doi{10.1038/s41467-020-20289-8}.
+
+\bibitem[Ceco and McNally(2013)]{Ceco2013}
+Erkan Ceco and Elizabeth~M McNally.
+\newblock Modifying muscular dystrophy through transforming growth factor-beta.
+\newblock \emph{FEBS Journal}, 280\penalty0 (17):\penalty0 4198--4209, 2013.
+\newblock \doi{10.1111/febs.12266}.
+
+\bibitem[Lach-Trifilieff et~al.(2019)]{LachTrifilieff2019}
+Estelle Lach-Trifilieff et~al.
+\newblock Inhibition of activin-like kinase 4/5 attenuates cancer
+  cachexia-associated muscle wasting.
+\newblock \emph{Scientific Reports}, 9:\penalty0 9826, 2019.
+\newblock \doi{10.1038/s41598-019-46178-9}.
+
+\bibitem[Weiss et~al.(2025{\natexlab{a}})Weiss, Hildebrandt, Gherardini,
+  et~al.]{Weiss2025a}
+Tobias Weiss, Eva Hildebrandt, Jacopo Gherardini, et~al.
+\newblock Effect of transforming growth factor beta receptor {I} inhibitors on
+  myotube formation in vitro.
+\newblock \emph{Scientific Reports}, 15:\penalty0 87934, 2025{\natexlab{a}}.
+\newblock \doi{10.1038/s41598-025-09381-5}.
+
+\bibitem[Weiss et~al.(2025{\natexlab{b}})]{Weiss2025b}
+Tobias Weiss et~al.
+\newblock The effects of {TGF-beta} receptor {I} inhibitors on myofibroblast
+  differentiation and myotube formation.
+\newblock \emph{Frontiers in Cell and Developmental Biology}, 13:\penalty0
+  1636884, 2025{\natexlab{b}}.
+\newblock \doi{10.3389/fcell.2025.1636884}.
+
+\bibitem[Vishwakarma et~al.(2014)]{Vishwakarma2014}
+Manasi Vishwakarma et~al.
+\newblock Leader cell positioning drives wound-directed collective migration in
+  {TGFbeta}-stimulated epithelial sheets.
+\newblock \emph{Molecular Biology of the Cell}, 25\penalty0 (9):\penalty0
+  1586--1593, 2014.
+\newblock \doi{10.1091/mbc.e14-01-0697}.
+
+\bibitem[Rodriguez-Vita et~al.(2005)]{RodriguezVita2005}
+Juan Rodriguez-Vita et~al.
+\newblock Essential role of {Smad3} in angiotensin {II}-induced vascular
+  fibrosis.
+\newblock \emph{Circulation Research}, 96\penalty0 (12):\penalty0 1292--1299,
+  2005.
+\newblock \doi{10.1161/01.RES.0000171524.42914.37}.
+
+\bibitem[Wang et~al.(2008)Wang, Huang, Canlas, et~al.]{Wang2008}
+Weiping Wang, Xiao-Ru Huang, Erwin Canlas, et~al.
+\newblock Angiotensin {II} activates the {Smad} pathway during epithelial
+  mesenchymal transdifferentiation.
+\newblock \emph{Kidney International}, 74\penalty0 (5):\penalty0 585--595,
+  2008.
+\newblock \doi{10.1038/ki.2008.302}.
+
+\bibitem[Murphy et~al.(2015)Murphy, Wong, and Bhagra]{Murphy2015}
+Aoife~M Murphy, Andrew~L Wong, and Meera Bhagra.
+\newblock Modulation of angiotensin {II} signaling in the prevention of
+  fibrosis.
+\newblock \emph{Fibrogenesis and Tissue Repair}, 8:\penalty0 7, 2015.
+\newblock \doi{10.1186/s13069-015-0023-z}.
+
+\bibitem[Yin et~al.(2012)Yin, Kanade, and Chen]{Yin2012}
+Zhaozheng Yin, Takeo Kanade, and Mei Chen.
+\newblock Understanding the phase contrast optics to restore artifact-free
+  microscopy images for segmentation.
+\newblock \emph{Medical Image Analysis}, 16\penalty0 (5):\penalty0 1047--1062,
+  2012.
+\newblock \doi{10.1016/j.media.2011.12.006}.
+
+\bibitem[Ambrossio et~al.(2022)Ambrossio, Enfedaque, and
+  de~Oliveira]{Ambrossio2022}
+Paulo~E Ambrossio, Pablo Enfedaque, and Jurandir~C de~Oliveira.
+\newblock Automated cell foreground-background segmentation with phase-contrast
+  microscopy images.
+\newblock \emph{Bioengineering}, 9\penalty0 (2):\penalty0 81, 2022.
+\newblock \doi{10.3390/bioengineering9020081}.
+
+\bibitem[Vicar et~al.(2019)]{Vicar2019}
+Tomas Vicar et~al.
+\newblock Cell segmentation methods for label-free contrast microscopy: review
+  and comprehensive comparison.
+\newblock \emph{BMC Bioinformatics}, 20:\penalty0 121, 2019.
+\newblock \doi{10.1186/s12859-019-2880-8}.
+
+\bibitem[Bragantini et~al.(2025)]{Bragantini2025}
+Jordao Bragantini et~al.
+\newblock Ultrack: pushing the limits of cell tracking across biological
+  scales.
+\newblock \emph{Nature Methods}, 2025.
+\newblock \doi{10.1038/s41592-025-02778-0}.
+
+\bibitem[Lee et~al.(2023)]{Lee2023}
+Kwanghun Lee et~al.
+\newblock {DeepSea} is an efficient deep-learning model for single-cell
+  segmentation and tracking in time-lapse microscopy.
+\newblock \emph{Cell Reports Methods}, 3\penalty0 (7):\penalty0 100523, 2023.
+\newblock \doi{10.1016/j.crmeth.2023.100523}.
+
+\bibitem[Li et~al.(2008)]{Li2008}
+Kang Li et~al.
+\newblock Image segmentation and dynamic lineage analysis in single-cell
+  fluorescence microscopy.
+\newblock \emph{Cytometry Part A}, 73A\penalty0 (5):\penalty0 376--386, 2008.
+\newblock \doi{10.1002/cyto.a.20527}.
+
+\bibitem[Guan et~al.(2021)]{Guan2021}
+Dayan Guan et~al.
+\newblock Domain adaptive video segmentation via temporal consistency
+  regularization.
+\newblock In \emph{Proceedings of the IEEE/CVF International Conference on
+  Computer Vision (ICCV)}, 2021.
+\newblock \doi{10.1109/ICCV48922.2021.00766}.
+
+\bibitem[Koenig et~al.(2017)]{Koenig2017}
+L~Koenig et~al.
+\newblock Segmentation of phase contrast microscopy images based on multi-scale
+  local {Basic Image Features} histograms.
+\newblock \emph{Computer Methods in Biomechanics and Biomedical Engineering:
+  Imaging and Visualization}, 5\penalty0 (5):\penalty0 358--368, 2017.
+\newblock \doi{10.1080/21681163.2015.1016243}.
+
+\bibitem[Loizou et~al.(2016)]{Loizou2016}
+Christos~P Loizou et~al.
+\newblock Adaptable texture-based segmentation by variance and intensity for
+  automatic detection of semitranslucent and pink blush areas in basal cell
+  carcinoma.
+\newblock \emph{Skin Research and Technology}, 22\penalty0 (4):\penalty0
+  412--423, 2016.
+\newblock \doi{10.1111/srt.12281}.
+
+\bibitem[Fischler and Bolles(1981)]{Fischler1981}
+Martin~A Fischler and Robert~C Bolles.
+\newblock Random sample consensus: a paradigm for model fitting with
+  applications to image analysis and automated cartography.
+\newblock \emph{Communications of the ACM}, 24\penalty0 (6):\penalty0 381--395,
+  1981.
+\newblock \doi{10.1145/358669.358692}.
+
+\bibitem[Savitzky and Golay(1964)]{Savitzky1964}
+Abraham Savitzky and Marcel J~E Golay.
+\newblock Smoothing and differentiation of data by simplified least squares
+  procedures.
+\newblock \emph{Analytical Chemistry}, 36\penalty0 (8):\penalty0 1627--1639,
+  1964.
+\newblock \doi{10.1021/ac60214a047}.
+
+\bibitem[van~der Walt et~al.(2014)]{vanderWalt2014}
+Stefan van~der Walt et~al.
+\newblock scikit-image: image processing in {Python}.
+\newblock \emph{PeerJ}, 2:\penalty0 e453, 2014.
+\newblock \doi{10.7717/peerj.453}.
+
+\bibitem[Zordan et~al.(2011)Zordan, Mill, Riese, and Leary]{Zordan2011}
+Michael~D Zordan, Charles~P Mill, Daniel~J Riese, and James~F Leary.
+\newblock A high throughput, interactive imaging, bright-field wound healing
+  assay.
+\newblock \emph{Cytometry Part A}, 79\penalty0 (3):\penalty0 227--232, 2011.
+\newblock \doi{10.1002/cyto.a.21029}.
+
+\bibitem[Schmidt et~al.(2024)Schmidt, Lerm, Schmidt, et~al.]{Schmidt2024}
+Kerstin Schmidt, Dennis Lerm, Anna Schmidt, et~al.
+\newblock Automated high-throughput live cell monitoring of scratch wound
+  closure.
+\newblock \emph{SLAS Technology}, 2024.
+\newblock \doi{10.1177/11795972241295619}.
+
+\bibitem[Delaney et~al.(2017)Delaney, Kasprzycka, Ciemerych, and
+  Zimowska]{Delaney2017}
+Kinga Delaney, Paulina Kasprzycka, Maria~A Ciemerych, and Marta Zimowska.
+\newblock The role of {TGF-beta1} during skeletal muscle regeneration.
+\newblock \emph{Cell Biology International}, 41\penalty0 (7):\penalty0
+  706--715, 2017.
+\newblock \doi{10.1002/cbin.10725}.
+
+\bibitem[Topman et~al.(2021)Topman, Sharabani-Yosef, and Gefen]{Topman2021}
+Gil Topman, Orna Sharabani-Yosef, and Amit Gefen.
+\newblock The frequent sampling of wound scratch assay reveals the
+  ``opportunity'' window for quantitative evaluation of cell motility-impeding
+  drugs.
+\newblock \emph{Frontiers in Cell and Developmental Biology}, 9:\penalty0
+  640972, 2021.
+\newblock \doi{10.3389/fcell.2021.640972}.
+
+\bibitem[Jin et~al.(2015)Jin, Shah, Penington, et~al.]{Jin2015}
+Wang Jin, Esha~T Shah, Catherine~J Penington, et~al.
+\newblock Estimating cell diffusivity and cell proliferation rate by
+  interpreting {IncuCyte ZOOM} assay data using the {Fisher--Kolmogorov} model.
+\newblock \emph{BMC Systems Biology}, 9:\penalty0 38, 2015.
+\newblock \doi{10.1186/s12918-015-0182-y}.
+
+\bibitem[Maini et~al.(2020)Maini, McElwain, and Leavesley]{Maini2020}
+Philip~K Maini, Donald L~S McElwain, and David~I Leavesley.
+\newblock Scratch assay microscopy: a reaction-diffusion equation approach for
+  common instruments and data.
+\newblock \emph{Mathematical Biosciences}, 330:\penalty0 108482, 2020.
+\newblock \doi{10.1016/j.mbs.2020.108482}.
+
+\bibitem[Simpson et~al.(2013)Simpson, Treloar, Binder, et~al.]{Simpson2013}
+Matthew~J Simpson, Katrina~K Treloar, Benjamin~J Binder, et~al.
+\newblock Quantifying the roles of cell motility and cell proliferation in a
+  circular barrier assay.
+\newblock \emph{Journal of the Royal Society Interface}, 10\penalty0
+  (82):\penalty0 20130007, 2013.
+\newblock \doi{10.1098/rsif.2013.0007}.
+
+\end{thebibliography}

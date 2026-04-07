@@ -1,0 +1,184 @@
+% ===========================================================================
+\section{Materials and Methods}
+% ===========================================================================
+
+\subsection{Cell Culture and Experimental Design}
+
+\subsubsection{Cell Lines}
+Two immortalized human skeletal muscle cell lines (myoblasts) were employed:
+
+\begin{itemize}
+  \item \textbf{iMC ISOR544C} (Line~1): derived from normal muscle tissue (isogenic control).
+  \item \textbf{iMC MUTR544C} (Line~2): derived from dystrophic muscle tissue (carrying the MUTR544 mutation).
+\end{itemize}
+
+This design enabled assessment of whether drug responsiveness differs between normal and dystrophic myoblasts. Cells were maintained under standard culture conditions and routinely tested for mycoplasma contamination.
+
+\subsubsection{Experimental Design}
+A factorial design was employed crossing cell line (2~levels), treatment (ALK5 inhibitor, DMSO vehicle control, media basal control), concentration (0.0, 0.01, 0.1, 1.0~mM), and experiment (EXP1, EXP2 as independent biological replicates). Two independent experiments served as biological replicates: EXP1 ($n = 158$ wells) and EXP2 ($n = 167$ wells), yielding 325~total wound regions. All downstream analyses were performed at the 0.1~mM concentration.
+
+\subsubsection{Pharmacological Agents}
+The ALK5 inhibitor is a selective antagonist of TGF-$\beta$ receptor type~I (ALK5). Given that TGF-$\beta$ signaling promotes myogenic-to-fibrotic transdifferentiation \citep{Li2004}, suppresses myoblast differentiation \citep{McFarland2001}, and modulates leader cell positioning during collective migration \citep{Vishwakarma2014}, we hypothesized that ALK5 inhibition would suppress wound closure kinetics. DMSO served as vehicle control.
+
+\subsection{Scratch-Wound Creation and Time-Lapse Microscopy}
+
+Confluent monolayers were wounded by standardized mechanical scratch. Treatment medium was applied immediately after wounding. Time-lapse imaging commenced at $t = 0$ (baseline, fully open wound) and continued for approximately 24~hours with images acquired at $\sim$1-hour intervals, yielding 20--25 timepoints per trajectory. Images were acquired at 10$\times$ magnification with a calibrated scale of 1.24\um/pixel.
+
+% ===========================================================================
+\subsection{Automated Wound Segmentation: The Quantification Pipeline}
+% ===========================================================================
+
+The Quantification pipeline operates in two stages: (1)~a single-frame detector that extracts wound boundaries from each image independently, and (2)~a temporal integrator that enforces the monotonic closure constraint across the time series.
+
+\subsubsection{Problem Formulation}
+
+Let $I(x, y, t) \in [0, 1]$ denote the intensity-normalized grayscale image at spatial position $(x, y)$ and discrete timepoint $t \in \{0, 1, \ldots, T\}$. The image has dimensions $H \times W$ (rows $\times$ columns). We seek a binary wound mask:
+\begin{equation}
+  M(x, y, t) = \begin{cases} 1 & \text{if pixel } (x, y) \text{ is wound at time } t \\ 0 & \text{otherwise} \end{cases}
+\end{equation}
+and per-column edge functions:
+\begin{align}
+  u(x, t) &= \min\{y : M(x, y, t) = 1\} \quad \text{(upper edge)} \\
+  \ell(x, t) &= \max\{y : M(x, y, t) = 1\} \quad \text{(lower edge)}
+\end{align}
+where $y$ increases downward in image coordinates. The total wound area at time $t$ is:
+\begin{equation}
+  A(t) = \sum_{x=0}^{W-1} \max\bigl(0,\; \ell(x,t) - u(x,t) + 1\bigr)
+\end{equation}
+
+\textbf{Biological axiom (monotonic closure).} In a properly conducted scratch-wound assay, wound area is a monotonically non-increasing function of time:
+\begin{equation}\label{eq:axiom}
+  \boxed{A(t+1) \leq A(t) \quad \forall\; t \geq 0}
+\end{equation}
+We enforce this constraint at the per-column edge level (Section~2.3.3), which is strictly stronger than the aggregate area constraint.
+
+\subsubsection{Single-Frame Detection}
+
+The single-frame detector implements a seven-stage pipeline that transforms a raw grayscale image into a validated wound mask with smooth boundary curves.
+
+\textbf{Stage~1: Local variance texture map.}
+Cell monolayers exhibit high spatial variance due to cell borders, nuclei, and phase-contrast halos, while the wound channel is comparatively smooth \citep{Yin2012}. We use local variance as a texture discriminator, following the precedent of variance-based segmentation in biomedical imaging \citep{Koenig2017,Loizou2016,Ambrossio2022}. For a square window of side length $w$ (default $w = 15$), the local variance is computed via the uniform-filter identity:
+\begin{equation}
+  \sigma^2(x, y) = \langle I^2 \rangle_w(x, y) - \bigl[\langle I \rangle_w(x, y)\bigr]^2
+\end{equation}
+where $\langle \cdot \rangle_w$ denotes the box-filter mean over a $w \times w$ neighborhood. Both terms are computed using separable uniform filters, yielding $O(HW)$ complexity independent of window size. The raw variance map is post-smoothed with a Gaussian kernel ($\sigma_\text{smooth} = 2.0$~pixels).
+
+\textbf{Stage~2: Y-band detection.}
+The wound is a horizontal band spanning nearly the full image width. We identify the vertical range $[y_\text{min}, y_\text{max}]$ by computing the row-averaged variance profile $\bar{V}(y) = W^{-1}\sum_x V(x,y)$, smoothing with a 1-D Gaussian kernel ($\sigma_y = 10.0$~pixels), locating the global minimum $y_c$, and extracting the contiguous segment of sub-threshold rows (35th~percentile) containing $y_c$, expanded by a margin fraction of 0.15.
+
+\textbf{Stage~3: Column-wise edge extraction.}
+Within the Y-band, upper and lower wound boundaries are extracted for each column by searching for the variance transition between cell (high $\sigma^2$) and wound (low $\sigma^2$) regions. The edge-detection threshold $\tau$ is derived adaptively from the cell regions flanking the wound: $\tau = 0.5 \cdot \mathrm{median}(\sigma^2_\text{cell})$. Edge search is fully vectorized using Boolean array operations.
+
+\textbf{Stage~4: RANSAC outlier rejection.}
+Raw edges may contain outliers caused by imaging artifacts, debris, or partial cell detachment. We apply an iterative polynomial-fit-and-reject scheme inspired by RANSAC \citep{Fischler1981}. A degree-2 polynomial (parabolic) captures the gentle curvature typical of scratch wounds while rejecting localized spikes. Three iterations with a maximum deviation threshold of 25~pixels suffice for convergence.
+
+\textbf{Stage~5: Savitzky--Golay smoothing.}
+Residual high-frequency jitter is removed with a Savitzky--Golay filter \citep{Savitzky1964}, which preserves edge shape without phase distortion (window length $w_\text{sg} = 51$, polynomial order $p_\text{sg} = 3$). Remaining NaN values are filled by linear interpolation prior to filtering.
+
+\textbf{Stage~6: Mask reconstruction.}
+The binary mask is reconstructed from smooth edges using vectorized broadcasting:
+\begin{equation}
+  M(x, y) = \mathbb{1}\bigl[u(x) \leq y \leq \ell(x)\bigr]
+\end{equation}
+This is implemented as a single array operation at $O(HW)$ complexity with no element-wise loops.
+
+\textbf{Stage~7: Geometric validation.}
+Four quality-control criteria are evaluated on each mask (Table~\ref{tab:qc_criteria}). A detection passes QC if and only if all four criteria are satisfied simultaneously. When the primary pipeline fails, an optional fallback strategy is activated using constrained region growing from a seed at $y_c$ with morphological cleanup.
+
+\begin{table}[t]
+  \centering
+  \caption{Single-frame geometric validation criteria.}\label{tab:qc_criteria}
+  \begin{tabular}{llp{5cm}}
+    \toprule
+    Criterion & Threshold & Rationale \\
+    \midrule
+    Width coverage $r_w$ & $> 0.75$ & Wound must span most of image width \\
+    Aspect ratio $\rho$ & $> 1.5$ & Wound is wider than tall \\
+    Y-position $\bar{y}_\text{frac}$ & $\in (0.15, 0.85)$ & Wound is roughly centered \\
+    Thickness CV & $< 0.60$ & Consistent thickness across columns \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Temporal Constraint: Monotonic Closure}
+
+The Quantification temporal integrator wraps the single-frame detector with a stateful constraint that enforces the biological axiom. Let $u_\text{det}(x, t)$ and $\ell_\text{det}(x, t)$ denote the raw detector output. The constrained edges are defined recursively:
+
+\textbf{Initialization} ($t = 0$):
+\begin{equation}
+  u(x, 0) = u_\text{det}(x, 0), \qquad \ell(x, 0) = \ell_\text{det}(x, 0)
+\end{equation}
+
+\textbf{Recursion} ($t > 0$):
+\begin{align}
+  u(x, t) &= \max\bigl(u(x, t-1),\; u_\text{det}(x, t)\bigr) \label{eq:upper_constraint}\\
+  \ell(x, t) &= \min\bigl(\ell(x, t-1),\; \ell_\text{det}(x, t)\bigr) \label{eq:lower_constraint}
+\end{align}
+
+The upper edge can only move down (increase in image coordinates) and the lower edge can only move up (decrease), guaranteeing $A(t) \leq A(t-1)$ for all $t > 0$.
+
+When constrained edges meet or cross at a column ($u(x,t) \geq \ell(x,t)$), that column is declared fully closed with zero wound width. No artificial minimum gap is imposed, eliminating systematic area overestimation at late timepoints.
+
+\paragraph{Kalman-filtered constraint (default).}
+When enabled, the hard constraint (Equations~\ref{eq:upper_constraint}--\ref{eq:lower_constraint}) is replaced by a per-column 1-D Kalman filter that fuses the detector observation with a monotonic prediction, weighted by per-frame confidence.
+
+The process noise $Q$ represents expected edge movement per frame and is estimated from the variance of frame-to-frame edge differences across clean trajectories. A conservative default of $Q = 400$~px$^2$ is used when no prior data are available.
+
+The observation noise $R$ is computed per-column per-frame from three signals: (i)~variance contrast at the wound boundary ($R \propto 1/\text{contrast}^2$); (ii)~edge jump magnitude ($R \propto 1 + (\text{jump}/\text{median\_jump})^2$); and (iii)~detection method ($R_\text{fallback} = 3 \times R_\text{primary}$).
+
+The Kalman update per column is:
+\begin{equation}
+  K(x) = \frac{P_\text{pred}}{P_\text{pred} + R(x,t)}, \qquad
+  \hat{u}(x,t) = u(x,t{-}1) + K(x) \cdot \bigl(u_\text{det}(x,t) - u(x,t{-}1)\bigr)
+\end{equation}
+
+A hard safety net is applied after the Kalman blend to guarantee the biological invariant: $u(x,t) = \max(\hat{u}(x,t), u(x,t{-}1))$. The key advantage is that a spurious inward edge (from debris or bubbles) receives high $R$, yielding $K \approx 0$, so the filter trusts the monotonic prediction. Once the artifact clears, the next clean frame is trusted again.
+
+\subsubsection{Trajectory Processing and Parallel Execution}
+
+For each biological sample (identified by a unique sample $\times$ experiment $\times$ exposure tuple), images are sorted by acquisition time, fed sequentially to the segmenter, and results serialized to disk. Independent samples are processed in parallel using Python's \texttt{ProcessPoolExecutor} with explicitly controlled worker count, capped at available CPU cores. Each worker instantiates its own segmenter with independent state.
+
+% ===========================================================================
+\subsection{Quality Control}
+% ===========================================================================
+
+Quality control operates at three hierarchical levels:
+
+\textbf{Level~1: Single-frame geometric validation} (Section~2.3.2, Stage~7). Applied automatically to every frame; flags implausible geometry.
+
+\textbf{Level~2: Baseline distributional analysis.} The $t = 0$ mask undergoes additional scrutiny. The row-wise projection $P_y(y) = \sum_x M(x, y, 0)$, smoothed with a Gaussian kernel ($\sigma = 15$), must exhibit exactly one prominent peak with center within $\pm 15\%$ of the mask centroid. The column-wise projection, normalized to $[0, 1]$, must satisfy $|\text{skew}| < 0.8$ and central-band flatness $\text{std}(P_x[0.25W : 0.75W]) < 0.15$.
+
+\textbf{Level~3: Manual expert curation.} For the validation study, baseline images were reviewed by a human expert using an interactive annotation tool. Each segmentation was classified as correct, incorrect, or no-wound. For a subset of images, the reviewer drew ground-truth polygon annotations enabling pixel-level validation.
+
+% ===========================================================================
+\subsection{Downstream Metrics}
+% ===========================================================================
+
+\subsubsection{Fractional Wound Closure}
+Fractional wound closure was defined as:
+\begin{equation}
+  f(t) = \frac{A(0) - A(t)}{A(0)}
+\end{equation}
+ranging from 0 (no closure) to 1 (complete closure). The monotonic constraint guarantees $f(t)$ is non-decreasing.
+
+\subsubsection{Edge Displacement and Closure Speed}
+Per-edge displacements between $t = 0$ and a target time $t_T$:
+\begin{equation}
+  \Delta u(x) = u(x, t_T) - u(x, 0), \qquad \Delta \ell(x) = \ell(x, 0) - \ell(x, t_T)
+\end{equation}
+Mean closure speed:
+\begin{equation}
+  v_\text{mean} = \frac{v_\text{upper} + v_\text{lower}}{2}, \quad
+  v_\text{edge} = \frac{1}{|\mathcal{V}|} \sum_{x \in \mathcal{V}} \frac{|\Delta_\text{edge}(x)|}{t_T}
+\end{equation}
+where $\mathcal{V}$ denotes the set of columns with valid (non-NaN) edges at both timepoints.
+
+% ===========================================================================
+\subsection{Statistical Analysis}
+% ===========================================================================
+
+All analyses were restricted to the 0.1~mM concentration. Pairwise comparisons of closure speed and edge displacement between ALK5i and DMSO within each cell line were performed using Welch's $t$-test (no equal-variance assumption). $P$-values were corrected for multiple comparisons using the Bonferroni method. Effect sizes were quantified as Cohen's $d$. A linear mixed-effects model (distance $\sim$ time $\times$ condition $\times$ cell line, with random intercepts and slopes per trajectory) assessed the time-course interaction. Distributional assumptions were evaluated using the Shapiro--Wilk test for normality and Levene's test for homogeneity of variances. All analyses were performed in Python~3.11 using SciPy and statsmodels.
+
+\subsection{Implementation}
+
+The pipeline was implemented in Python~3.11 with NumPy (array operations), OpenCV (image I/O), SciPy (filtering), scikit-image (morphology) \citep{vanderWalt2014}, pandas (data management), and matplotlib (visualization). All per-column operations were implemented using NumPy broadcasting and fancy indexing. Computational complexity per frame is $O(HW)$, dominated by the variance computation and mask reconstruction. The pipeline is fully deterministic and reproducible with fixed random seeds. Full parameter values are provided in Supplementary Table~S1.

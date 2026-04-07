@@ -1,0 +1,30 @@
+% --- Table Template ---
+% Copy this template for each table. Replace placeholders.
+%
+% Usage in a section file:
+%   \input{tables/table_N_name}
+%
+% Requirements:
+%   - booktabs rules only (no \hline)
+%   - \caption{} with descriptive text
+%   - \label{tab:unique-key} for cross-referencing
+%   - siunitx S-columns for numeric alignment
+%   - Note below table for abbreviations
+%   - Every number from source preserved exactly
+
+\begin{table}[htbp]
+\centering
+\caption{CAPTION HERE.}
+\label{tab:LABEL-HERE}
+\begin{tabular}{l S[table-format=-1.3] S[table-format=1.3] c S[table-format=1.3]}
+\toprule
+{Column 1} & {Column 2} & {Column 3} & {Column 4} & {Column 5} \\
+\midrule
+Row 1 & -0.034 & 0.231 & $-0.487$ to $0.420$ & 0.885 \\
+Row 2 &  0.029 & 0.146 & $-0.258$ to $0.316$ & 0.844 \\
+\bottomrule
+\end{tabular}
+
+\smallskip
+\noindent\textit{Note:} Abbreviations and method explanations here.
+\end{table}

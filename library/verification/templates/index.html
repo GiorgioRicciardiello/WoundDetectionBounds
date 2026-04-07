@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wound Verification GUI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- ============================================================
+         Top bar: progress + bulk actions + export
+         ============================================================ -->
+    <header id="top-bar">
+        <div class="top-left">
+            <h1>Wound Verification</h1>
+            <span id="progress-text">0 / 0 annotated</span>
+            <span id="progress-detail"></span>
+        </div>
+        <div class="top-right">
+            <select id="filter-exposure" title="Filter by exposure">
+                <option value="">All exposures</option>
+            </select>
+            <select id="filter-status" title="Filter by status">
+                <option value="">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="correct">Correct</option>
+                <option value="incorrect">Incorrect</option>
+            </select>
+            <button id="btn-approve-qc" class="btn btn-sm btn-green"
+                    title="Approve all un-annotated QC-valid images">
+                Approve QC-valid
+            </button>
+            <button id="btn-reject-qc" class="btn btn-sm btn-red"
+                    title="Reject all un-annotated QC-invalid images">
+                Reject QC-invalid
+            </button>
+            <button id="btn-export" class="btn btn-sm btn-blue">
+                Export Excel
+            </button>
+            <button id="btn-help" class="btn btn-sm" title="How to use this tool">
+                ? Help
+            </button>
+        </div>
+    </header>
+
+    <!-- ============================================================
+         Main layout: table (left) + viewer (right)
+         ============================================================ -->
+    <div id="main-container">
+        <!-- ---------- Left panel: annotation table ---------- -->
+        <div id="table-panel">
+            <table id="records-table">
+                <thead>
+                    <tr>
+                        <th class="col-idx">#</th>
+                        <th class="col-key sortable" data-sort="trajectory_key">Key</th>
+                        <th class="col-exp sortable" data-sort="exposure">Exp.</th>
+                        <th class="col-qc sortable" data-sort="qc_valid">QC</th>
+                        <th class="col-verdict sortable" data-sort="correct">Verdict</th>
+                        <th class="col-dice sortable" data-sort="dice">Dice</th>
+                    </tr>
+                </thead>
+                <tbody id="records-tbody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ---------- Right panel: image viewer + annotation ---------- -->
+        <div id="viewer-panel">
+            <!-- Current image info -->
+            <div id="viewer-header">
+                <span id="current-key">Select an image from the table</span>
+                <span id="current-filename"></span>
+            </div>
+
+            <!-- Two-column image area: debug (left) + canvas (right) -->
+            <div id="image-row">
+                <!-- Debug PNG (6-panel, read-only) -->
+                <div id="debug-section">
+                    <h3>Diagnostic Panel</h3>
+                    <div id="debug-container">
+                        <img id="debug-img" alt="Select an image to view diagnostics">
+                    </div>
+                </div>
+
+                <!-- Interactive canvas: raw image + mask overlay + drawing -->
+                <div id="canvas-section">
+                    <h3>Interactive Annotation</h3>
+                    <div id="canvas-toolbar">
+                        <!-- Drawing mode selector -->
+                        <div id="mode-selector">
+                            <label class="mode-label">
+                                <input type="radio" name="draw-mode" value="edge" checked>
+                                Edge correction
+                            </label>
+                            <label class="mode-label">
+                                <input type="radio" name="draw-mode" value="polygon">
+                                Full polygon
+                            </label>
+                        </div>
+                        <span class="toolbar-sep">|</span>
+                        <label>
+                            <input type="checkbox" id="toggle-mask" checked>
+                            Mask overlay
+                        </label>
+                        <label>
+                            <input type="checkbox" id="toggle-edges" checked>
+                            Show edges
+                        </label>
+                        <label>
+                            <input type="checkbox" id="toggle-polygon">
+                            Show fill
+                        </label>
+                    </div>
+                    <!-- Edge correction controls (visible in edge mode) -->
+                    <div id="edge-toolbar">
+                        <label class="edge-label">
+                            <input type="radio" name="edge-target" value="upper" checked>
+                            Correct upper edge
+                        </label>
+                        <label class="edge-label">
+                            <input type="radio" name="edge-target" value="lower">
+                            Correct lower edge
+                        </label>
+                        <span class="toolbar-sep">|</span>
+                        <button id="btn-finish-edge" class="btn btn-sm btn-blue">Finish segment</button>
+                        <button id="btn-undo-vertex" class="btn btn-sm">Undo</button>
+                        <button id="btn-clear-all" class="btn btn-sm btn-red">Clear All</button>
+                        <button id="btn-compute-metrics" class="btn btn-sm btn-blue">Compute Metrics</button>
+                    </div>
+                    <!-- Polygon mode controls (visible in polygon mode) -->
+                    <div id="polygon-toolbar" style="display:none;">
+                        <button id="btn-new-polygon" class="btn btn-sm">New Polygon</button>
+                        <button id="btn-undo-vertex-poly" class="btn btn-sm">Undo</button>
+                        <button id="btn-clear-all-poly" class="btn btn-sm btn-red">Clear All</button>
+                        <button id="btn-compute-metrics-poly" class="btn btn-sm btn-blue">Compute Metrics</button>
+                    </div>
+                    <div id="canvas-container">
+                        <canvas id="annotation-canvas"></canvas>
+                    </div>
+                    <div id="canvas-hint">
+                        <span id="hint-edge">Click along the correct boundary. Finish segment to apply.</span>
+                        <span id="hint-polygon" style="display:none;">Click to add vertices. Double-click or click near start to close.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metrics display -->
+            <div id="metrics-section" style="display:none;">
+                <h3>Metrics (model mask vs. correction)</h3>
+                <div id="metrics-grid"></div>
+            </div>
+
+            <!-- Verdict + notes (sticky at bottom) -->
+            <div id="verdict-section">
+                <div id="verdict-buttons">
+                    <button id="btn-correct" class="btn btn-verdict btn-green">
+                        Correct (y)
+                    </button>
+                    <button id="btn-incorrect" class="btn btn-verdict btn-red">
+                        Incorrect (n)
+                    </button>
+                </div>
+                <div id="notes-container">
+                    <label for="notes-input">Notes:</label>
+                    <input type="text" id="notes-input" placeholder="Optional notes...">
+                </div>
+                <div id="save-nav">
+                    <button id="btn-prev" class="btn btn-sm">&larr; Prev</button>
+                    <button id="btn-save-next" class="btn btn-blue">Save &amp; Next</button>
+                    <button id="btn-next" class="btn btn-sm">Next &rarr;</button>
+                </div>
+            </div>
+
+            <!-- Flash overlay for verdict feedback -->
+            <div id="verdict-flash"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         Help modal
+         ============================================================ -->
+    <div id="help-overlay" style="display:none;">
+        <div id="help-modal">
+            <div id="help-header">
+                <h2>Annotation Guide</h2>
+                <button id="help-close" class="btn btn-sm">&times; Close</button>
+            </div>
+            <div id="help-body">
+                <h3>Workflow</h3>
+                <ol>
+                    <li>Click a row in the <b>left table</b> to load an image.</li>
+                    <li>Review the <b>Diagnostic Panel</b> (left) &mdash; shows the 6-panel
+                        debug output: original image, variance map, Y-profile, raw edges,
+                        smoothed edges, and final mask with QC verdict.</li>
+                    <li>Review the <b>Interactive Annotation</b> canvas (right) &mdash;
+                        shows the raw image with the model mask overlaid in red.</li>
+                    <li>Click <b>Correct</b> or <b>Incorrect</b> to record your verdict.
+                        The tool auto-saves and advances to the next image.</li>
+                    <li>Optionally draw corrections (see below) and click
+                        <b>Compute Metrics</b> to quantify the model error.</li>
+                </ol>
+
+                <h3>Drawing modes</h3>
+                <h4>Edge Correction (default, recommended)</h4>
+                <p>The model detects the wound as a band between an <b>upper edge</b>
+                   (cyan line) and a <b>lower edge</b> (magenta line).  When the
+                   boundary is mostly correct but off in a region:</p>
+                <ol>
+                    <li>Select <b>"Correct upper edge"</b> or <b>"Correct lower edge"</b>.</li>
+                    <li>Click points along where the <em>real</em> boundary should be,
+                        within the x-range that is wrong.  You only need 3&ndash;5 points.</li>
+                    <li>Click <b>Finish segment</b> (or double-click) to lock it in.
+                        The correction appears in green (upper) or purple (lower).</li>
+                    <li>You can add multiple segments (upper and lower independently).</li>
+                    <li>Click <b>Compute Metrics</b> to see how the corrected mask
+                        compares to the original model mask (Dice, IoU, etc.).</li>
+                </ol>
+                <p><em>Columns outside your correction keep the original model edge.</em></p>
+
+                <h4>Full Polygon (for badly wrong masks)</h4>
+                <p>When the model completely missed the wound or the mask shape is
+                   entirely wrong:</p>
+                <ol>
+                    <li>Switch to <b>"Full polygon"</b> mode.</li>
+                    <li>Click to add vertices around the real wound area.</li>
+                    <li>Double-click or click near the first vertex to close the polygon.</li>
+                    <li>You can draw multiple polygons if the wound is fragmented.</li>
+                    <li>Click <b>Compute Metrics</b> to compare.</li>
+                </ol>
+
+                <h3>Controls</h3>
+                <table class="help-table">
+                    <tr><td><b>Mask overlay</b></td>
+                        <td>Toggle the red semi-transparent model mask on/off</td></tr>
+                    <tr><td><b>Show edges</b></td>
+                        <td>Toggle the cyan (upper) and magenta (lower) boundary lines</td></tr>
+                    <tr><td><b>Show fill</b></td>
+                        <td>Fill closed polygons with semi-transparent blue</td></tr>
+                    <tr><td><b>Undo</b></td>
+                        <td>Remove the last vertex; if none, re-opens the last segment/polygon</td></tr>
+                    <tr><td><b>Clear All</b></td>
+                        <td>Remove all corrections and polygons for this image</td></tr>
+                    <tr><td><b>Compute Metrics</b></td>
+                        <td>Send corrections to the server and display Dice, IoU, etc.</td></tr>
+                </table>
+
+                <h3>Keyboard shortcuts</h3>
+                <table class="help-table">
+                    <tr><td><kbd>y</kbd></td><td>Mark as Correct &amp; advance</td></tr>
+                    <tr><td><kbd>n</kbd></td><td>Mark as Incorrect &amp; advance</td></tr>
+                    <tr><td><kbd>&rarr;</kbd></td><td>Next image (no save)</td></tr>
+                    <tr><td><kbd>&larr;</kbd></td><td>Previous image</td></tr>
+                    <tr><td><kbd>Ctrl+S</kbd></td><td>Save without advancing</td></tr>
+                    <tr><td><kbd>Ctrl+Enter</kbd></td><td>Save &amp; next</td></tr>
+                    <tr><td><kbd>Ctrl+Z</kbd></td><td>Undo last vertex</td></tr>
+                </table>
+
+                <h3>Bulk actions</h3>
+                <p><b>Approve QC-valid</b>: sets all un-annotated images that passed
+                   automatic QC to "Correct".<br>
+                   <b>Reject QC-invalid</b>: sets all un-annotated images that failed QC
+                   to "Incorrect".<br>
+                   These only affect images without an existing verdict. You can always
+                   override a bulk verdict by selecting the image and clicking a
+                   different button.</p>
+
+                <h3>Session &amp; Export</h3>
+                <p>All annotations are auto-saved to disk on every action. You can
+                   close the browser and resume later &mdash; progress is preserved.<br>
+                   <b>Export Excel</b> generates a workbook with two sheets: per-image
+                   annotations and aggregate summary statistics.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

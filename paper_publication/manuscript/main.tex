@@ -1,0 +1,97 @@
+% ===========================================================================
+% Quantification: Temporally Constrained Variance-Based Segmentation
+% for Automated Scratch-Wound Healing Quantification
+% ===========================================================================
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage[round]{natbib}
+\usepackage{lineno}
+
+% --- Settings ---
+\onehalfspacing
+\linenumbers
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black,
+}
+\captionsetup{font=small,labelfont=bf}
+
+% --- Custom commands ---
+\newcommand{\um}{\ensuremath{\,\mu\text{m}}}
+\newcommand{\pxh}{\ensuremath{\text{px}\,\text{h}^{-1}}}
+
+% ===========================================================================
+\begin{document}
+
+% --- Title ---
+\begin{center}
+  {\LARGE\bfseries Temporally Constrained Variance-Based Segmentation for Automated Scratch-Wound Healing Quantification in Pharmacologically Treated Myoblasts}
+  \vspace{1em}
+
+  {\large [Author list]}\\[0.5em]
+  {\normalsize Department of [Department], Icahn School of Medicine at Mount Sinai, New York, NY, USA}\\[0.5em]
+  {\small Correspondence: [corresponding author email]}
+\end{center}
+
+\vspace{1em}
+
+\noindent\textbf{Keywords:} scratch-wound assay, automated segmentation, monotonic closure constraint, Kalman filter, myoblast migration, ALK5 inhibitor, TGF-$\beta$, image analysis
+
+\vspace{1em}
+
+% --- Abstract ---
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\newpage
+
+% --- Main Sections ---
+\input{sections/intro}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+
+% --- Data and Code Availability ---
+\section*{Data and Code Availability}
+The Quantification segmentation pipeline is implemented in Python 3.11 and is available at [repository URL]. Raw microscopy images and processed quantitative data are available at [data repository]. All analysis scripts, configuration files, and parameter documentation are included in the repository.
+
+% --- Acknowledgements ---
+\section*{Acknowledgements}
+[To be completed.]
+
+% --- Author Contributions ---
+\section*{Author Contributions}
+[To be completed using CRediT taxonomy.]
+
+% --- Conflicts of Interest ---
+\section*{Conflicts of Interest}
+The authors declare no competing interests.
+
+% --- References ---
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\newpage
+% --- Supplementary ---
+\input{supplement}
+
+\end{document}

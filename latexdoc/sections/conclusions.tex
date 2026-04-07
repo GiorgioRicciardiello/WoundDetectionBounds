@@ -1,0 +1,27 @@
+\section{Conclusion}
+
+We have presented Quantification, a fully automated pipeline for scratch-wound healing
+quantification that combines variance-based single-frame detection with a biologically
+motivated monotonic closure constraint.
+The pipeline requires no training data, processes standard phase-contrast microscopy images in
+linear time, and produces smooth, strictly non-increasing wound area trajectories.
+Validation on 325 images from a pharmacological study in immortalized myoblasts demonstrated
+98.9\% detection accuracy and a mean Dice coefficient of 0.91 against expert annotations.
+Application to 282 validated trajectories revealed that ALK5 inhibition suppressed wound
+closure kinetics while candesartan had no appreciable effect, consistent with a dominant role
+for canonical TGF-$\beta$ signaling in myoblast migration.
+A three-tier quality-control system ensures robust performance, and parallel trajectory
+processing enables scalable analysis of high-content experiments.
+The mathematical formulation is presented in full, all parameters are documented, and the
+implementation is released as open-source Python code.
+We anticipate that Quantification will reduce the time and subjectivity currently associated
+with scratch-wound quantification, enabling researchers to focus on biological interpretation
+rather than manual measurement.
+
+\bigskip
+\textbf{Data and Code Availability.}
+The Quantification segmentation pipeline is implemented in Python~3.11 and is available at
+[repository URL].
+Raw microscopy images and processed quantitative data are available at [data repository].
+All analysis scripts, configuration files, and parameter documentation are included in the
+repository.

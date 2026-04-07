@@ -1,0 +1,66 @@
+% ===========================================================================
+\section{Discussion}
+% ===========================================================================
+
+\subsection{Methodological Advances}
+
+The Quantification pipeline offers several advances over existing scratch-wound quantification tools.
+
+\textbf{Training-free segmentation.} Unlike deep-learning approaches that require annotated datasets \citep{Ronneberger2015,Dogru2024,Lehmann2024,Naser2025} and suffer from domain shift when applied to novel imaging conditions \citep{Oldenburg2021}, Quantification exploits a fundamental physical property of phase-contrast image formation: cells scatter light and produce high local variance, while the empty wound channel does not \citep{Yin2012}. This approach aligns with growing evidence that classical texture-based methods can compete with machine learning on small-to-medium datasets in label-free microscopy \citep{Ambrossio2022,Vicar2019}. The 98.9\% detection accuracy achieved without any training data is competitive with or exceeds reported performance of supervised methods on comparable assays.
+
+\textbf{Biologically grounded temporal constraint.} The monotonic closure axiom is not merely a regularizer---it encodes a physical law of the assay system. While temporal constraints have been explored in cell tracking \citep{Bragantini2025,Lee2023} and video segmentation \citep{Guan2021}, prior wound-healing tools process frames independently. The per-column monotonic constraint is strictly stronger than a global area constraint: it enforces spatial coherence at every column, preventing the non-biological area fluctuations that plague single-frame methods and that \citet{Treloar2013} identified as a major source of quantification error. The Kalman-filtered variant further attenuates spurious observations while preserving the biological invariant, addressing the irreversible error-propagation limitation of the hard constraint.
+
+\textbf{Computational efficiency.} Full vectorization ensures $O(HW)$ complexity per frame, dominated by array operations rather than interpreter overhead. A typical 20-frame trajectory processes in under 10~seconds on commodity hardware, enabling real-time analysis of high-content screening experiments. This efficiency is particularly relevant as high-throughput platforms scale to 96- and 384-well formats \citep{Zordan2011,Yarrow2004,Schmidt2024}.
+
+\textbf{Multi-level quality control.} The three-tier QC system provides hierarchical confidence in segmentation quality. The perfect sensitivity (1.00) for wound-bearing images ensures that no valid segmentation is erroneously rejected, while the moderate specificity for no-wound images (0.56) represents a known limitation addressable by supplementing the variance-based QC with intensity-profile features.
+
+\subsection{Comparison with Existing Tools}
+
+Table~\ref{tab:comparison} contextualizes the Quantification pipeline's properties against established and recent alternatives. Quantification is unique in combining training-free operation with hard temporal constraints and multi-level quality control. While deep-learning methods can achieve high per-frame accuracy when adequate training data are available, Quantification eliminates the domain-shift problem entirely and produces temporally coherent outputs by construction.
+
+\begin{table}[t]
+  \centering
+  \caption{Feature comparison with existing wound quantification tools.}\label{tab:comparison}
+  \small
+  \begin{tabular}{lcccccc}
+    \toprule
+    Feature & TScratch & ImageJ & RQSA & DL & Level-Set & \textbf{Ours} \\
+    & \citep{Gebaeck2009} & \citep{SuarezArnedo2020} & \citep{Vargas2016} & \citep{Dogru2024} & \citep{Martinotti2025} & \\
+    \midrule
+    Training data     & No  & No    & No      & Yes     & No    & \textbf{No} \\
+    Temporal constraint & No  & No  & No      & No      & No    & \textbf{Yes} \\
+    Automated QC      & No  & No    & Partial & No      & No    & \textbf{3-level} \\
+    Spatial analysis   & No  & Width & No      & Pixel   & Sector & \textbf{Per-column} \\
+    Outlier rejection  & No  & No   & Stat.   & Implicit & No   & \textbf{RANSAC} \\
+    Parallel processing & No & Macro & No     & GPU     & No    & \textbf{CPU} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Biological Findings}
+
+\textbf{ALK5 inhibition showed a consistent but non-significant trend toward reduced wound closure.} Across both cell lines, ALK5i-treated samples showed lower mean edge displacement and closure speed than DMSO controls (Cohen's $d = -0.26$ to $-0.43$). However, none of these comparisons reached statistical significance after Bonferroni correction ($p_\text{corr} > 0.64$). The direction of the effect is consistent with the role of TGF-$\beta$ in promoting collective cell migration through leader cell positioning \citep{Vishwakarma2014} and epithelial-to-mesenchymal transition-related motility pathways. While TGF-$\beta$ is often considered anti-regenerative in skeletal muscle due to its pro-fibrotic effects \citep{Li2004,Ceco2013,Delaney2017}, the observed trend suggests that ALK5 signaling may also contribute to the migratory component of wound repair in myoblasts, consistent with recent work showing complex, dose-dependent effects of TGF-$\beta$ receptor~I inhibitors on myoblast biology \citep{WeissA2025,WeissB2025}.
+
+\textbf{High between-trajectory variability limited statistical power.} The Line~2 DMSO group exhibited particularly high variability (SD~$= 19.3$~px, compared with 4.8--9.2~px for other groups), driven by a subset of trajectories with unusually large initial wound areas. This heterogeneity, combined with the modest sample sizes ($n = 5$--15 per group), substantially reduced statistical power. The significant random intercept variance in the mixed-effects model ($p < 0.001$) further confirms that between-trajectory differences dominate the variance structure.
+
+\textbf{No condition reached 50\% closure.} All conditions achieved less than approximately 20\% closure in 24~hours. This may reflect the inherently slower migratory phenotype of skeletal muscle myoblasts compared to epithelial cell lines commonly used in wound-healing assays \citep{Goetsch2011,Goetsch2013}, or the specific culture conditions employed. The slow closure kinetics suggest that longer observation windows (48--72~h) may be necessary to fully characterize dose-response relationships in myoblast systems \citep{Topman2021}.
+
+\subsection{Limitations}
+
+\textbf{Irreversible per-column constraint.} If the detector produces a spurious inward edge at time $t$ (due to debris or focus artifacts), the hard monotonic constraint permanently propagates that error. This has been mitigated by the Kalman-filtered constraint (default behavior), which assigns high observation noise to spurious detections, causing the filter to rely on the monotonic prediction. The hard constraint remains available for reproducibility of legacy results.
+
+\textbf{Fixed threshold heuristic.} The edge-detection threshold ($\tau = 0.5 \cdot \mathrm{median}(\sigma^2_\text{cell})$) assumes unimodal cell variance and a clean cell--wound boundary. Images with heterogeneous cell populations or illumination gradients may require adaptive thresholding.
+
+\textbf{Integer-pixel edges.} Edges are extracted at integer-pixel resolution. For thin wounds approaching closure, the 1-pixel quantization error represents a significant fraction of remaining width.
+
+\textbf{No uncertainty quantification.} The pipeline produces point estimates without confidence intervals. Bootstrapping area estimates under edge perturbations would provide uncertainty bounds essential for rigorous inference.
+
+\textbf{Limited ground-truth annotations.} Pixel-level validation was performed on only 5~images. A larger annotated dataset would provide tighter estimates of segmentation accuracy.
+
+\textbf{Modest sample sizes.} The final analysis cohort ($n = 38$) was limited by the concentration restriction (0.1~mM), QC filtering, and uneven distribution across groups, reducing power for detecting moderate effect sizes.
+
+% ===========================================================================
+\section{Conclusion}
+% ===========================================================================
+
+We have presented Quantification, a fully automated pipeline for scratch-wound healing quantification that combines variance-based single-frame detection with a biologically motivated monotonic closure constraint. The pipeline requires no training data, processes standard phase-contrast microscopy images in linear time, and produces smooth, strictly non-increasing wound area trajectories. Validation on 325~images from a pharmacological study in immortalized myoblasts demonstrated 98.9\% detection accuracy and a mean Dice coefficient of 0.91 against expert annotations. Application to 38~validated trajectories at 0.1~mM concentration revealed a consistent but non-significant trend toward reduced wound closure with ALK5 inhibition (Cohen's $d = -0.26$ to $-0.43$, $p_\text{corr} > 0.64$), highlighting the need for larger sample sizes and longer observation windows in slowly migrating myoblast systems. The Kalman-filtered temporal constraint addresses the irreversible error-propagation limitation of the original hard constraint while preserving the biological invariant. A three-tier quality-control system ensures robust performance, and parallel trajectory processing enables scalable analysis of high-content experiments. The mathematical formulation is presented in full, all parameters are documented, and the implementation is released as open-source Python code. From a biological perspective, mathematical models such as the Fisher--Kolmogorov reaction-diffusion framework \citep{Jin2015,Maini2020,Simpson2013} could be applied to the Quantification-derived trajectories to disentangle the contributions of cell migration and proliferation, providing mechanistic insight beyond the aggregate closure rate.

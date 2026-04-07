@@ -1,0 +1,125 @@
+======================================================================
+RESULTS SUMMARY  —  Kalman constraint method
+======================================================================
+
+1. IMAGE CENSUS AND MANUAL REVIEW
+--------------------------------------------------
+  Total t=0 images:               325
+  Manually graded:                323
+  Unannotated:                    2
+
+  Manual review identified 40 (12.3%) containing no visible wound.
+
+  No-wound distribution by condition:
+    Alk5i              8
+    Candesartan        9
+    DMSO              11
+    Media             12
+
+  No-wound distribution by cell line:
+    Line 1            14
+    Line 2            26
+
+  Manually approved (correct):    282
+  Manually rejected (incorrect):  41
+
+  Of 285 wound-bearing images, the algorithm correctly segmented
+  282 (98.9%).  3 were incorrectly segmented.
+
+  Pipeline filtering cascade:
+    Loaded (images / traj):       7486 / 325
+    Candesartan excluded:         2202 images, 191 traj
+    Post-candesartan:             5284 images, 134 traj
+    Condition/conc/cell/time:     -3709 images, -91 traj
+    FINAL:                        1575 images, 43 traj
+
+  Per-group breakdown (filtered set):
+  Cell Line    | Condition  |  Traj |  Images |  QC pass |   CS
+  -------------+------------+-------+---------+----------+-----
+  Line 1       | Alk5i      |    11 |     231 |       10 |   10
+  Line 1       | DMSO       |    24 |     504 |        8 |    8
+  Line 2       | Alk5i      |     8 |     168 |        5 |    5
+  Line 2       | DMSO       |    32 |     672 |       15 |   15
+
+
+2. QC ALGORITHM EVALUATION
+--------------------------------------------------
+
+  All annotated images (n=323):
+    TP (QC=valid,   human=correct):    282
+    FP (QC=valid,   human=incorrect):  18
+    FN (QC=invalid, human=correct):    0
+    TN (QC=invalid, human=incorrect):  23
+
+    Sensitivity:   1.0000
+    Specificity:   0.5610
+    PPV:           0.9400
+    NPV:           1.0000
+    Accuracy:      0.9443
+    Cohen's kappa: 0.6905
+
+  Wound-bearing images only (n=285):
+    TP (QC=valid,   human=correct):    282
+    FP (QC=valid,   human=incorrect):  2
+    FN (QC=invalid, human=correct):    0
+    TN (QC=invalid, human=incorrect):  1
+
+    Sensitivity:   1.0000
+    Specificity:   0.3333
+    PPV:           0.9930
+    NPV:           1.0000
+    Accuracy:      0.9930
+    Cohen's kappa: 0.4974
+
+
+3. WOUND DETECTION ACCURACY (all timepoints)
+--------------------------------------------------
+  Cell Line    | Condition  |  Traj |  Frames |  Detected |  Failed |    Rate
+  -------------+------------+-------+---------+-----------+---------+--------
+  Line 1       | Alk5i      |    11 |     263 |       242 |      21 |   92.0%
+  Line 1       | DMSO       |     8 |     200 |       200 |       0 |  100.0%
+  Line 2       | Alk5i      |     8 |     168 |       108 |      60 |   64.3%
+  Line 2       | DMSO       |    16 |     368 |       344 |      24 |   93.5%
+
+  Overall: 894/999 frames detected (89.5%), 105 failed
+
+
+4. AUTOMATIC QC EVALUATION (t=0, filtered set)
+--------------------------------------------------
+  Cell Line    | Condition  |  Traj |  Pass |  Fail |  QC Rate |  Constraint
+  -------------+------------+-------+-------+-------+----------+------------
+  Line 1       | Alk5i      |    11 |    10 |     1 |    90.9% |      100.0%
+  Line 1       | DMSO       |     8 |     8 |     0 |   100.0% |      100.0%
+  Line 2       | Alk5i      |     8 |     5 |     3 |    62.5% |      100.0%
+  Line 2       | DMSO       |    16 |    15 |     1 |    93.8% |      100.0%
+
+  Overall QC pass: 38/43 (88.4%)
+
+
+5. WOUND HEALING DYNAMICS (t = 20 h)
+--------------------------------------------------
+  Of the 43 verified trajectories in the filtered set, 38 have
+  cross-sectional measurements at t = 20 h.
+
+  Closure distance (um):
+  Cell Line    | Condition  |    n |      Mean |       SEM
+  -------------+------------+------+-----------+----------
+  Line 1       | Alk5i      |   10 |     16.34 |      2.76
+  Line 1       | DMSO       |    8 |     19.28 |      1.75
+  Line 2       | Alk5i      |    5 |     16.56 |      3.10
+  Line 2       | DMSO       |   15 |     21.69 |      5.01
+
+  Closure speed (um/h):
+  Cell Line    | Condition  |    n |      Mean |       SEM
+  -------------+------------+------+-----------+----------
+  Line 1       | Alk5i      |   10 |      0.82 |      0.14
+  Line 1       | DMSO       |    8 |      0.96 |      0.09
+  Line 2       | Alk5i      |    5 |      0.83 |      0.16
+  Line 2       | DMSO       |   15 |      1.08 |      0.25
+
+  See fig1_model_quality and fig2_wound_dynamics.
+
+
+Cross-sectional timepoint: t = 20 h
+Constraint method: Kalman
+======================================================================

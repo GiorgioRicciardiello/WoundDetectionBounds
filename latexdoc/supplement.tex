@@ -1,0 +1,288 @@
+\clearpage
+\appendix
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\section*{Supplementary Material}
+
+\subsection*{Supplementary Tables}
+
+% ── Supp Table S1 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Sample sizes (number of trajectories) per cell line and treatment condition
+  after QC filtering.}
+\label{tab:supp-sample-sizes}
+\begin{tabular}{llll}
+\toprule
+Cell line & Alk5i & DMSO & Media \\
+\midrule
+Line~1 & 10 & 8  & 15 \\
+Line~2 &  5 & 15 &  6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S2 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Sample accounting: initial, QC-passing, and final trajectory counts per group,
+  with exclusion percentages.
+  High exclusion rates in DMSO and Media reflect the 0.1~mM concentration filter
+  (only trajectories at the analysis concentration are retained).}
+\label{tab:supp-sample-accounting}
+\begin{tabular}{llrrrr
+  S[table-format=2.1]}
+\toprule
+{Cell line} & {Condition} & {$n$ initial} & {$n$ QC pass} & {$n$ final} & {$n$ excluded} & {Excl.\ (\%)} \\
+\midrule
+Line~1 & Alk5i &  11 & 10 & 10 &  1 &  9.1 \\
+Line~1 & DMSO  &  24 &  8 &  8 & 16 & 66.7 \\
+Line~1 & Media &  31 & 15 & 15 & 16 & 51.6 \\
+Line~2 & Alk5i &   8 &  5 &  5 &  3 & 37.5 \\
+Line~2 & DMSO  &  32 & 15 & 15 & 17 & 53.1 \\
+Line~2 & Media &  22 &  6 &  6 & 16 & 72.7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table kalman ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+	\centering
+	\caption{Per-frame processing sequence of the temporal integrator ($t > 0$).}
+	\label{tab:temporal-sequence}
+	
+	\begin{tabular}{
+			>{\centering\arraybackslash}m{0.08\linewidth}
+			>{\arraybackslash}m{0.52\linewidth}
+			>{\arraybackslash}m{0.30\linewidth}
+		}
+		\toprule
+		Step & Operation & Implemented in \\
+		\midrule
+		
+		1  & Single-frame detector $\rightarrow$ raw edges $u_\text{det}(x,t)$, $\ell_\text{det}(x,t)$ 
+		& Section~2.3.2 \\
+		
+		2  & NaN guard: replace non-finite detector outputs with previous state 
+		& \texttt{KalmanEdgeFilter.update} \\
+		
+		3  & Spatial Gaussian smoothing of detected edges ($\sigma_\text{spatial} = 5$ columns) 
+		& \texttt{gaussian\_filter1d} \\
+		
+		4  & Per-column observation noise $R(x,t)$ estimation 
+		& \texttt{estimate\_R\_per\_column} \\
+		
+		5  & Kalman predict step: $P^-(x,t) = P(x,t-1) + Q$ 
+		& \texttt{\_kalman\_step} \\
+		
+		6  & Kalman update: gain $K$, blended edge $u_\text{filt}$, contracted $P_\text{upd}$ 
+		& \texttt{\_kalman\_step} \\
+		
+		7  & NaN guard on Kalman output: reset non-finite $u_\text{filt}$ to $u(x,t-1)$ 
+		& \texttt{KalmanEdgeFilter.update} \\
+		
+		8  & Hard safety net: $u(x,t) = \max(u_\text{filt}, u(x,t-1))$ 
+		& \texttt{KalmanEdgeFilter.update} \\
+		
+		9  & P-state correction: reset $P$ to $P^-$ for columns where safety net fired 
+		& \texttt{KalmanEdgeFilter.update} \\
+		
+		10 & Mask reconstruction from constrained edges 
+		& \texttt{\_edges\_to\_mask} \\
+		
+		11 & Last-resort area backstop: emit warning and revert if $A(t) > A(t-1)$ 
+		& \texttt{QuantificationSegmenter.segment} \\
+		
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+% ── Supp Table S3 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Descriptive statistics for the primary endpoint (wound closure distance, pixels)
+  and secondary endpoint (closure speed, pixels/h) at the final timepoint,
+  stratified by cell line and treatment condition.
+  Values are mean~$\pm$~SEM with 95\% confidence intervals.}
+\label{tab:supp-descriptive}
+\small
+\begin{tabular}{ll
+  S[table-format=2.2]
+  S[table-format=2.2]
+  S[table-format=2.2]
+  S[table-format=2.2]
+  S[table-format=2.2]
+  r}
+\toprule
+{Cell line} & {Condition}
+  & {Distance mean}
+  & {Distance SD}
+  & {Distance SEM}
+  & {CI$_{95}$ lower}
+  & {CI$_{95}$ upper}
+  & {$n$} \\
+\midrule
+Line~1 & Alk5i & 16.34 &  8.73 & 2.76 & 10.93 & 21.75 & 10 \\
+Line~1 & DMSO  & 19.28 &  4.94 & 1.75 & 15.86 & 22.70 &  8 \\
+Line~1 & Media & 20.87 &  9.06 & 2.34 & 16.28 & 25.45 & 15 \\
+Line~2 & Alk5i & 16.56 &  6.93 & 3.10 & 10.49 & 22.64 &  5 \\
+Line~2 & DMSO  & 21.69 & 19.40 & 5.01 & 11.87 & 31.51 & 15 \\
+Line~2 & Media & 18.86 &  4.02 & 1.64 & 15.65 & 22.08 &  6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S4 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{QC pass rate and monotonic constraint rate per group.
+  All QC-passing trajectories were constrained, consistent with the biological axiom.}
+\label{tab:supp-qc-validation}
+\begin{tabular}{ll
+  S[table-format=3.1]
+  S[table-format=3.0]
+  r}
+\toprule
+{Cell line} & {Condition} & {QC pass rate (\%)} & {Constraint rate (\%)} & {$n$ total} \\
+\midrule
+Line~1 & Alk5i &  90.9 & 100 & 11 \\
+Line~1 & DMSO  & 100.0 & 100 &  8 \\
+Line~1 & Media & 100.0 & 100 & 15 \\
+Line~2 & Alk5i &  62.5 & 100 &  8 \\
+Line~2 & DMSO  &  93.8 & 100 & 16 \\
+Line~2 & Media &  85.7 & 100 &  7 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S5 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Pairwise comparisons of closure speed and distance versus DMSO,
+  stratified by cell line.
+  Welch's $t$-test; $p$-values shown before and after Bonferroni correction
+  (4 tests per metric).
+  All corrected $p$-values equal 1.000.}
+\label{tab:supp-pairwise}
+\small
+\begin{tabular}{lll
+  S[table-format=1.3]
+  S[table-format=-1.3]
+  S[table-format=1.3]
+  S[table-format=1.3]
+  rr}
+\toprule
+{Cell line} & {Condition} & {Metric}
+  & {$t$-stat}
+  & {Cohen's $d$}
+  & {$p$ (raw)}
+  & {$p$ (Bonf.)}
+  & {$n_\text{trt}$}
+  & {$n_\text{ctrl}$} \\
+\midrule
+Line~1 & Media & speed    &  0.543 &  0.200 & 0.593 & 1.000 & 15 & 8 \\
+Line~1 & Alk5i & speed    & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
+Line~2 & Media & speed    & -0.537 & -0.169 & 0.599 & 1.000 &  6 & 15 \\
+Line~2 & Alk5i & speed    & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
+Line~1 & Media & distance &  0.543 &  0.200 & 0.593 & 1.000 & 15 & 8 \\
+Line~1 & Alk5i & distance & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
+Line~2 & Media & distance & -0.537 & -0.169 & 0.599 & 1.000 &  6 & 15 \\
+Line~2 & Alk5i & distance & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S6 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Mixed-effects model parameter estimates.
+  Model: distance $\sim$ time $\times$ condition $\times$ cell\_line, with random intercept
+  and random slope per trajectory.
+  The main effect of time is highly significant ($p < 10^{-12}$);
+  no interaction terms reach significance.}
+\label{tab:supp-mixed-model-coefficients}
+\begin{tabular}{l
+  S[table-format=1.3]
+  S[table-format=1.3]
+  S[table-format=-1.3]
+  S[table-format=1.3]}
+\toprule
+{Term} & {Estimate} & {$p$-value} & {CI$_{95}$ lower} & {CI$_{95}$ upper} \\
+\midrule
+Intercept                                    &  0.847 & 0.744 & -4.237 &  5.931 \\
+DMSO vs.\ Alk5i                              &  0.864 & 0.828 & -6.953 &  8.681 \\
+Media vs.\ Alk5i                             &  1.378 & 0.686 & -5.305 &  8.060 \\
+Line~2 vs.\ Line~1                           &  1.710 & 0.670 & -6.164 &  9.585 \\
+DMSO $\times$ Line~2                         &  2.851 & 0.602 & -7.873 & 13.574 \\
+Media $\times$ Line~2                        & -2.239 & 0.691 & -13.268 &  8.789 \\
+$t$ (main effect)                            &  0.879 & {$<$0.001} & 0.639 &  1.120 \\
+$t \times$ DMSO                              &  0.143 & 0.438 & -0.218 &  0.504 \\
+$t \times$ Media                             &  0.161 & 0.309 & -0.149 &  0.472 \\
+$t \times$ Line~2                            & -0.122 & 0.563 & -0.536 &  0.292 \\
+$t \times$ DMSO $\times$ Line~2              & -0.065 & 0.810 & -0.597 &  0.466 \\
+$t \times$ Media $\times$ Line~2             & -0.019 & 0.945 & -0.573 &  0.534 \\
+\midrule
+\multicolumn{5}{l}{\textit{Variance components}} \\
+\midrule
+Group variance                               &  8.278 & {$<$0.001} & 5.144 & 11.411 \\
+Group $\times$ $t$ covariance                &  0.096 & 0.063 & -0.005 &  0.197 \\
+$t$ variance                                 &  0.016 & {$<$0.001} & 0.009 &  0.023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S7 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Statistical assumption checks.
+  Shapiro--Wilk normality test for wound closure distance, per group.
+  Levene's test for homogeneity of variance across conditions, per cell line.
+  DMSO Line~2 shows significant deviation from normality ($p < 0.001$),
+  warranting use of Welch's $t$-test (unequal variances assumed).}
+\label{tab:supp-assumption-checks}
+\begin{tabular}{ll
+  S[table-format=1.3]
+  S[table-format=1.6]
+  r}
+\toprule
+{Cell line} & {Condition} & {Shapiro $W$} & {Shapiro $p$} & {$n$} \\
+\midrule
+Line~1 & Alk5i & 0.961 & 0.799 & 10 \\
+Line~1 & DMSO  & 0.915 & 0.393 &  8 \\
+Line~1 & Media & 0.957 & 0.634 & 15 \\
+Line~2 & Alk5i & 0.780 & 0.055 &  5 \\
+Line~2 & DMSO  & 0.551 & {$<$0.001} & 15 \\
+Line~2 & Media & 0.876 & 0.253 &  6 \\
+\midrule
+\multicolumn{5}{l}{\textit{Levene's test (homogeneity of variance across conditions)}} \\
+\midrule
+Line~1 & & \multicolumn{2}{l}{$F = 1.457$, $p = 0.249$} & \\
+Line~2 & & \multicolumn{2}{l}{$F = 0.412$, $p = 0.667$} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S8 ────────────────────────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Inter-experiment reproducibility: mean wound closure distance (pixels) at the
+  final timepoint, by cell line, condition, and experiment.
+  Experiment~2 data were unavailable for some condition--cell line combinations
+  (see text for details).}
+\label{tab:supp-reproducibility}
+\begin{tabular}{llrrr rr}
+\toprule
+{Cell line} & {Condition} & {Mean EXP1} & {Mean EXP2} & {Difference} & {$n$ EXP1} & {$n$ EXP2} \\
+\midrule
+Line~1 & Alk5i & 10.94 & 17.69 & -6.75 & 2 & 8 \\
+Line~1 & DMSO  & 19.28 & ---   & ---   & 8 & 0 \\
+Line~1 & Media & 17.63 & 23.70 & -6.07 & 7 & 8 \\
+Line~2 & Alk5i & 16.56 & ---   & ---   & 5 & 0 \\
+Line~2 & DMSO  & 25.82 & 16.98 &  8.84 & 8 & 7 \\
+Line~2 & Media & 18.86 & ---   & ---   & 6 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
