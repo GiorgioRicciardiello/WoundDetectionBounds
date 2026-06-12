@@ -72,30 +72,42 @@ WoundDetectionBounds/
 
 # DATA FLOW
 
+## Modern Pipeline (Recommended)
+
+```
+experiments.xlsx  (flat list with absolute image paths)
+        │
+        ▼  Pipeline(config.yaml)._run_segmentation()
+  Reads absolute paths directly — no intermediate directory structure
+        │
+        ▼  QuantificationSegmenter → process_trajectory() → Kalman filter + monotonic constraint
+        │
+        ▼  output/segmentation/
+  trajectories.pickle          ← full trajectory objects (images + masks + results)
+  experiments.xlsx             ← per-frame measurements (wound_area, t_seg, constrained, qc_valid)
+  {identifier}/experiment.pkl  ← per-sample cache (enables incremental re-runs)
+        │
+        ▼  Pipeline(config.yaml)._run_analysis()
+  output/analysis/
+  analysis_results.xlsx        ← statistical comparisons, effect sizes
+  analysis_results.json        ← structured analysis output
+```
+
+## Legacy Pipeline (Deprecated)
+
 ```
 Raw Incucyte images (OneDrive)
         │
-        ▼  organize_experiments()  [experiment_handler]
+        ▼  organize_experiments()  [DEPRECATED - see grant_reporting/]
 Organised images
   OneDrive/.../processed_experiments_test/
     └── {exposure}/{experiment}/{sample}/*.tif
         │
-        ▼  main.py
+        ▼  main.py  [DEPRECATED - use Pipeline instead]
 QuantificationSegmenter → process_trajectory() → Kalman filter + monotonic constraint
-        │
-        ▼  output_dir/Quantification_results/
-  trajectories.pickle          ← full trajectory objects (images + masks + results)
-  final_legacy_table.xlsx      ← per-frame measurements (wound_area, t_seg, constrained, qc_valid)
-  aligned_legacy_table.xlsx    ← time-aligned version
-  {identifier}/experiment.pkl  ← per-sample cache (enables incremental re-runs)
-        │
-        ▼  python -m scripts.publication.generate_figures
-  paper_publication/fig1_model_quality.{png,pdf}
-  paper_publication/fig2_wound_dynamics.{png,pdf}
-  paper_publication/tables/statistics.xlsx
-  paper_publication/tables/supplementary_tables.xlsx
-  paper_publication/figure_captions.txt
 ```
+
+⚠️ Organization code moved to `grant_reporting/` as historical reference only.
 
 ---
 
@@ -119,23 +131,42 @@ All paths are absolute Windows paths pointing to OneDrive. **Do not modify them.
 
 # PIPELINE ENTRY POINTS
 
-## Step 1 — Quantification Segmentation
+## Modern Approach: YAML Configuration (Recommended)
+
+**New production API** — Use the YAML-based configuration system for flexibility.
+
+```python
+from library.pipeline import Pipeline
+
+# Load config from YAML
+pipeline = Pipeline("config.yaml")
+
+# Run segmentation and analysis
+results = pipeline.run()
+
+# Or run just segmentation
+results = pipeline.run(stages=["segmentation"])
+```
+
+Configuration in `config.yaml`:
+- `input_excel` — Path to experiments.xlsx with absolute image paths
+- `columns` — Map custom Excel columns to pipeline internals
+- `segmentation` — n_workers, use_kalman, process_missing, save_debug_images
+- `analysis` — control_condition, stratify_by, interaction_factors, statistical tests
+- `output` — base_dir and optional per-disk overrides
+
+See `config.example.yaml` for complete documentation.
+
+## Legacy Approach: Direct Script (Deprecated)
+
+The old `main.py` approach using hardcoded paths in `config/config.py` is **deprecated but still functional**.
 
 ```bash
 cd C:\Users\riccig01\OneDrive\Projects\MtSinai\Vascbrain\WoundDetectionBounds
 python main.py
 ```
 
-Key parameters (from `config/config.py` and `__main__`):
-- `MODEL_KEY = 'Quantification_results'`
-- `exposures = ["alk5i", "Candasertan"]`
-- `experiments = ["EXP1", "EXP2"]`
-- `process_missing = True` — set `False` to skip already-processed samples
-- `save_debug = True` — saves 6-panel composite PNGs per frame
-- `n_workers = 10` — parallel workers via `ProcessPoolExecutor`
-
-Incremental re-runs: per-sample cache at `output_root/{identifier}/experiment.pkl`.
-If the file exists, segmentation is skipped for that sample.
+⚠️ Use modern Pipeline API instead.
 
 ## Step 2 — Publication Figures & Tables
 
@@ -143,7 +174,7 @@ If the file exists, segmentation is skipped for that sample.
 python -m scripts.publication.generate_figures
 ```
 
-Reads from `trajectories.pickle` + `final_legacy_table.xlsx`.
+Reads from `trajectories.pickle` + measurements Excel file.
 Candesartan is excluded automatically (`filter_candesartan()`).
 Analysis concentration fixed at `ANALYSIS_CONCENTRATION_MM = 0.1 mM`.
 

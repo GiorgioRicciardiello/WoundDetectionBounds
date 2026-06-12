@@ -23,7 +23,7 @@ from tqdm import tqdm
 
 from library.config.pipeline_config import PipelineConfig
 from library.core.types import WoundDetectorConfig
-from library.core.segmentation import run_quantification_pipeline, pickle_io
+from library.core.segmentation import run_quantification_from_dataframe, pickle_io
 
 
 class SegmentationCache:
@@ -134,37 +134,6 @@ class Pipeline:
             print(self.config)
             print(f"{'='*60}\n")
 
-    def _organize_segmentation_input(self, df_input: pd.DataFrame, organized_dir: Path) -> None:
-        """Organize flat input data into condition/experiment/sample structure.
-
-        Creates directory structure expected by run_quantification_pipeline:
-        organized_dir/
-          condition1/
-            experiment1/
-              condition1_experiment1_sample_file.xlsx
-          condition2/
-            experiment1/
-              condition2_experiment1_sample_file.xlsx
-        """
-        organized_dir.mkdir(parents=True, exist_ok=True)
-
-        for (condition, experiment), group in df_input.groupby(["condition", "experiment"]):
-            # Create directories
-            exp_dir = organized_dir / condition / experiment
-            exp_dir.mkdir(parents=True, exist_ok=True)
-
-            # Create sample file expected by run_quantification_pipeline
-            # Rename columns to match what the pipeline expects
-            df_legacy = group.copy()
-            df_legacy.columns = df_legacy.columns.str.replace("_", " ").str.title()
-
-            # Save the sample file
-            sample_file = exp_dir / f"{condition}_{experiment}_sample_file.xlsx"
-            df_legacy.to_excel(sample_file, index=False)
-
-            if self.config.verbose:
-                print(f"[OK] Organized: {sample_file} ({len(group)} rows)")
-
     def run(
         self,
         stages: Optional[list[str]] = None,
@@ -209,55 +178,36 @@ class Pipeline:
         return results
 
     def _run_segmentation(self) -> Dict[str, Any]:
-        """Run the segmentation pipeline."""
+        """Run the segmentation pipeline directly from flat Excel data."""
         if self.config.verbose:
             print("\n[STAGE 1/2] SEGMENTATION")
             print("-" * 60)
 
-        # Load and organize input data
+        # Load input data
         df_input = pd.read_excel(self.config.input_excel)
 
-        # Map column names to internal names (rename for consistency)
-        col_map = {
-            self.config.columns.image_path: "image_path",
-            self.config.columns.time_min: "time_min",
-            self.config.columns.condition: "condition",
-            self.config.columns.experiment: "experiment",
-            self.config.columns.sample_name: "sample_name",
-        }
-        # Add analysis factors to the mapping
-        for factor in self.config.columns.factors:
-            col_map[factor.column] = factor.name
-
-        df_input = df_input.rename(columns=col_map)
-
-        # Organize input data into required directory structure
-        # run_quantification_pipeline expects: image_folder/condition/experiment/*.tif
-        organized_dir = self.seg_dir / ".organized_input"
-        self._organize_segmentation_input(df_input, organized_dir)
-
-        # Get unique conditions and experiments
-        exposures = df_input["condition"].unique().tolist()
-        experiments = df_input["experiment"].unique().tolist()
-
         if self.config.verbose:
-            print(f"Conditions: {exposures}")
-            print(f"Experiments: {experiments}")
-            print(f"Total rows: {len(df_input)}")
+            print(f"Loaded: {len(df_input)} rows from {self.config.input_excel}")
+            print(f"Conditions: {df_input[self.config.columns.condition].nunique()}")
+            print(f"Experiments: {df_input[self.config.columns.experiment].nunique()}")
 
-        # Create detector config from pipeline config
+        # Create detector config
         detector_cfg = WoundDetectorConfig(
             use_kalman=self.config.segmentation.use_kalman,
             kalman_Q=self.config.segmentation.kalman_Q,
             kalman_R_base=self.config.segmentation.kalman_R_base,
         )
 
-        # Run quantification pipeline with organized data
-        df_measurements, trajectories = run_quantification_pipeline(
-            image_folder=organized_dir,
+        # Run quantification pipeline directly with DataFrame
+        # No directory organization needed — uses absolute paths from Excel
+        df_measurements, trajectories = run_quantification_from_dataframe(
+            df_input=df_input,
             output_root=self.seg_dir,
-            exposures=exposures,
-            experiments=experiments,
+            condition_col=self.config.columns.condition,
+            experiment_col=self.config.columns.experiment,
+            sample_col=self.config.columns.sample_name,
+            image_path_col=self.config.columns.image_path,
+            time_col=self.config.columns.time_min,
             process_missing=self.config.segmentation.process_missing,
             save_debug=self.config.segmentation.save_debug_images,
             n_workers=self.config.segmentation.n_workers,

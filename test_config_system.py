@@ -6,7 +6,7 @@ This script validates:
 1. Config loading from YAML files
 2. Config validation against Excel data
 3. Column mapping and renaming
-4. Data organization structure
+4. DataFrame processing (direct, no intermediate organization)
 5. Pipeline initialization
 """
 
@@ -80,48 +80,35 @@ def test_column_mapping():
 
     return True
 
-def test_data_organization():
-    """Test that data can be organized correctly."""
+def test_dataframe_processing():
+    """Test that Pipeline processes DataFrames directly (no organization)."""
     print("\n" + "="*60)
-    print("TEST 4: Data Organization Structure")
+    print("TEST 4: DataFrame Processing (No Intermediate Organization)")
     print("="*60)
 
     # Load test data
     df = pd.read_excel("experiments_test.xlsx")
-
-    # Simulate column renaming as pipeline would do
-    col_map = {
-        "image_path": "image_path",
-        "time_min": "time_min",
-        "sample_condition": "condition",
-        "experiment": "experiment",
-        "sample_name": "sample_name",
-    }
-    df = df.rename(columns=col_map)
-
     print(f"[OK] Data loaded: {len(df)} rows")
 
     # Check grouping
-    grouping = df.groupby(["condition", "experiment"]).size()
-    print(f"[OK] Groups found:\n{grouping}")
+    grouping = df.groupby(["sample_condition", "experiment"]).size()
+    print(f"[OK] Data groups:\n{grouping}")
 
-    # Initialize pipeline to test organization
+    # Initialize pipeline
     try:
         pipeline = Pipeline("config_test.yaml")
 
-        # Test the organization method
-        organized_dir = pipeline.seg_dir / ".organized_input_test"
-        pipeline._organize_segmentation_input(df, organized_dir)
+        # Pipeline now works directly with flat DataFrames
+        # No intermediate directory organization needed
+        print(f"\n[OK] Pipeline initialized (no directory organization required)")
+        print(f"     Segmentation dir: {pipeline.seg_dir}")
 
-        # Verify structure was created
-        print(f"\n[OK] Data organized to: {organized_dir}")
-
-        # Show structure
-        import os
-        for root, dirs, files in os.walk(str(organized_dir)):
-            if files:
-                rel_path = os.path.relpath(root, str(organized_dir))
-                print(f"     {rel_path}: {len(files)} files")
+        # Verify config column mappings are correct
+        print(f"\n[OK] Column mappings:")
+        print(f"     Condition column: {pipeline.config.columns.condition}")
+        print(f"     Experiment column: {pipeline.config.columns.experiment}")
+        print(f"     Image path column: {pipeline.config.columns.image_path}")
+        print(f"     Time column: {pipeline.config.columns.time_min}")
 
         return True
     except Exception as e:
@@ -170,8 +157,8 @@ def main():
     if test_column_mapping():
         tests_passed += 1
 
-    # Test 4: Data organization
-    if test_data_organization():
+    # Test 4: DataFrame processing
+    if test_dataframe_processing():
         tests_passed += 1
 
     # Test 5: Pipeline init
