@@ -1,0 +1,41 @@
+input_excel: "C:\\Users\\riccig01\\OneDrive\\Projects\\MtSinai\\Vascbrain\\WoundDetectionBounds\\experiments_test.xlsx"
+
+columns:
+  # Infrastructure
+  image_path: "image_path"
+  time_min: "time_min"
+
+  # Trajectory identifiers (define temporal sequences)
+  condition: "sample_condition"
+  experiment: "experiment"
+  sample_name: "sample_name"
+
+  # Analysis factors (configurable for stratification/interaction)
+  factors:
+    - name: "cell_line"
+      column: "cell_line"
+    - name: "concentration"
+      column: "concentration_mm"
+
+segmentation:
+  n_workers: 2
+  save_debug_images: false
+  process_missing: true
+  use_kalman: true
+
+analysis:
+  control_condition: "dmso"
+  stratify_by: ["cell_line"]
+  interaction_factors: []
+  effect_size_metric: "cohens_d"
+  output_formats: ["excel"]
+  alpha: 0.05
+
+output:
+  base_dir: "C:\\Users\\riccig01\\Documents\\vascbrain\\WoundImages\\WoundQuantification\\results_test"
+  segmentation_subdir: "segmentation"
+  analysis_subdir: "analysis"
+
+overwrite_existing: false
+save_config_with_results: true
+verbose: true

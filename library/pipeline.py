@@ -134,6 +134,37 @@ class Pipeline:
             print(self.config)
             print(f"{'='*60}\n")
 
+    def _organize_segmentation_input(self, df_input: pd.DataFrame, organized_dir: Path) -> None:
+        """Organize flat input data into condition/experiment/sample structure.
+
+        Creates directory structure expected by run_quantification_pipeline:
+        organized_dir/
+          condition1/
+            experiment1/
+              condition1_experiment1_sample_file.xlsx
+          condition2/
+            experiment1/
+              condition2_experiment1_sample_file.xlsx
+        """
+        organized_dir.mkdir(parents=True, exist_ok=True)
+
+        for (condition, experiment), group in df_input.groupby(["condition", "experiment"]):
+            # Create directories
+            exp_dir = organized_dir / condition / experiment
+            exp_dir.mkdir(parents=True, exist_ok=True)
+
+            # Create sample file expected by run_quantification_pipeline
+            # Rename columns to match what the pipeline expects
+            df_legacy = group.copy()
+            df_legacy.columns = df_legacy.columns.str.replace("_", " ").str.title()
+
+            # Save the sample file
+            sample_file = exp_dir / f"{condition}_{experiment}_sample_file.xlsx"
+            df_legacy.to_excel(sample_file, index=False)
+
+            if self.config.verbose:
+                print(f"[OK] Organized: {sample_file} ({len(group)} rows)")
+
     def run(
         self,
         stages: Optional[list[str]] = None,
@@ -183,21 +214,36 @@ class Pipeline:
             print("\n[STAGE 1/2] SEGMENTATION")
             print("-" * 60)
 
-        # Load input data
+        # Load and organize input data
         df_input = pd.read_excel(self.config.input_excel)
 
-        # Map column names
-        col_map = self.config.columns.to_dict()
+        # Map column names to internal names (rename for consistency)
+        col_map = {
+            self.config.columns.image_path: "image_path",
+            self.config.columns.time_min: "time_min",
+            self.config.columns.condition: "condition",
+            self.config.columns.experiment: "experiment",
+            self.config.columns.sample_name: "sample_name",
+        }
+        # Add analysis factors to the mapping
+        for factor in self.config.columns.factors:
+            col_map[factor.column] = factor.name
+
         df_input = df_input.rename(columns=col_map)
 
-        # Group by exposure × experiment (dynamics)
-        exposures = df_input[self.config.columns.exposure].unique().tolist()
-        experiments = df_input[self.config.columns.experiment].unique().tolist()
+        # Organize input data into required directory structure
+        # run_quantification_pipeline expects: image_folder/condition/experiment/*.tif
+        organized_dir = self.seg_dir / ".organized_input"
+        self._organize_segmentation_input(df_input, organized_dir)
+
+        # Get unique conditions and experiments
+        exposures = df_input["condition"].unique().tolist()
+        experiments = df_input["experiment"].unique().tolist()
 
         if self.config.verbose:
-            print(f"Exposures: {exposures}")
+            print(f"Conditions: {exposures}")
             print(f"Experiments: {experiments}")
-            print(f"Total samples: {len(df_input)}")
+            print(f"Total rows: {len(df_input)}")
 
         # Create detector config from pipeline config
         detector_cfg = WoundDetectorConfig(
@@ -206,9 +252,9 @@ class Pipeline:
             kalman_R_base=self.config.segmentation.kalman_R_base,
         )
 
-        # Run quantification pipeline
+        # Run quantification pipeline with organized data
         df_measurements, trajectories = run_quantification_pipeline(
-            image_folder=Path(self.config.input_excel).parent,  # Adjust as needed
+            image_folder=organized_dir,
             output_root=self.seg_dir,
             exposures=exposures,
             experiments=experiments,

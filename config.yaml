@@ -18,8 +18,9 @@ columns:
       column: "concentration_mm"
 
 segmentation:
-  n_workers: 4
-  process_missing: false
+  n_workers: 2
+  save_debug_images: false
+  process_missing: true
   use_kalman: true
 
 analysis:
