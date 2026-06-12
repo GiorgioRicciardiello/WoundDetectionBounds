@@ -136,13 +136,31 @@ class AnalysisConfig:
 
 @dataclass
 class OutputConfig:
-    """Output directory and file structure."""
+    """Output directory and file structure.
+
+    Supports flexible path configuration for different storage needs.
+    All paths are optional — if not specified, defaults to subdirs under base_dir.
+
+    Example: Store trajectories on fast SSD, analysis on slow NAS:
+        output:
+          base_dir: "./results"
+          segmentation_subdir: "segmentation"
+          analysis_subdir: "analysis"
+          # Explicitly specify fast disk for trajectories
+          trajectories_pickle_path: "D:/fast_storage/trajectories.pickle"
+    """
 
     base_dir: str
     segmentation_subdir: str = "segmentation"
     verification_subdir: str = "verification"
     analysis_subdir: str = "analysis"
     figures_subdir: str = "figures"
+
+    # Optional: Override specific output paths (if None, uses default subdirs)
+    trajectories_pickle_path: Optional[str] = None
+    measurements_xlsx_path: Optional[str] = None
+    analysis_results_xlsx_path: Optional[str] = None
+    analysis_results_json_path: Optional[str] = None
 
     def get_segmentation_dir(self) -> Path:
         return Path(self.base_dir) / self.segmentation_subdir
@@ -155,6 +173,30 @@ class OutputConfig:
 
     def get_figures_dir(self) -> Path:
         return Path(self.base_dir) / self.figures_subdir
+
+    def get_trajectories_pickle_path(self) -> Path:
+        """Get trajectories pickle path (custom or default)."""
+        if self.trajectories_pickle_path:
+            return Path(self.trajectories_pickle_path)
+        return self.get_segmentation_dir() / "trajectories.pickle"
+
+    def get_measurements_xlsx_path(self) -> Path:
+        """Get measurements Excel path (custom or default)."""
+        if self.measurements_xlsx_path:
+            return Path(self.measurements_xlsx_path)
+        return self.get_segmentation_dir() / "experiments.xlsx"
+
+    def get_analysis_results_xlsx_path(self) -> Path:
+        """Get analysis results Excel path (custom or default)."""
+        if self.analysis_results_xlsx_path:
+            return Path(self.analysis_results_xlsx_path)
+        return self.get_analysis_dir() / "analysis_results.xlsx"
+
+    def get_analysis_results_json_path(self) -> Path:
+        """Get analysis results JSON path (custom or default)."""
+        if self.analysis_results_json_path:
+            return Path(self.analysis_results_json_path)
+        return self.get_analysis_dir() / "analysis_results.json"
 
 
 @dataclass

@@ -153,14 +153,37 @@ analysis:
   alpha: 0.05                           # Significance threshold
 
 
-# OUTPUT STRUCTURE
-# ================
+# OUTPUT STRUCTURE & PATHS
+# =========================
 output:
   base_dir: "./results"                 # Root output directory
+
+  # Subdirectories under base_dir (default behavior)
   segmentation_subdir: "segmentation"   # Masks, trajectories, measurements
   verification_subdir: "verification"   # Manual QC results
   analysis_subdir: "analysis"           # Statistical tables and figures
   figures_subdir: "figures"             # Publication-ready figures
+
+  # OPTIONAL: Override specific output paths
+  # Useful when storing on different disks (fast SSD vs. slow NAS, etc.)
+  # If not specified, files go to subdirs under base_dir.
+  #
+  # Example: Store trajectories on fast disk, analysis on slow disk:
+  # trajectories_pickle_path: "D:/fast_storage/trajectories.pickle"
+  # measurements_xlsx_path: "D:/fast_storage/measurements.xlsx"
+  # analysis_results_xlsx_path: "E:/backups/analysis_results.xlsx"
+  # analysis_results_json_path: "E:/backups/analysis_results.json"
+  #
+  # Supported custom paths:
+  # - trajectories_pickle_path: Where to save wound trajectory objects
+  # - measurements_xlsx_path: Where to save per-frame measurements
+  # - analysis_results_xlsx_path: Where to save statistical tables
+  # - analysis_results_json_path: Where to save analysis as JSON
+
+  trajectories_pickle_path: null        # null = use default (segmentation_subdir)
+  measurements_xlsx_path: null          # null = use default (segmentation_subdir)
+  analysis_results_xlsx_path: null      # null = use default (analysis_subdir)
+  analysis_results_json_path: null      # null = use default (analysis_subdir)
 
 
 # CACHING & REPRODUCIBILITY

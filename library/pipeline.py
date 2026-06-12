@@ -218,9 +218,13 @@ class Pipeline:
             detector_config=detector_cfg,
         )
 
-        # Save outputs
-        traj_path = self.seg_dir / "trajectories.pickle"
-        meas_path = self.seg_dir / "experiments.xlsx"
+        # Save outputs (using configurable paths)
+        traj_path = self.config.output.get_trajectories_pickle_path()
+        meas_path = self.config.output.get_measurements_xlsx_path()
+
+        # Ensure parent directories exist
+        traj_path.parent.mkdir(parents=True, exist_ok=True)
+        meas_path.parent.mkdir(parents=True, exist_ok=True)
 
         pickle_io(traj_path, obj=trajectories, save=True)
         df_measurements.to_excel(meas_path, index=False)
@@ -284,20 +288,19 @@ class Pipeline:
             print(f"[OK] Summary statistics computed")
             print(f"[OK] Pairwise comparisons completed")
 
-        # Save outputs (Excel and/or JSON)
-        analysis_dir = self.analysis_dir
-        analysis_dir.mkdir(parents=True, exist_ok=True)
-
+        # Save outputs (Excel and/or JSON) to configurable paths
         output_formats = self.config.analysis.output_formats or ["excel", "json"]
 
         if "excel" in output_formats:
-            excel_path = analysis_dir / "analysis_results.xlsx"
+            excel_path = self.config.output.get_analysis_results_xlsx_path()
+            excel_path.parent.mkdir(parents=True, exist_ok=True)
             pipeline.to_excel(str(excel_path))
             if self.config.verbose:
                 print(f"[OK] Saved: {excel_path}")
 
         if "json" in output_formats:
-            json_path = analysis_dir / "analysis_results.json"
+            json_path = self.config.output.get_analysis_results_json_path()
+            json_path.parent.mkdir(parents=True, exist_ok=True)
             pipeline.to_json(str(json_path))
             if self.config.verbose:
                 print(f"[OK] Saved: {json_path}")

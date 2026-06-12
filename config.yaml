@@ -36,7 +36,16 @@ analysis:
   alpha: 0.05
 
 output:
-  base_dir: "./results_multifactor"
+  base_dir: "C:\\Users\\riccig01\\Documents\\vascbrain\\WoundImages\\WoundQuantification\\results_06122026"
+  segmentation_subdir: "segmentation"
+  analysis_subdir: "analysis"
+
+  # Optional: Override specific paths for different disks
+  # Example: Store trajectories on fast SSD, analysis on slow NAS
+  # trajectories_pickle_path: "D:/fast_disk/trajectories.pickle"
+  # measurements_xlsx_path: "D:/fast_disk/measurements.xlsx"
+  # analysis_results_xlsx_path: "E:/slow_disk/analysis_results.xlsx"
+  # analysis_results_json_path: "E:/slow_disk/analysis_results.json"
 
 overwrite_existing: false
 save_config_with_results: true
