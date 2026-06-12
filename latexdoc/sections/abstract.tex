@@ -1,54 +1,15 @@
 \begin{abstract}
 
-\textbf{Objective}: To develop and validate a fully automated, training-free computational pipeline for quantitative analysis of scratch-wound healing assays that overcomes limitations of existing methods, including single-frame independence, reliance on annotated training data, and lack of biologically informed temporal constraints.
+\textbf{Objective}: To develop and validate a fully automated, training-free computational pipeline for scratch-wound quantification that enforces a per-column monotonic closure constraint, eliminating the non-biological area fluctuations produced by frame-independent segmentation.
 
-\textbf{Materials and Methods}: We designed a computational pipeline for phase-contrast time-lapse microscopy that segments wound boundaries using local variance–based texture analysis and enforces a biologically motivated monotonic closure constraint over time. The method operates in $O(HW)$ per frame and requires no training data. The single-frame detector consists of seven stages: local variance mapping, Y-band detection, column-wise edge extraction, RANSAC-based outlier rejection, Savitzky–Golay smoothing, vectorized mask reconstruction, and geometric validation. A stateful temporal integrator constrains per-column boundary evolution to inward motion only. The pipeline was evaluated on 325 images from two independent cell lines (iMC ISOR544C and iMC MUTR544C) across pharmacologic conditions including ALK5 inhibitor, DMSO, and media control at concentrations of 0.1mM.
+\textbf{Materials and Methods}: A training-free pipeline segments phase-contrast time-lapse images using local variance--based texture analysis with RANSAC outlier rejection and Savitzky--Golay boundary smoothing, operating in $O(HW)$ per frame. A per-column Kalman filter with a hard monotonic safety net enforces strictly non-increasing boundary evolution. The pipeline was evaluated on 134 phase-contrast images from two independent experiments and two cell lines (iMC~ISOR544C and iMC~MUTR544C) across three culture conditions (ALK5 inhibitor at $0.1\,\mathrm{mM}$, DMSO vehicle, and media control), used as a test bed to assess whether the pipeline resolves condition-dependent closure dynamics.
 
-\textbf{Results}: Expert review confirmed 98.9\% detection accuracy across 285 wound-bearing images, with a mean Dice coefficient of 0.91 against manual annotations ((n=5)). The automated quality-control module achieved sensitivity of 1.00 for wound detection. Analysis of 282 validated trajectories demonstrated modest wound closure across all conditions (15.5–20.0\% at 24 hours), with ALK5 inhibition yielding the lowest fractional closure (15.5 ± 0.8\%), consistent with suppression of migration. No condition reached 50\% closure within the observation window. Computational efficiency enabled processing of a 20-frame trajectory in under 10 seconds on standard hardware.
+\textbf{Results}: Expert review confirmed 98.4\% detection accuracy across 124 wound-bearing image. The automated quality-control module achieved a sensitivity of 1.00 for wound detection (NPV = 1.00; Cohen's $\kappa$ = 0.90 against expert verdicts). The temporal constraint yielded strictly non-increasing area trajectories by construction, with a monotonic-constraint across all approved trajectories. A linear mixed-effects model fit to the resulting edge-displacement trajectories detected a significant closure-over-time effect ($\beta = 0.88$~px/frame, $p < 10^{-12}$), demonstrating that the pipeline is able to capture differences between the experiments. 
 
-\textbf{Discussion}: This approach eliminates dependence on training data while incorporating biologically grounded temporal constraints, addressing key limitations of deep learning and frame-independent methods. The resulting trajectories are smooth, physically consistent, and directly interpretable without post hoc correction, enabling robust downstream quantitative analysis.
-
-\textbf{Conclusion}:The proposed pipeline provides a scalable, accurate, and interpretable framework for automated wound healing quantification, bridging a critical methodological gap and supporting reproducible analysis in cell migration studies.
-
-
-
+\textbf{Conclusion}: The proposed pipeline offers a training-free of supervised deep-learning segmenter or manual parameter tuning; the temporal constraint removes the non-biological area fluctuations that accumulate when frames are processed independently. The resulting trajectories are physically consistent and structured for post hoc statistical analysis. The implementation is released in GitHub \citep{Ricciardiello2025code}.
 
 \end{abstract}
 
-
-%The scratch-wound healing assay is a cornerstone of \emph{in vitro} cell migration studies,
-%yet automated quantification remains limited by single-frame independence,
-%training-data requirements, and the absence of biological constraints in existing tools.
-%Here we present a fully automated computational pipeline that
-%segments wound boundaries from phase-contrast time-lapse microscopy using local variance
-%texture analysis and enforces a biologically motivated monotonic closure constraint across
-%the temporal sequence.
-%
-%Unlike deep-learning approaches, Quantification requires no annotated training data and
-%operates on standard phase-contrast images in $O(HW)$ time per frame.
-%The pipeline comprises a seven-stage single-frame detector ---
-%local variance mapping, Y-band detection, column-wise edge extraction,
-%RANSAC-based outlier rejection, Savitzky--Golay smoothing,
-%vectorized mask reconstruction, and geometric validation ---
-%followed by a stateful temporal integrator that constrains per-column edges
-%to move only inward over time.
-%We validated Quantification on 325 baseline images from two independent
-%scratch-wound experiments in immortalized skeletal muscle cell lines
-%(iMC~ISOR544C and iMC~MUTR544C) treated with candesartan (AT1R blocker),
-%an ALK5 inhibitor (TGF-$\beta$ receptor~I antagonist), vehicle (DMSO),
-%or media control across three concentrations (0.01--1.0~mM).
-%Expert manual review confirmed 98.9\% detection accuracy on 285 wound-bearing images,
-%with a mean Dice coefficient of 0.91 against hand-drawn ground truth ($n = 5$).
-%The automatic quality-control algorithm achieved perfect sensitivity (1.00) for
-%wound-bearing images.
-%Downstream analysis of 282 validated trajectories revealed modest wound closure across
-%all conditions (15.5--20.0\% at 24~h), with ALK5 inhibition producing the lowest
-%fractional closure (15.5~$\pm$~0.8\%), consistent with TGF-$\beta$-mediated suppression
-%of collective cell migration.
-%No condition reached 50\% closure within the 24-hour observation window.
-%The pipeline processes a typical 20-frame trajectory in under 10~seconds on commodity
-%hardware and is released as open-source Python code with fully vectorized NumPy operations
-%and configurable parallel processing.
-%Quantification addresses a critical methodological gap by combining training-free
-%segmentation with physics-informed temporal constraints, producing smooth, strictly
-%non-increasing area trajectories that are directly interpretable without post-hoc smoothing.
+\noindent\textbf{Keywords:} scratch-wound assay, automated segmentation,
+monotonic closure constraint, local-variance texture analysis, Kalman filter,
+temporal constraint, training-free image analysis

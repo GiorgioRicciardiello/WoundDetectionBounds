@@ -27,7 +27,7 @@ config = {
 
     # Segmentation pipeline outputs
     'trajectories_pickle': _model_output_dir / 'trajectories.pickle',
-    'final_legacy_table': _model_output_dir / 'final_legacy_table.xlsx',
+    'final_legacy_table': _model_output_dir / 'experiments.xlsx',
     'aligned_legacy_table': _model_output_dir / 'aligned_legacy_table.xlsx',
 
     # Manual verification results (human ground-truth annotations at t=0)

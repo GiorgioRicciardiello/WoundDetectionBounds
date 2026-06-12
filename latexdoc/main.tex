@@ -39,19 +39,26 @@
 
 % ── Typography and layout ─────────────────────────────────────────────────────
 \usepackage{setspace}
-\onehalfspacing
-\usepackage{parskip}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\doublespacing
+\setlength{\parindent}{1.5em}
+
+% ── Running header ────────────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Temporally Constrained Wound Segmentation}}
+\fancyhead[R]{\small Ricciardiello et al.}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Manuscript style: suppress section numbers ────────────────────────────────
+\setcounter{secnumdepth}{0}
 
 % ── Hyperlinks ────────────────────────────────────────────────────────────────
 \usepackage[
-  colorlinks = true,
-  linkcolor  = blue!60!black,
-  citecolor  = blue!60!black,
-  urlcolor   = blue!70!black,
+  hidelinks,
   pdftitle   = {Temporally Constrained Variance-Based Segmentation},
-  pdfauthor  = {},
+  pdfauthor  = {Ricciardiello et al.},
 ]{hyperref}
 
 % ── References ────────────────────────────────────────────────────────────────
@@ -69,7 +76,7 @@
 	\textbf{Temporally Constrained Segmentation Enables Robust Quantification of Scratch-Wound Healing Dynamics}%
 }
 
-\author{[Giorgio Ricciardiello,Pauline August, Eirini Stratigakou, Selene Lomoio, Fanny Elahi]\\
+\author{[Giorgio Ricciardiello, Pauline August, Eirini Stratigakou, Selene Lomoio, Fanny Elahi]\\
   \small Department of Neurology, Icahn School of Medicine at Mount Sinai, New York, NY\\
   \small \texttt{[giorgio.ricciardiellomejia@mountsinai.org]}
 }
@@ -79,24 +86,15 @@
 % ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 \maketitle
-\thispagestyle{empty}
-
-\noindent\textbf{Keywords:} scratch-wound assay, automated segmentation,
-monotonic closure constraint, myoblast migration, angiotensin receptor blocker,
-TGF-$\beta$, ALK5 inhibitor, image analysis
-
-\bigskip
-\hrule
-\bigskip
+\thispagestyle{fancy}
 
 % ── Sections ──────────────────────────────────────────────────────────────────
 \input{sections/abstract}
-\newpage
 \input{sections/introduction}
 \input{sections/methods}
 \input{sections/results}
 \input{sections/discussion}
-\input{sections/conclusions}
+% \input{sections/conclusions}
 
 % ── References ────────────────────────────────────────────────────────────────
 \bibliography{references}

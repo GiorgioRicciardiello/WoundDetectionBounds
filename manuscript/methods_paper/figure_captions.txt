@@ -1,0 +1,8 @@
+FIGURE CAPTIONS
+===============
+
+Figure 1. Automated wound boundary detection and closure dynamics.
+(A-C) Representative phase-contrast images of a wound healing assay at three timepoints (t = 0, mid, and t = 20 h) with computationally detected wound boundaries overlaid as semi-transparent filled regions. Boundaries are shown cumulatively: earlier timepoints appear as faint dashed outlines, the current timepoint as solid fill.  Representative trajectory: alk5i_e4_1-EXP2-alk5i. Images were acquired at a calibrated scale of 1.24 um/px. (D) Normalised wound area over time, expressed as a fraction of the t = 0 wound area. Error bands represent 95% confidence intervals. Sample sizes: Line 1 - Alk5i: n = 10; Line 1 - DMSO: n = 8; Line 1 - Media: n = 15; Line 2 - Alk5i: n = 5; Line 2 - DMSO: n = 15; Line 2 - Media: n = 6.
+
+Figure 2. Wound healing dynamics across experimental conditions.
+(A) Mean wound closure speed (pixels/h) at t = 20 h, computed as the rate of wound edge displacement. (B) Mean wound closure distance (pixels) at t = 20 h, representing the cumulative inward displacement of the wound boundary from t = 0. (C) Time-series of wound edge displacement over the full observation period. Error bars represent 95% confidence intervals. Statistical comparisons were performed using Welch's t-test with Bonferroni correction for multiple comparisons. Sample sizes: Line 1 - Alk5i: n = 10; Line 1 - DMSO: n = 8; Line 1 - Media: n = 15; Line 2 - Alk5i: n = 5; Line 2 - DMSO: n = 15; Line 2 - Media: n = 6.

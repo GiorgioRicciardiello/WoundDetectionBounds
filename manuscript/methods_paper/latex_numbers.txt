@@ -1,0 +1,50 @@
+LATEX NUMBERS (candesartan-free, ALK5i experiment only)
+============================================================
+
+[Candesartan exclusion]
+  rows_removed    : 4385
+  rows_kept       : 3101
+  traj_removed    : 191
+  traj_kept       : 134
+  verif_removed   : 191
+  verif_kept      : 134
+
+[Analysis cohort — trajectories per cell line x condition]
+  Line 1   | Alk5i : 11
+  Line 1   | DMSO  : 8
+  Line 1   | Media : 15
+  Line 2   | Alk5i : 8
+  Line 2   | DMSO  : 16
+  Line 2   | Media : 7
+  TOTAL trajectories (filtered): 65
+
+[Cross-sectional cohort @ t=20 h]
+  Line 1   | Alk5i : 10
+  Line 1   | DMSO  : 8
+  Line 1   | Media : 15
+  Line 2   | Alk5i : 5
+  Line 2   | DMSO  : 15
+  Line 2   | Media : 6
+  TOTAL cross-sectional: 59
+
+[QC pass rate @ t=0 per group]
+  Line 1   | Alk5i : 10/11 (90.9%)
+  Line 1   | DMSO  : 8/8 (100.0%)
+  Line 1   | Media : 15/15 (100.0%)
+  Line 2   | Alk5i : 5/8 (62.5%)
+  Line 2   | DMSO  : 15/16 (93.8%)
+  Line 2   | Media : 6/7 (85.7%)
+
+[Pixel-level metrics — expert polygons, ALK5i only]
+  n polygons: 5
+  dice        : mean=0.909 sd=0.057 min=0.843 max=0.998 (n=5)
+  iou         : mean=0.837 sd=0.099 min=0.729 max=0.997 (n=5)
+  precision   : mean=0.868 sd=0.123 min=0.729 max=1.000 (n=5)
+  recall      : mean=0.969 sd=0.070 min=0.844 max=1.000 (n=5)
+  f1          : mean=0.909 sd=0.057 min=0.843 max=0.998 (n=5)
+  accuracy    : mean=0.954 sd=0.029 min=0.921 max=0.999 (n=5)
+  hausdorff_95: mean=45.600 sd=27.808 min=0.000 max=76.000 (n=5)
+
+See results_summary.txt for the full census / accuracy / QC
+confusion matrix, and supplementary_tables.xlsx for the
+closure tables, pairwise comparisons, and mixed-model output.

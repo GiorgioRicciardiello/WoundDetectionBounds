@@ -1,26 +1,30 @@
 \section{Conclusion}
 
-We have presented Quantification, a fully automated pipeline for scratch-wound healing
-quantification that combines variance-based single-frame detection with a biologically
-motivated monotonic closure constraint.
+The pipeline introduced here addresses the core limitation shared by frame-independent
+wound segmentation tools: by coupling texture-based single-frame detection with a
+per-column Kalman-filtered monotonic constraint, it produces wound-area trajectories
+that are physically valid by construction and require no post-hoc correction.
 The pipeline requires no training data, processes standard phase-contrast microscopy images in
 linear time, and produces smooth, strictly non-increasing wound area trajectories.
-Validation on 325 images from a pharmacological study in immortalized myoblasts demonstrated
-98.9\% detection accuracy and a mean Dice coefficient of 0.91 against expert annotations.
-Application to 282 validated trajectories revealed that ALK5 inhibition suppressed wound
-closure kinetics while candesartan had no appreciable effect, consistent with a dominant role
-for canonical TGF-$\beta$ signaling in myoblast migration.
-A three-tier quality-control system ensures robust performance, and parallel trajectory
-processing enables scalable analysis of high-content experiments.
+Validation on 134 phase-contrast images across three culture conditions in immortalized
+myoblasts demonstrated 98.4\% detection accuracy and a mean Dice coefficient of 0.91 against
+expert annotations.
+The extracted trajectories were strictly non-increasing by construction and supported a
+properly specified linear mixed-effects analysis (significant closure-over-time main effect,
+$p < 10^{-12}$), confirming that the pipeline yields measurements suitable for rigorous
+downstream statistical inference without manual measurement or post-hoc smoothing.
+The three-tier quality-control system excluded the spurious ALK5i masks that would have
+inverted the condition ranking; per-trajectory parallelism via \texttt{ProcessPoolExecutor}
+scales processing time linearly with CPU count.
 The mathematical formulation is presented in full, all parameters are documented, and the
 implementation is released as open-source Python code.
-We anticipate that Quantification will reduce the time and subjectivity currently associated
+We anticipate that the pipeline will reduce the time and subjectivity currently associated
 with scratch-wound quantification, enabling researchers to focus on biological interpretation
 rather than manual measurement.
 
 \bigskip
 \textbf{Data and Code Availability.}
-The Quantification segmentation pipeline is implemented in Python~3.11 and is available at
+The pipeline is implemented in Python~3.11 and is available at
 [repository URL].
 Raw microscopy images and processed quantitative data are available at [data repository].
 All analysis scripts, configuration files, and parameter documentation are included in the

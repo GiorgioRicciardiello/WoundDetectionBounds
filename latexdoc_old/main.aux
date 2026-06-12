@@ -1,0 +1,258 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\bibstyle{unsrtnat}
+\def\@LN@column{1}
+\def\@LN@column{1}
+\citation{Liang2007,Jonkman2014,Grada2017}
+\citation{Yarrow2004,Ashby2012,Pinto2023}
+\citation{Stamm2016}
+\citation{Gebaeck2009}
+\citation{Suarez2020}
+\citation{Vargas2016}
+\citation{Nunes2017}
+\citation{McQuin2018}
+\citation{Martinotti2025}
+\citation{Treloar2013}
+\citation{Ronneberger2015,Dogru2024,Naser2025}
+\citation{Lehmann2024}
+\citation{Oldenburg2021}
+\citation{Haeger2013,Ele2020}
+\citation{Goetsch2013,Webster2013,Kowalski2017}
+\citation{Goetsch2011}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{3}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.1}The Scratch-Wound Assay}{3}{subsection.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.2}Quantification Remains a Bottleneck}{3}{subsection.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.3}Biological Context: Myoblast Migration Under Pharmacological Modulation}{3}{subsection.1.3}\protected@file@percent }
+\citation{Yoshida2013}
+\citation{Yoshida2010}
+\citation{Lemos2019}
+\citation{Cohn2007}
+\citation{Bedair2008}
+\citation{Kurosaka2009}
+\citation{Cabello2015}
+\citation{Li2004,Loiselle2009}
+\citation{McFarland2001}
+\citation{Girardi2021}
+\citation{Ceco2013,Cohn2007}
+\citation{LachTrifilieff2019}
+\citation{Weiss2025a}
+\citation{Weiss2025b}
+\citation{Vishwakarma2014}
+\citation{RodriguezVita2005,Wang2008}
+\citation{Murphy2015}
+\citation{Yin2012}
+\citation{Ambrossio2022,Vicar2019}
+\citation{Bragantini2025,Lee2023,Li2008}
+\citation{Guan2021}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Our Contribution}{4}{subsection.1.4}\protected@file@percent }
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Materials and Methods}{5}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Cell Culture and Experimental Design}{5}{subsection.2.1}\protected@file@percent }
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Automated Wound Segmentation}{6}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Problem Formulation}{6}{subsubsection.2.2.1}\protected@file@percent }
+\newlabel{eq:mask}{{1}{6}{Problem Formulation}{equation.1}{}}
+\newlabel{eq:upper-edge}{{2}{6}{Problem Formulation}{equation.2}{}}
+\newlabel{eq:lower-edge}{{3}{6}{Problem Formulation}{equation.3}{}}
+\newlabel{eq:area}{{4}{6}{Problem Formulation}{equation.4}{}}
+\newlabel{eq:monotonic}{{5}{6}{Problem Formulation}{equation.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Single-Frame Detection}{6}{subsubsection.2.2.2}\protected@file@percent }
+\newlabel{sec_single_frame}{{2.2.2}{6}{Single-Frame Detection}{subsubsection.2.2.2}{}}
+\citation{Yin2012}
+\citation{Koenig2017,Loizou2016,Ambrossio2022}
+\def\@LN@column{1}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Representative pipeline output on a single frame.} Phase-contrast image acquired at $t = 0$ (ALK5i condition, EXP2). The wound channel (center, low local variance) is flanked by cell monolayers (high local variance). Detected upper and lower boundaries are overlaid as colored lines after RANSAC outlier rejection and Savitzky--Golay smoothing. The shaded region corresponds to the reconstructed binary wound mask (Equation~\eqref  {eq:mask-reconstruction}).}}{7}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:pipeline-example}{{1}{7}{\textbf {Representative pipeline output on a single frame.} Phase-contrast image acquired at $t = 0$ (ALK5i condition, EXP2). The wound channel (center, low local variance) is flanked by cell monolayers (high local variance). Detected upper and lower boundaries are overlaid as colored lines after RANSAC outlier rejection and Savitzky--Golay smoothing. The shaded region corresponds to the reconstructed binary wound mask (Equation~\eqref {eq:mask-reconstruction})}{figure.caption.1}{}}
+\newlabel{eq:local-variance}{{6}{7}{Single-Frame Detection}{equation.6}{}}
+\citation{Fischler1981}
+\citation{Savitzky1964}
+\def\@LN@column{1}
+\newlabel{eq:mask-reconstruction}{{7}{8}{Single-Frame Detection}{equation.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Geometric validation criteria applied to each wound mask.}}{8}{table.caption.2}\protected@file@percent }
+\newlabel{tab:qc-criteria}{{1}{8}{Geometric validation criteria applied to each wound mask}{table.caption.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Temporal Constraint: Kalman-Filtered Monotonic Closure}{8}{subsubsection.2.2.3}\protected@file@percent }
+\newlabel{sec:temporal-constraint}{{2.2.3}{8}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{subsubsection.2.2.3}{}}
+\def\@LN@column{1}
+\newlabel{eq:P-init}{{9}{9}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.9}{}}
+\newlabel{eq:Rbase-init}{{10}{9}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.10}{}}
+\def\@LN@column{1}
+\newlabel{eq:kalman-predict}{{11}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.11}{}}
+\newlabel{eq:Q-estimate}{{12}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.12}{}}
+\newlabel{eq:spatial-smooth}{{13}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.13}{}}
+\newlabel{eq:R-estimate}{{14}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.14}{}}
+\newlabel{eq:kalman-gain}{{15}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.15}{}}
+\newlabel{eq:kalman-update}{{16}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.16}{}}
+\newlabel{eq:P-update}{{17}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.17}{}}
+\newlabel{eq:hard-upper}{{18}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.18}{}}
+\newlabel{eq:hard-lower}{{19}{10}{Temporal Constraint: Kalman-Filtered Monotonic Closure}{equation.19}{}}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Wound Quantification}{11}{subsection.2.3}\protected@file@percent }
+\citation{vanderWalt2014}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Statistical Analysis}{12}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Implementation}{12}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Results}{12}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Image Census and Exclusions}{12}{subsection.3.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Distribution of no-wound images by condition and experiment. These images contained no visible scratch wound and were excluded from accuracy analysis.}}{12}{table.caption.3}\protected@file@percent }
+\newlabel{tab:nowound-distribution}{{2}{12}{Distribution of no-wound images by condition and experiment. These images contained no visible scratch wound and were excluded from accuracy analysis}{table.caption.3}{}}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Wound Detection Accuracy}{13}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Detection accuracy by exposure and experiment (wound-bearing images only). Values are expressed as correctly segmented / total (percentage). Expert review served as ground truth.}}{13}{table.caption.4}\protected@file@percent }
+\newlabel{tab:accuracy}{{3}{13}{Detection accuracy by exposure and experiment (wound-bearing images only). Values are expressed as correctly segmented / total (percentage). Expert review served as ground truth}{table.caption.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Automatic Quality-Control Evaluation}{13}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces QC confusion matrix (all annotated images, $n$~=~323). Sensitivity~=~1.00; Specificity~=~0.56; PPV~=~0.94; NPV~=~1.00.}}{13}{table.caption.5}\protected@file@percent }
+\newlabel{tab:qc-confusion}{{4}{13}{QC confusion matrix (all annotated images, $n$~=~323). Sensitivity~=~1.00; Specificity~=~0.56; PPV~=~0.94; NPV~=~1.00}{table.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Pixel-Level Segmentation Quality}{13}{subsection.3.4}\protected@file@percent }
+\def\@LN@column{1}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Pixel-level segmentation metrics against expert polygon annotations ($n$~=~5). Dice and F1 are identical for binary masks. Hausdorff distance is reported at the 95th percentile.}}{14}{table.caption.6}\protected@file@percent }
+\newlabel{tab:pixel-metrics}{{5}{14}{Pixel-level segmentation metrics against expert polygon annotations ($n$~=~5). Dice and F1 are identical for binary masks. Hausdorff distance is reported at the 95th percentile}{table.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Wound Healing Dynamics}{14}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Validated Cohort and Pipeline Illustration}{14}{subsubsection.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.2}Fractional Closure at Fixed Timepoints}{14}{subsubsection.3.5.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Mean fractional wound closure at 24~hours by treatment condition (mean~$\pm $~SEM, all concentrations pooled). No condition reached 50\% closure within the observation window.}}{14}{table.caption.8}\protected@file@percent }
+\newlabel{tab:closure24h}{{6}{14}{Mean fractional wound closure at 24~hours by treatment condition (mean~$\pm $~SEM, all concentrations pooled). No condition reached 50\% closure within the observation window}{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Mean fractional wound closure at 12~hours by treatment condition (mean~$\pm $~SEM, all concentrations pooled).}}{14}{table.caption.9}\protected@file@percent }
+\newlabel{tab:closure12h}{{7}{14}{Mean fractional wound closure at 12~hours by treatment condition (mean~$\pm $~SEM, all concentrations pooled)}{table.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {Automated wound boundary detection and model quality metrics.} \textbf  {(A--C)} Representative phase-contrast images of a wound healing assay at three timepoints ($t = 0$, mid, and $t = 20$~h) with computationally detected wound boundaries overlaid as semi-transparent filled regions. Earlier timepoints are shown as faint dashed outlines; the current timepoint as solid fill. Images were acquired at 1.24~\textmu m/px. \textbf  {(D)} Normalised wound area over time, expressed as a fraction of the $t = 0$ wound area. Error bands represent 95\% confidence intervals. Sample sizes per group are provided in the legend. (Figure~\ref {fig:fig1} corresponds to the analysis of the ALK5i exposure, one cell line subset; full dataset is shown in Figure~\ref {fig:fig2}.)}}{15}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:fig1}{{2}{15}{\textbf {Automated wound boundary detection and model quality metrics.} \textbf {(A--C)} Representative phase-contrast images of a wound healing assay at three timepoints ($t = 0$, mid, and $t = 20$~h) with computationally detected wound boundaries overlaid as semi-transparent filled regions. Earlier timepoints are shown as faint dashed outlines; the current timepoint as solid fill. Images were acquired at 1.24~\textmu m/px. \textbf {(D)} Normalised wound area over time, expressed as a fraction of the $t = 0$ wound area. Error bands represent 95\% confidence intervals. Sample sizes per group are provided in the legend. (Figure~\ref {fig:fig1} corresponds to the analysis of the ALK5i exposure, one cell line subset; full dataset is shown in Figure~\ref {fig:fig2}.)}{figure.caption.7}{}}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.3}Time to 50\% Closure}{16}{subsubsection.3.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.4}Time-Course Profiles and Cross-Sectional Analysis}{16}{subsubsection.3.5.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {Wound healing dynamics across experimental conditions.} \textbf  {(A)} Mean wound closure speed (pixels/h) at $t = 20$~h, computed as the rate of wound edge displacement. \textbf  {(B)} Mean wound closure distance (pixels) at $t = 20$~h, representing cumulative inward displacement of the wound boundary from $t = 0$. \textbf  {(C)} Time-series of wound edge displacement over the full observation period. Error bars represent 95\% confidence intervals. Statistical comparisons were performed using Welch's $t$-test with Bonferroni correction. Sample sizes: Line~1~--~Alk5i: $n = 10$; Line~1~--~DMSO: $n = 8$; Line~1~--~Media: $n = 15$; Line~2~--~Alk5i: $n = 5$; Line~2~--~DMSO: $n = 15$; Line~2~--~Media: $n = 6$.}}{16}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:fig2}{{3}{16}{\textbf {Wound healing dynamics across experimental conditions.} \textbf {(A)} Mean wound closure speed (pixels/h) at $t = 20$~h, computed as the rate of wound edge displacement. \textbf {(B)} Mean wound closure distance (pixels) at $t = 20$~h, representing cumulative inward displacement of the wound boundary from $t = 0$. \textbf {(C)} Time-series of wound edge displacement over the full observation period. Error bars represent 95\% confidence intervals. Statistical comparisons were performed using Welch's $t$-test with Bonferroni correction. Sample sizes: Line~1~--~Alk5i: $n = 10$; Line~1~--~DMSO: $n = 8$; Line~1~--~Media: $n = 15$; Line~2~--~Alk5i: $n = 5$; Line~2~--~DMSO: $n = 15$; Line~2~--~Media: $n = 6$}{figure.caption.10}{}}
+\citation{Ronneberger2015,Dogru2024,Lehmann2024,Naser2025}
+\citation{Oldenburg2021}
+\citation{Yin2012}
+\citation{Ambrossio2022,Vicar2019}
+\citation{Bragantini2025,Lee2023}
+\citation{Guan2021}
+\citation{Treloar2013}
+\def\@LN@column{1}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Effect sizes and pairwise comparisons vs.\ DMSO at the final timepoint. Welch's $t$-test with Bonferroni correction; $p$-values reported after correction. All comparisons non-significant after correction.}}{17}{table.caption.11}\protected@file@percent }
+\newlabel{tab:effects}{{8}{17}{Effect sizes and pairwise comparisons vs.\ DMSO at the final timepoint. Welch's $t$-test with Bonferroni correction; $p$-values reported after correction. All comparisons non-significant after correction}{table.caption.11}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.5}Mixed-Effects Time-Series Model}{17}{subsubsection.3.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{17}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Methodological Advances}{17}{subsection.4.1}\protected@file@percent }
+\citation{Fischler1981}
+\citation{Savitzky1964}
+\citation{Zordan2011,Yarrow2004,Schmidt2024}
+\citation{Yoshida2010}
+\citation{Yoshida2013}
+\citation{Kurosaka2009}
+\citation{Vishwakarma2014}
+\citation{Li2004,Ceco2013,Delaney2017}
+\citation{Weiss2025a,Weiss2025b}
+\citation{Goetsch2011,Goetsch2013}
+\citation{Topman2021}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Biological Findings}{18}{subsection.4.2}\protected@file@percent }
+\citation{RodriguezVita2005,Wang2008,Murphy2015}
+\citation{Gebaeck2009}
+\citation{Suarez2020}
+\citation{Vargas2016}
+\citation{Dogru2024}
+\citation{Martinotti2025}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Comparison with Existing Tools}{19}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Comparison of wound-healing quantification tools. DL, deep learning; RQSA, Robust Quantitative Scratch Assay.}}{19}{table.caption.12}\protected@file@percent }
+\newlabel{tab:tool-comparison}{{9}{19}{Comparison of wound-healing quantification tools. DL, deep learning; RQSA, Robust Quantitative Scratch Assay}{table.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Limitations}{19}{subsection.4.4}\protected@file@percent }
+\citation{Jin2015,Maini2020,Simpson2013}
+\def\@LN@column{1}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Future Directions}{20}{subsection.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Conclusion}{20}{section.5}\protected@file@percent }
+\bibdata{references}
+\bibcite{Liang2007}{{1}{2007}{{Liang et~al.}}{{Liang, Park, and Guan}}}
+\bibcite{Jonkman2014}{{2}{2014}{{Jonkman et~al.}}{{Jonkman, Cathcart, Xu, et~al.}}}
+\bibcite{Grada2017}{{3}{2017}{{Grada et~al.}}{{Grada, Otero-Vinas, Prieto-Castrillo, et~al.}}}
+\bibcite{Yarrow2004}{{4}{2004}{{Yarrow et~al.}}{{Yarrow, Perlman, Westwood, and Mitchison}}}
+\bibcite{Ashby2012}{{5}{2012}{{Ashby and Zijlstra}}{{}}}
+\bibcite{Pinto2023}{{6}{2023}{{Pinto et~al.}}{{}}}
+\bibcite{Stamm2016}{{7}{2016}{{Stamm et~al.}}{{Stamm, Reimers, et~al.}}}
+\bibcite{Gebaeck2009}{{8}{2009}{{Geb{\"a}ck et~al.}}{{Geb{\"a}ck, Schulz, Koumoutsakos, and Detmar}}}
+\bibcite{Suarez2020}{{9}{2020}{{Suarez-Arnedo et~al.}}{{Suarez-Arnedo, Torres~Figueroa, Clavijo, et~al.}}}
+\bibcite{Vargas2016}{{10}{2016}{{Vargas et~al.}}{{Vargas, Angeli, Pastrello, et~al.}}}
+\bibcite{Nunes2017}{{11}{2017}{{Nunes~Viana et~al.}}{{Nunes~Viana, Leite~Oliveira, Nunes, and Santos~de Oliveira}}}
+\bibcite{McQuin2018}{{12}{2018}{{McQuin et~al.}}{{McQuin, Goodman, Chernyshev, et~al.}}}
+\def\@LN@column{1}
+\bibcite{Martinotti2025}{{13}{2025}{{Martinotti et~al.}}{{}}}
+\bibcite{Treloar2013}{{14}{2013}{{Treloar and Simpson}}{{}}}
+\bibcite{Ronneberger2015}{{15}{2015}{{Ronneberger et~al.}}{{Ronneberger, Fischer, and Brox}}}
+\bibcite{Dogru2024}{{16}{2024}{{Do{\u {g}}ru et~al.}}{{Do{\u {g}}ru, {\"O}zdemir, {\"O}zdemir, and Ercan}}}
+\bibcite{Naser2025}{{17}{2025}{{Naser et~al.}}{{}}}
+\bibcite{Lehmann2024}{{18}{2024}{{Lehmann et~al.}}{{}}}
+\bibcite{Oldenburg2021}{{19}{2021}{{Oldenburg et~al.}}{{}}}
+\bibcite{Haeger2013}{{20}{2013}{{Haeger et~al.}}{{Haeger, Wolf, Zegers, and Friedl}}}
+\bibcite{Ele2020}{{21}{2020}{{Ele et~al.}}{{Ele, Richter, Gros, et~al.}}}
+\bibcite{Goetsch2013}{{22}{2013}{{Goetsch et~al.}}{{Goetsch, Snyman, Myburgh, and Niesler}}}
+\bibcite{Webster2013}{{23}{2013}{{Webster and Fan}}{{}}}
+\bibcite{Kowalski2017}{{24}{2017}{{Kowalski et~al.}}{{Kowalski, Kolbowicz, Krzeminski, et~al.}}}
+\def\@LN@column{1}
+\bibcite{Goetsch2011}{{25}{2011}{{Goetsch et~al.}}{{Goetsch, Myburgh, and Niesler}}}
+\bibcite{Yoshida2013}{{26}{2013}{{Yoshida et~al.}}{{Yoshida, Tabony, Galvez, et~al.}}}
+\bibcite{Yoshida2010}{{27}{2010}{{Yoshida et~al.}}{{Yoshida, Semprun-Prieto, Sukhanov, and Delafontaine}}}
+\bibcite{Lemos2019}{{28}{2019}{{Lemos et~al.}}{{Lemos, Babaeijandaghi, Low, et~al.}}}
+\bibcite{Cohn2007}{{29}{2007}{{Cohn et~al.}}{{Cohn, van Erp, Habashi, et~al.}}}
+\bibcite{Bedair2008}{{30}{2008}{{Bedair et~al.}}{{Bedair, Karthikeyan, Quintero, et~al.}}}
+\bibcite{Kurosaka2009}{{31}{2009}{{Kurosaka et~al.}}{{Kurosaka, Suzuki, Hosono, et~al.}}}
+\bibcite{Cabello2015}{{32}{2015}{{Cabello-Verrugio et~al.}}{{Cabello-Verrugio, Morales, Rivera, et~al.}}}
+\bibcite{Li2004}{{33}{2004}{{Li et~al.}}{{Li, Foster, Deasy, et~al.}}}
+\bibcite{Loiselle2009}{{34}{2009}{{Loiselle et~al.}}{{Loiselle, Bowers, Paul, et~al.}}}
+\bibcite{McFarland2001}{{35}{2001}{{McFarland et~al.}}{{}}}
+\def\@LN@column{1}
+\bibcite{Girardi2021}{{36}{2021}{{Girardi et~al.}}{{}}}
+\bibcite{Ceco2013}{{37}{2013}{{Ceco and McNally}}{{}}}
+\bibcite{LachTrifilieff2019}{{38}{2019}{{Lach-Trifilieff et~al.}}{{}}}
+\bibcite{Weiss2025a}{{39}{2025{}}{{Weiss et~al.}}{{Weiss, Hildebrandt, Gherardini, et~al.}}}
+\bibcite{Weiss2025b}{{40}{2025{}}{{Weiss et~al.}}{{}}}
+\bibcite{Vishwakarma2014}{{41}{2014}{{Vishwakarma et~al.}}{{}}}
+\bibcite{RodriguezVita2005}{{42}{2005}{{Rodriguez-Vita et~al.}}{{}}}
+\bibcite{Wang2008}{{43}{2008}{{Wang et~al.}}{{Wang, Huang, Canlas, et~al.}}}
+\bibcite{Murphy2015}{{44}{2015}{{Murphy et~al.}}{{Murphy, Wong, and Bhagra}}}
+\bibcite{Yin2012}{{45}{2012}{{Yin et~al.}}{{Yin, Kanade, and Chen}}}
+\bibcite{Ambrossio2022}{{46}{2022}{{Ambrossio et~al.}}{{Ambrossio, Enfedaque, and de~Oliveira}}}
+\bibcite{Vicar2019}{{47}{2019}{{Vicar et~al.}}{{}}}
+\bibcite{Bragantini2025}{{48}{2025}{{Bragantini et~al.}}{{}}}
+\bibcite{Lee2023}{{49}{2023}{{Lee et~al.}}{{}}}
+\def\@LN@column{1}
+\bibcite{Li2008}{{50}{2008}{{Li et~al.}}{{}}}
+\bibcite{Guan2021}{{51}{2021}{{Guan et~al.}}{{}}}
+\bibcite{Koenig2017}{{52}{2017}{{Koenig et~al.}}{{}}}
+\bibcite{Loizou2016}{{53}{2016}{{Loizou et~al.}}{{}}}
+\bibcite{Fischler1981}{{54}{1981}{{Fischler and Bolles}}{{}}}
+\bibcite{Savitzky1964}{{55}{1964}{{Savitzky and Golay}}{{}}}
+\bibcite{vanderWalt2014}{{56}{2014}{{van~der Walt et~al.}}{{}}}
+\bibcite{Zordan2011}{{57}{2011}{{Zordan et~al.}}{{Zordan, Mill, Riese, and Leary}}}
+\bibcite{Schmidt2024}{{58}{2024}{{Schmidt et~al.}}{{Schmidt, Lerm, Schmidt, et~al.}}}
+\bibcite{Delaney2017}{{59}{2017}{{Delaney et~al.}}{{Delaney, Kasprzycka, Ciemerych, and Zimowska}}}
+\bibcite{Topman2021}{{60}{2021}{{Topman et~al.}}{{Topman, Sharabani-Yosef, and Gefen}}}
+\bibcite{Jin2015}{{61}{2015}{{Jin et~al.}}{{Jin, Shah, Penington, et~al.}}}
+\def\@LN@column{1}
+\bibcite{Maini2020}{{62}{2020}{{Maini et~al.}}{{Maini, McElwain, and Leavesley}}}
+\bibcite{Simpson2013}{{63}{2013}{{Simpson et~al.}}{{Simpson, Treloar, Binder, et~al.}}}
+\def\@LN@column{1}
+\def\@LN@column{1}
+\@writefile{lot}{\contentsline {table}{\numberline {S1}{\ignorespaces Sample sizes (number of trajectories) per cell line and treatment condition after QC filtering.}}{27}{table.caption.16}\protected@file@percent }
+\newlabel{tab:supp-sample-sizes}{{S1}{27}{Sample sizes (number of trajectories) per cell line and treatment condition after QC filtering}{table.caption.16}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S2}{\ignorespaces Sample accounting: initial, QC-passing, and final trajectory counts per group, with exclusion percentages. High exclusion rates in DMSO and Media reflect the 0.1~mM concentration filter (only trajectories at the analysis concentration are retained).}}{27}{table.caption.17}\protected@file@percent }
+\newlabel{tab:supp-sample-accounting}{{S2}{27}{Sample accounting: initial, QC-passing, and final trajectory counts per group, with exclusion percentages. High exclusion rates in DMSO and Media reflect the 0.1~mM concentration filter (only trajectories at the analysis concentration are retained)}{table.caption.17}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S3}{\ignorespaces Per-frame processing sequence of the temporal integrator ($t > 0$).}}{28}{table.caption.18}\protected@file@percent }
+\newlabel{tab:temporal-sequence}{{S3}{28}{Per-frame processing sequence of the temporal integrator ($t > 0$)}{table.caption.18}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S4}{\ignorespaces Descriptive statistics for the primary endpoint (wound closure distance, pixels) and secondary endpoint (closure speed, pixels/h) at the final timepoint, stratified by cell line and treatment condition. Values are mean~$\pm $~SEM with 95\% confidence intervals.}}{28}{table.caption.19}\protected@file@percent }
+\newlabel{tab:supp-descriptive}{{S4}{28}{Descriptive statistics for the primary endpoint (wound closure distance, pixels) and secondary endpoint (closure speed, pixels/h) at the final timepoint, stratified by cell line and treatment condition. Values are mean~$\pm $~SEM with 95\% confidence intervals}{table.caption.19}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S5}{\ignorespaces QC pass rate and monotonic constraint rate per group. All QC-passing trajectories were constrained, consistent with the biological axiom.}}{28}{table.caption.20}\protected@file@percent }
+\newlabel{tab:supp-qc-validation}{{S5}{28}{QC pass rate and monotonic constraint rate per group. All QC-passing trajectories were constrained, consistent with the biological axiom}{table.caption.20}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S6}{\ignorespaces Pairwise comparisons of closure speed and distance versus DMSO, stratified by cell line. Welch's $t$-test; $p$-values shown before and after Bonferroni correction (4 tests per metric). All corrected $p$-values equal 1.000.}}{29}{table.caption.21}\protected@file@percent }
+\newlabel{tab:supp-pairwise}{{S6}{29}{Pairwise comparisons of closure speed and distance versus DMSO, stratified by cell line. Welch's $t$-test; $p$-values shown before and after Bonferroni correction (4 tests per metric). All corrected $p$-values equal 1.000}{table.caption.21}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S7}{\ignorespaces Mixed-effects model parameter estimates. Model: distance $\sim $ time $\times $ condition $\times $ cell\_line, with random intercept and random slope per trajectory. The main effect of time is highly significant ($p < 10^{-12}$); no interaction terms reach significance.}}{29}{table.caption.22}\protected@file@percent }
+\newlabel{tab:supp-mixed-model-coefficients}{{S7}{29}{Mixed-effects model parameter estimates. Model: distance $\sim $ time $\times $ condition $\times $ cell\_line, with random intercept and random slope per trajectory. The main effect of time is highly significant ($p < 10^{-12}$); no interaction terms reach significance}{table.caption.22}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S8}{\ignorespaces Statistical assumption checks. Shapiro--Wilk normality test for wound closure distance, per group. Levene's test for homogeneity of variance across conditions, per cell line. DMSO Line~2 shows significant deviation from normality ($p < 0.001$), warranting use of Welch's $t$-test (unequal variances assumed).}}{30}{table.caption.23}\protected@file@percent }
+\newlabel{tab:supp-assumption-checks}{{S8}{30}{Statistical assumption checks. Shapiro--Wilk normality test for wound closure distance, per group. Levene's test for homogeneity of variance across conditions, per cell line. DMSO Line~2 shows significant deviation from normality ($p < 0.001$), warranting use of Welch's $t$-test (unequal variances assumed)}{table.caption.23}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {S9}{\ignorespaces Inter-experiment reproducibility: mean wound closure distance (pixels) at the final timepoint, by cell line, condition, and experiment. Experiment~2 data were unavailable for some condition--cell line combinations (see text for details).}}{30}{table.caption.24}\protected@file@percent }
+\newlabel{tab:supp-reproducibility}{{S9}{30}{Inter-experiment reproducibility: mean wound closure distance (pixels) at the final timepoint, by cell line, condition, and experiment. Experiment~2 data were unavailable for some condition--cell line combinations (see text for details)}{table.caption.24}{}}
+\gdef \@abspage@last{30}

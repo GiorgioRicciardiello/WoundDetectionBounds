@@ -895,7 +895,7 @@ def main(
     traj_path : Path or None
         Path to trajectories.pickle.  Defaults to config value.
     table_path : Path or None
-        Path to final_legacy_table.xlsx.  Defaults to config value.
+        Path to experiments.xlsx.  Defaults to config value.
     pub_dir : Path or None
         Output directory for figures and tables.  Defaults to config value.
 

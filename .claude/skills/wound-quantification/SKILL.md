@@ -250,7 +250,7 @@ from config.config import config
 config["data_in_organized"]    # Organized images (pipeline input)
 config["model_output_dir"]     # Model-specific output directory
 config["trajectories_pickle"]  # trajectories.pickle path
-config["final_legacy_table"]   # final_legacy_table.xlsx path
+config["final_legacy_table"]   # experiments.xlsx path
 config["aligned_legacy_table"] # aligned_legacy_table.xlsx path
 config["publication_dir"]      # paper_publication/ directory
 ```

@@ -10,14 +10,14 @@
 \subsection*{Supplementary Tables}
 
 % ── Supp Table S1 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Sample sizes (number of trajectories) per cell line and treatment condition
   after QC filtering.}
 \label{tab:supp-sample-sizes}
 \begin{tabular}{llll}
 \toprule
-Cell line & Alk5i & DMSO & Media \\
+Cell line & ALK5i & DMSO & Media \\
 \midrule
 Line~1 & 10 & 8  & 15 \\
 Line~2 &  5 & 15 &  6 \\
@@ -26,30 +26,30 @@ Line~2 &  5 & 15 &  6 \\
 \end{table}
 
 % ── Supp Table S2 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Sample accounting: initial, QC-passing, and final trajectory counts per group,
   with exclusion percentages.
-  High exclusion rates in DMSO and Media reflect the 0.1~mM concentration filter
-  (only trajectories at the analysis concentration are retained).}
+  Exclusions reflect trajectories that failed $t = 0$ quality control; all
+  QC-passing trajectories were retained for analysis.}
 \label{tab:supp-sample-accounting}
 \begin{tabular}{llrrrr
   S[table-format=2.1]}
 \toprule
 {Cell line} & {Condition} & {$n$ initial} & {$n$ QC pass} & {$n$ final} & {$n$ excluded} & {Excl.\ (\%)} \\
 \midrule
-Line~1 & Alk5i &  11 & 10 & 10 &  1 &  9.1 \\
-Line~1 & DMSO  &  24 &  8 &  8 & 16 & 66.7 \\
-Line~1 & Media &  31 & 15 & 15 & 16 & 51.6 \\
-Line~2 & Alk5i &   8 &  5 &  5 &  3 & 37.5 \\
-Line~2 & DMSO  &  32 & 15 & 15 & 17 & 53.1 \\
-Line~2 & Media &  22 &  6 &  6 & 16 & 72.7 \\
+Line~1 & ALK5i &  11 & 10 & 10 & 1 &  9.1 \\
+Line~1 & DMSO  &   8 &  8 &  8 & 0 &  0.0 \\
+Line~1 & Media &  15 & 15 & 15 & 0 &  0.0 \\
+Line~2 & ALK5i &   8 &  5 &  5 & 3 & 37.5 \\
+Line~2 & DMSO  &  16 & 15 & 15 & 1 &  6.2 \\
+Line~2 & Media &   7 &  6 &  6 & 1 & 14.3 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 % ── Supp Table kalman ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 	\centering
 	\caption{Per-frame processing sequence of the temporal integrator ($t > 0$).}
 	\label{tab:temporal-sequence}
@@ -101,7 +101,7 @@ Line~2 & Media &  22 &  6 &  6 & 16 & 72.7 \\
 \end{table}
 
 % ── Supp Table S3 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Descriptive statistics for the primary endpoint (wound closure distance, pixels)
   and secondary endpoint (closure speed, pixels/h) at the final timepoint,
@@ -125,10 +125,10 @@ Line~2 & Media &  22 &  6 &  6 & 16 & 72.7 \\
   & {CI$_{95}$ upper}
   & {$n$} \\
 \midrule
-Line~1 & Alk5i & 16.34 &  8.73 & 2.76 & 10.93 & 21.75 & 10 \\
+Line~1 & ALK5i & 16.34 &  8.73 & 2.76 & 10.93 & 21.75 & 10 \\
 Line~1 & DMSO  & 19.28 &  4.94 & 1.75 & 15.86 & 22.70 &  8 \\
 Line~1 & Media & 20.87 &  9.06 & 2.34 & 16.28 & 25.45 & 15 \\
-Line~2 & Alk5i & 16.56 &  6.93 & 3.10 & 10.49 & 22.64 &  5 \\
+Line~2 & ALK5i & 16.56 &  6.93 & 3.10 & 10.49 & 22.64 &  5 \\
 Line~2 & DMSO  & 21.69 & 19.40 & 5.01 & 11.87 & 31.51 & 15 \\
 Line~2 & Media & 18.86 &  4.02 & 1.64 & 15.65 & 22.08 &  6 \\
 \bottomrule
@@ -136,7 +136,7 @@ Line~2 & Media & 18.86 &  4.02 & 1.64 & 15.65 & 22.08 &  6 \\
 \end{table}
 
 % ── Supp Table S4 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{QC pass rate and monotonic constraint rate per group.
   All QC-passing trajectories were constrained, consistent with the biological axiom.}
@@ -148,10 +148,10 @@ Line~2 & Media & 18.86 &  4.02 & 1.64 & 15.65 & 22.08 &  6 \\
 \toprule
 {Cell line} & {Condition} & {QC pass rate (\%)} & {Constraint rate (\%)} & {$n$ total} \\
 \midrule
-Line~1 & Alk5i &  90.9 & 100 & 11 \\
+Line~1 & ALK5i &  90.9 & 100 & 11 \\
 Line~1 & DMSO  & 100.0 & 100 &  8 \\
 Line~1 & Media & 100.0 & 100 & 15 \\
-Line~2 & Alk5i &  62.5 & 100 &  8 \\
+Line~2 & ALK5i &  62.5 & 100 &  8 \\
 Line~2 & DMSO  &  93.8 & 100 & 16 \\
 Line~2 & Media &  85.7 & 100 &  7 \\
 \bottomrule
@@ -159,7 +159,7 @@ Line~2 & Media &  85.7 & 100 &  7 \\
 \end{table}
 
 % ── Supp Table S5 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Pairwise comparisons of closure speed and distance versus DMSO,
   stratified by cell line.
@@ -184,19 +184,19 @@ Line~2 & Media &  85.7 & 100 &  7 \\
   & {$n_\text{ctrl}$} \\
 \midrule
 Line~1 & Media & speed    &  0.543 &  0.200 & 0.593 & 1.000 & 15 & 8 \\
-Line~1 & Alk5i & speed    & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
+Line~1 & ALK5i & speed    & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
 Line~2 & Media & speed    & -0.537 & -0.169 & 0.599 & 1.000 &  6 & 15 \\
-Line~2 & Alk5i & speed    & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
+Line~2 & ALK5i & speed    & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
 Line~1 & Media & distance &  0.543 &  0.200 & 0.593 & 1.000 & 15 & 8 \\
-Line~1 & Alk5i & distance & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
+Line~1 & ALK5i & distance & -0.900 & -0.402 & 0.382 & 1.000 & 10 & 8 \\
 Line~2 & Media & distance & -0.537 & -0.169 & 0.599 & 1.000 &  6 & 15 \\
-Line~2 & Alk5i & distance & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
+Line~2 & ALK5i & distance & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 % ── Supp Table S6 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Mixed-effects model parameter estimates.
   Model: distance $\sim$ time $\times$ condition $\times$ cell\_line, with random intercept
@@ -212,30 +212,30 @@ Line~2 & Alk5i & distance & -0.871 & -0.294 & 0.396 & 1.000 &  5 & 15 \\
 \toprule
 {Term} & {Estimate} & {$p$-value} & {CI$_{95}$ lower} & {CI$_{95}$ upper} \\
 \midrule
-Intercept                                    &  0.847 & 0.744 & -4.237 &  5.931 \\
-DMSO vs.\ Alk5i                              &  0.864 & 0.828 & -6.953 &  8.681 \\
-Media vs.\ Alk5i                             &  1.378 & 0.686 & -5.305 &  8.060 \\
-Line~2 vs.\ Line~1                           &  1.710 & 0.670 & -6.164 &  9.585 \\
-DMSO $\times$ Line~2                         &  2.851 & 0.602 & -7.873 & 13.574 \\
-Media $\times$ Line~2                        & -2.239 & 0.691 & -13.268 &  8.789 \\
-$t$ (main effect)                            &  0.879 & {$<$0.001} & 0.639 &  1.120 \\
-$t \times$ DMSO                              &  0.143 & 0.438 & -0.218 &  0.504 \\
-$t \times$ Media                             &  0.161 & 0.309 & -0.149 &  0.472 \\
-$t \times$ Line~2                            & -0.122 & 0.563 & -0.536 &  0.292 \\
-$t \times$ DMSO $\times$ Line~2              & -0.065 & 0.810 & -0.597 &  0.466 \\
-$t \times$ Media $\times$ Line~2             & -0.019 & 0.945 & -0.573 &  0.534 \\
+Intercept                                    &  0.924 & 0.744 & -4.618 &  6.467 \\
+DMSO vs.\ ALK5i                              &  0.787 & 0.853 & -7.527 &  9.101 \\
+Media vs.\ ALK5i                             &  1.301 & 0.722 & -5.855 &  8.456 \\
+Line~2 vs.\ Line~1                           &  2.984 & 0.542 & -6.616 & 12.584 \\
+DMSO $\times$ Line~2                         &  1.958 & 0.755 & -10.332 & 14.248 \\
+Media $\times$ Line~2                        & -3.255 & 0.618 & -16.056 &  9.545 \\
+$t$ (main effect)                            &  0.880 & {$<$0.001} & 0.639 &  1.122 \\
+$t \times$ DMSO                              &  0.142 & 0.442 & -0.220 &  0.505 \\
+$t \times$ Media                             &  0.161 & 0.313 & -0.151 &  0.473 \\
+$t \times$ Line~2                            & -0.115 & 0.591 & -0.533 &  0.304 \\
+$t \times$ DMSO $\times$ Line~2              & -0.069 & 0.801 & -0.605 &  0.467 \\
+$t \times$ Media $\times$ Line~2             & -0.024 & 0.932 & -0.582 &  0.534 \\
 \midrule
 \multicolumn{5}{l}{\textit{Variance components}} \\
 \midrule
-Group variance                               &  8.278 & {$<$0.001} & 5.144 & 11.411 \\
-Group $\times$ $t$ covariance                &  0.096 & 0.063 & -0.005 &  0.197 \\
+Group variance                               &  9.016 & {$<$0.001} & 5.434 & 12.598 \\
+Group $\times$ $t$ covariance                &  0.104 & 0.067 & -0.007 &  0.215 \\
 $t$ variance                                 &  0.016 & {$<$0.001} & 0.009 &  0.023 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 % ── Supp Table S7 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Statistical assumption checks.
   Shapiro--Wilk normality test for wound closure distance, per group.
@@ -250,10 +250,10 @@ $t$ variance                                 &  0.016 & {$<$0.001} & 0.009 &  0.
 \toprule
 {Cell line} & {Condition} & {Shapiro $W$} & {Shapiro $p$} & {$n$} \\
 \midrule
-Line~1 & Alk5i & 0.961 & 0.799 & 10 \\
+Line~1 & ALK5i & 0.961 & 0.799 & 10 \\
 Line~1 & DMSO  & 0.915 & 0.393 &  8 \\
 Line~1 & Media & 0.957 & 0.634 & 15 \\
-Line~2 & Alk5i & 0.780 & 0.055 &  5 \\
+Line~2 & ALK5i & 0.780 & 0.055 &  5 \\
 Line~2 & DMSO  & 0.551 & {$<$0.001} & 15 \\
 Line~2 & Media & 0.876 & 0.253 &  6 \\
 \midrule
@@ -266,7 +266,7 @@ Line~2 & & \multicolumn{2}{l}{$F = 0.412$, $p = 0.667$} & \\
 \end{table}
 
 % ── Supp Table S8 ────────────────────────────────────────────────────────────
-\begin{table}[htbp]
+\begin{table}[H]
 \centering
 \caption{Inter-experiment reproducibility: mean wound closure distance (pixels) at the
   final timepoint, by cell line, condition, and experiment.
@@ -277,12 +277,151 @@ Line~2 & & \multicolumn{2}{l}{$F = 0.412$, $p = 0.667$} & \\
 \toprule
 {Cell line} & {Condition} & {Mean EXP1} & {Mean EXP2} & {Difference} & {$n$ EXP1} & {$n$ EXP2} \\
 \midrule
-Line~1 & Alk5i & 10.94 & 17.69 & -6.75 & 2 & 8 \\
+Line~1 & ALK5i & 10.94 & 17.69 & -6.75 & 2 & 8 \\
 Line~1 & DMSO  & 19.28 & ---   & ---   & 8 & 0 \\
 Line~1 & Media & 17.63 & 23.70 & -6.07 & 7 & 8 \\
-Line~2 & Alk5i & 16.56 & ---   & ---   & 5 & 0 \\
+Line~2 & ALK5i & 16.56 & ---   & ---   & 5 & 0 \\
 Line~2 & DMSO  & 25.82 & 16.98 &  8.84 & 8 & 7 \\
 Line~2 & Media & 18.86 & ---   & ---   & 6 & 0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S9 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{Distribution of no-wound images by cell line and condition.
+  These 10 images contained no visible scratch wound at $t = 0$ and were excluded
+  from the accuracy analysis cohort.}
+\label{tab:supp-nowound-distribution}
+\begin{tabular}{lrrrr}
+\toprule
+Cell line & ALK5i & DMSO & Media & Total \\
+\midrule
+Line~1 & 2 & 0 & 0 & 2 \\
+Line~2 & 6 & 1 & 1 & 8 \\
+\midrule
+\textbf{Total} & \textbf{8} & \textbf{1} & \textbf{1} & \textbf{10} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S10 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{QC module confusion matrix against expert review (all annotated images,
+  $n = 134$). Sensitivity~=~1.00; Specificity~=~0.83; PPV~=~0.98; NPV~=~1.00;
+  accuracy~=~0.99.}
+\label{tab:supp-qc-confusion}
+\begin{tabular}{lrr}
+\toprule
+ & Human: Correct & Human: Incorrect \\
+\midrule
+\textbf{QC: Valid}   & 122 (TP) & 2 (FP) \\
+\textbf{QC: Invalid} & 0 (FN)   & 10 (TN) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S11 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{Mean fractional wound closure by condition at 12~h and 20~h, pooled across
+  cell lines (mean~$\pm$~SEM; $n = 59$ QC-validated trajectories).
+  ALK5i shows the lowest closure at both timepoints.}
+\label{tab:supp-closure}
+\begin{tabular}{lrrrrr}
+\toprule
+Condition & $n$ & Closure 12\,h (\%) & SEM & Closure 20\,h (\%) & SEM \\
+\midrule
+ALK5i & 15 & 10.0 & 1.2 & 12.6 & 1.5 \\
+DMSO  & 23 & 12.7 & 1.7 & 16.1 & 1.7 \\
+Media & 21 & 12.0 & 1.1 & 16.3 & 1.5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S12 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{Comparison of wound-healing quantification tools.
+  DL, deep learning; RQSA, Robust Quantitative Scratch Assay.}
+\label{tab:tool-comparison}
+\small
+\begin{tabular}{lcccccc}
+\toprule
+Feature & TScratch & ImageJ & RQSA & DL & Level-set & \textbf{This work} \\
+        & \citep{Gebaeck2009} & \citep{Suarez2020} & \citep{Vargas2016} & \citep{Dogru2024} & \citep{Martinotti2025} & \\
+\midrule
+Training data       & No  & No         & No        & Yes         & No        & \textbf{No} \\
+Temporal constraint & No  & No         & No        & No          & No        & \textbf{Yes} \\
+Automated QC        & No  & No         & Partial   & No          & No        & \textbf{Yes (3-level)} \\
+Spatial analysis    & No  & Width only & No        & Pixel-level & Sector    & \textbf{Per-column} \\
+Outlier rejection   & No  & No         & Statistical & Implicit  & No        & \textbf{RANSAC} \\
+Parallel processing & No  & Macro      & No        & GPU batch   & No        & \textbf{CPU parallel} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S13 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{Geometric validation criteria applied to each wound mask at Stage~7 of the
+  single-frame detector. A detection passes QC if and only if all four criteria
+  are satisfied simultaneously.}
+\label{tab:qc-criteria}
+\begin{tabular}{llp{6.5cm}}
+\toprule
+Criterion & Threshold & Rationale \\
+\midrule
+Width coverage $r_w$                   & $> 0.75$           & Wound must span most of image width \\
+Aspect ratio $\rho$                    & $> 1.5$            & Wound is wider than tall \\
+Y-position $\bar{y}_\text{frac}$       & $\in (0.15, 0.85)$ & Wound is roughly centered vertically \\
+Thickness CV                           & $< 0.60$           & Consistent thickness across columns \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ── Supp Table S14 ────────────────────────────────────────────────────────────
+\begin{table}[H]
+\centering
+\caption{Pipeline parameter values and Kalman initialisation details.
+  All parameters are fixed across experiments and cell lines; none require user tuning.
+  $P(x,0)$ initialisation: initial uncertainty is estimated as
+  $P(x,0) = \max(R_\text{base}(0),\, 1.0)$, where
+  $R_\text{base}(0) = \operatorname{Var}_x(u_\text{RANSAC}(x,0) - u_\text{det}(x,0))$
+  is the within-frame spatial residual variance between RANSAC-rejected and
+  Savitzky--Golay smoothed edges at $t = 0$.
+  Fallback: if fewer than 6 finite-valued columns are available or fallback detection
+  is active at $t = 0$, $R_\text{base}(0) = 0.1 \times Q_0 = 40$~px$^2$.
+  The floor of 1.0 prevents zero initial uncertainty from collapsing the Kalman gain.
+  Numerical safeguards: (i) non-finite $R$ clamped to $Q_0$;
+  (ii) non-finite Kalman output reset to previous edge;
+  (iii) $P$ reset to $P^-$ when hard safety net fires;
+  (iv) last-resort revert if $A(t) > A(t-1)$ persists after all constraint paths.}
+\label{tab:pipeline-parameters}
+\small
+\begin{tabular}{llll}
+\toprule
+Stage & Parameter & Value & Purpose \\
+\midrule
+Variance map        & Window size $w$                          & 15~px         & Local texture estimation \\
+Y-band              & Row-profile Gaussian $\sigma_y$          & 10.0~px       & Wound centre smoothing \\
+Y-band              & Variance percentile threshold            & 35th          & Sub-threshold band selection \\
+Y-band              & Margin expansion fraction                & 0.15          & Band boundary padding \\
+Edge extraction     & Threshold factor                         & 0.5           & $\tau = 0.5 \cdot \text{median}(\sigma^2_\text{cell})$ \\
+RANSAC              & Polynomial degree                        & 2             & Captures genuine curvature \\
+RANSAC              & Iterations                               & 3             & Outlier convergence \\
+RANSAC              & Max deviation                            & 25~px         & Spike rejection threshold \\
+Savitzky--Golay     & Window length $w_\text{sg}$              & 51            & High-frequency jitter removal \\
+Savitzky--Golay     & Polynomial order $p_\text{sg}$           & 3             & Shape preservation \\
+Fallback detection  & Morphological hole fill                  & 500~px        & Region growing cleanup \\
+Fallback detection  & Small-object removal                     & 1000~px       & Region growing cleanup \\
+Fallback detection  & Disk closing radius                      & 5~px          & Region growing cleanup \\
+Kalman              & Default process noise $Q_0$              & 400~px$^2$    & Conservative first-run default \\
+Kalman              & Spatial pre-smoothing $\sigma_\text{spatial}$ & 5~columns & Column-level artifact suppression \\
+Kalman              & Fallback $R$ clamp                       & $Q_0$         & Non-finite guard \\
+Wound closure       & Closure threshold $\theta_\text{close}$  & 0.01          & Normalised area floor \\
 \bottomrule
 \end{tabular}
 \end{table}

@@ -40,7 +40,7 @@ def load_and_filter_legacy_data(
     Parameters
     ----------
     legacy_path : Path
-        Path to ``final_legacy_table.xlsx`` with per-timepoint wound data.
+        Path to ``experiments.xlsx`` with per-timepoint wound data.
     verification_path : Path
         Path to ``verification_results_*.xlsx`` with human verdicts.
 

@@ -1,0 +1,159 @@
+# Wound Healing Quantification Pipeline Configuration
+# ====================================================
+#
+# Complete example with all available options.
+# Copy this file and customize for your experiment.
+#
+# Key Concepts:
+# - trajectory identifiers: condition, experiment, sample_name → define which images form a temporal sequence
+# - analysis factors: arbitrary domain-specific variables for statistical grouping
+#
+# Usage:
+#   from library.config.pipeline_config import PipelineConfig
+#   config = PipelineConfig.from_yaml("your_config.yaml")
+#   config.validate()  # Check for typos and missing columns
+
+# INPUT DATA
+# ==========
+input_excel: "/path/to/your/master_experiments.xlsx"
+
+# Column name mapping
+# ===================
+# Separates infrastructure, trajectory identifiers, and analysis factors.
+#
+# INFRASTRUCTURE (always required):
+#   - image_path: path to image file
+#   - time_min: timepoint in minutes (defines temporal order within a sequence)
+#
+# TRAJECTORY IDENTIFIERS (always required, define which images form a sequence):
+#   - condition: primary treatment/exposure variable (DMSO, Alk5i, Media, etc.)
+#   - experiment: replicate identifier (EXP1, EXP2, ensures independence assumption)
+#   - sample_name: individual well/sample identifier (A1, A2, etc.)
+#
+# ANALYSIS FACTORS (optional, domain-specific, used for stratification/interaction):
+#   - any number of factors in the `factors` list
+#   - examples: cell_line, concentration, laser_power, substrate_type, etc.
+#   - completely configurable → same code works for any lab
+
+columns:
+  # Infrastructure (always required)
+  image_path: "image_path"              # Path to image file
+  time_min: "time_min"                  # Timepoint in minutes
+
+  # Trajectory identifiers (always required)
+  # These define which images belong to the same temporal sequence.
+  # Do NOT mix images from different conditions/experiments/samples.
+  condition: "sample_condition"         # Primary treatment/exposure variable
+                                         # e.g., "DMSO", "Alk5i", "Media", custom conditions
+  experiment: "experiment"              # Replicate/batch identifier (EXP1, EXP2)
+  sample_name: "sample_name"            # Sample identifier (well A1, A2, etc.)
+
+  # Analysis factors (optional, configurable)
+  # Used for statistical stratification/interaction.
+  # Format: name: column_name
+  #   name = logical name you reference in stratify_by/interaction_factors
+  #   column_name = actual Excel column name
+  #
+  # Examples:
+  #   Lab A (cell biology): cell_line, concentration
+  #   Lab B (optics): laser_power, wavelength, substrate_type
+  #   Lab C (pharmaceutical): dose, exposure_duration, temperature
+  #
+  # Same code works for all — purely config-driven.
+  factors:
+    - name: "cell_line"
+      column: "cell_line"
+    - name: "concentration"
+      column: "concentration_mm"
+    # - name: "laser_power"              # Uncomment for optical experiments
+    #   column: "power_mW"
+    # - name: "substrate_type"           # Uncomment for material studies
+    #   column: "material"
+
+
+# SEGMENTATION PIPELINE
+# =====================
+segmentation:
+  n_workers: 10                         # Parallel workers (cap at CPU count)
+  save_debug_images: false              # Save 6-panel diagnostics per frame?
+  use_kalman: true                      # Kalman filter for edge refinement
+  kalman_Q: null                        # Process noise (null = auto-estimate)
+  kalman_R_base: null                   # Observation noise (null = auto-estimate)
+  process_missing: true                 # Re-segment missing samples?
+
+
+# STATISTICAL ANALYSIS
+# ====================
+analysis:
+  control_condition: "DMSO"             # Baseline condition for comparisons
+
+  # Optional: stratify analysis by factor(s)
+  # Runs separate comparisons within each level of the specified factor(s).
+  # References factor names defined in columns.factors.
+  #
+  # Example 1: stratify_by: ["cell_line"]
+  #   → separate analyses per cell line (iMC ISOR544C, iMC MUTR544C)
+  #
+  # Example 2: stratify_by: ["cell_line", "concentration"]
+  #   → separate analyses per (cell_line, concentration) combination
+  #   → 2 cell_lines × 4 concentrations = 8 separate comparisons
+  #
+  # Use when: "Does the effect differ across cell lines?" or similar questions.
+  stratify_by: []
+  # stratify_by: ["cell_line"]
+  # stratify_by: ["concentration"]
+  # stratify_by: ["cell_line", "concentration"]
+
+  # Optional: include factor(s) as interaction terms
+  # Compares each condition × factor level combination separately.
+  # References factor names defined in columns.factors.
+  #
+  # Example: interaction_factors: ["concentration"]
+  #   → compares (alk5i @ 0.01mM vs dmso @ 0.01mM),
+  #            (alk5i @ 0.1mM vs dmso @ 0.1mM), etc.
+  #
+  # Use when: "Does drug potency change with concentration?" or similar questions.
+  interaction_factors: []
+  # interaction_factors: ["concentration"]
+  # interaction_factors: ["laser_power"]
+
+  statistical_tests:                    # Which tests to run
+    - "t_test"                          # Pairwise Welch's t-tests vs. control
+    - "mixed_effects"                   # Mixed-effects model (placeholder)
+
+  multiple_comparison_correction: "bonferroni"  # How to correct p-values
+  # Other options: "holm", "hochberg", "hommel", "fdr_bh"
+
+  effect_size_metric: "cohens_d"        # Default effect size
+  # Other options (uncomment to use):
+  # effect_size_metric: "hedges_g"      # Hedges' g (bias-corrected Cohen's d)
+  # effect_size_metric: "glass_delta"   # Glass's delta (uses control SD only)
+
+  random_effects_structure: "both"      # Random effects in mixed model
+  # Options:
+  # random_effects_structure: "intercept"  # Random intercepts only
+  # random_effects_structure: "slopes"     # Random slopes only
+  # random_effects_structure: "both"       # Random intercepts + slopes (default)
+
+  output_formats:                       # Output file formats
+    - "excel"                           # Excel workbooks
+    - "json"                            # JSON for programmatic use
+
+  alpha: 0.05                           # Significance threshold
+
+
+# OUTPUT STRUCTURE
+# ================
+output:
+  base_dir: "./results"                 # Root output directory
+  segmentation_subdir: "segmentation"   # Masks, trajectories, measurements
+  verification_subdir: "verification"   # Manual QC results
+  analysis_subdir: "analysis"           # Statistical tables and figures
+  figures_subdir: "figures"             # Publication-ready figures
+
+
+# CACHING & REPRODUCIBILITY
+# ==========================
+overwrite_existing: false               # If false, ask before overwriting
+save_config_with_results: true          # Save config_used.yaml with outputs?
+verbose: true                           # Print progress messages?

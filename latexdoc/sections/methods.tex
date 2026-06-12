@@ -2,37 +2,29 @@
 
 \subsection{Cell Culture and Experimental Design}
 
-Two cell lines were used: iMC ISOR544C (Line 1, isogenic control) and iMC MUTR544C (Line 2, mutant).
-
-A full factorial design was implemented (Table~\ref{tab:experimental-design}), comprising 2 cell lines $\times$ 3 treatment conditions $\times$ 2 independent experiments, yielding 12 unique experimental conditions. Two independent experiments were conducted as biological replicates: EXP1 ($n = 158$ wells) and EXP2 ($n = 167$ wells), resulting in a total of 325 wound regions. Each well contained a single wound region, yielding one independent trajectory per well
+The evaluation dataset comprises two cell lines (iMC~ISOR544C and iMC~MUTR544C) across three culture conditions, acquired in two independent experiments serving as biological replicates (EXP1, $n = 62$ images; EXP2, $n = 72$ images), for a total of 134 baseline ($t = 0$) wound regions. The three conditions are an ALK5 inhibitor at $0.1\,\mathrm{mM}$ (a selective TGF-$\beta$ receptor type~I antagonist), a DMSO vehicle control, and an untreated media reference used solely as a test bed to probe whether the pipeline resolves condition-dependent closure dynamics.
 
 
-\begin{table}[htbp]
-	\centering
-	\caption{Factorial experimental design.}
-	\label{tab:experimental-design}
-	\begin{tabular}{lcl}
-		\toprule
-		Factor & Levels & Description \\
-		\midrule
-		Cell line  & 2 & iMC ISOR544C, iMC MUTR544C \\
-		Treatment  & 3 & DMSO, ALK5, Media \\
-		Experiment & 2 & EXP1, EXP2 \\
-		\bottomrule
-	\end{tabular}
-\end{table}
+Confluent monolayers were wounded using a standardized mechanical scratch assay. Treatment media were applied immediately after wounding. Time-lapse imaging began at $t = 0$ (baseline, fully open wound) and continued for $25$ hours, with images acquired at $1$-hour intervals, yielding $25$ timepoints per trajectory. Images were captured at a resolution of approximately $900 \times 735$ pixels per field of view.
 
-The ALK5 inhibitor was applied at 0.1~mM as a selective antagonist of the TGF-$\beta$ receptor type I (ALK5). Inhibition of TGF-$\beta$ signaling is relevant in this context as it promotes myogenic-to-fibrotic transdifferentiation \citep{Li2004}, suppresses myoblast differentiation \citep{McFarland2001}, and regulates leader cell dynamics during collective migration \citep{Vishwakarma2014}. DMSO was used as the vehicle control, while untreated media served as the basal reference condition.
-
-Confluent monolayers were wounded using a standardized mechanical scratch assay. Treatment media were applied immediately after wounding. Time-lapse imaging began at $t = 0$ (baseline, fully open wound) and continued for approximately 24 hours, with images acquired at ~1-hour intervals, yielding 20–25 timepoints per trajectory. Images were captured at a resolution of approximately $900 \times 735$ pixels per field of view.
-
-Images were acquired using a [microscope type] with a [X× objective] under [conditions].
+iMCs were seeded into $96$-well plates at a density of $5 \times 10^{4}$ cells per well in media containing either DMSO or the indicated drug conditions. After overnight incubation, wounds were created in the cell monolayers using the Incucyte\textsuperscript{\textregistered} $96$-Well WoundMaker tool. Cells were washed twice with PBS, after which conditioned media were reapplied. Images were acquired immediately after wounding and every hour for up to $24$ hours using the Incucyte\textsuperscript{\textregistered} Live-Cell Analysis System with the whole-well ($4\times$) setting.
 
 \subsection{Automated Wound Segmentation}
 
-The quantification pipeline operates in two stages: (1) a single-frame detector that extracts wound boundaries from each image independently, and (2) a temporal integrator that enforces the monotonic closure constraint across the time series. Parameters were selected based on empirical tuning on a held-out subset and fixed for all analyses.
+The quantification pipeline operates in two stages: a single-frame detector that estimates wound boundaries independently for each image, followed by a temporal integration stage that enforces a monotonic closure constraint across the time series. The resulting boundary estimates are converted into wound masks and quantitative measurements.
 
-For each trajectory, frames are processed sequentially as follows: each frame is independently segmented using the single-frame detector (Section~\ref{sec_single_frame}), producing validated edge estimates; these are refined by the temporal integrator (Section~\ref{sec:temporal-constraint}) under a monotonic constraint; the resulting edges are converted to wound masks and areas.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1.0\linewidth]{diagram_main_figure}
+	\caption{%
+		\textbf{Automated scratch-wound quantification pipeline with monotonic temporal integration.}
+		\textbf{(A)} Experimental workflow. Confluent cell monolayers cultured in 96-well plates are wounded using a standardized mechanical scratch assay and imaged by phase-contrast time-lapse microscopy. Sequential images capture progressive wound closure from baseline to the final timepoint.
+		\textbf{(B)} Single-frame wound detection. Each frame is independently segmented using local variance--based texture analysis to distinguish the wound channel from the surrounding cellular monolayer. Candidate wound boundaries are refined through edge detection, RANSAC-based outlier rejection, and Savitzky--Golay smoothing before reconstruction of the wound mask.
+		\textbf{(C)} Temporal integration with monotonic closure constraint. Independent frame-wise segmentations produce wound-area trajectories, wound boundaries are modeled independently for each image column using a Kalman-filter framework with a hard monotonic constraint, ensuring that wound area cannot increase over time ($A(t+1) \leq A(t)$). This generates temporally consistent wound trajectories and strictly non-increasing area profiles.
+		\textbf{(D)} Quantitative metrics derived from the final segmentation masks, including wound area ($A(t)$), closure fraction ($f(t)$), edge displacement ($\Delta u(t)$ and $\Delta \ell(t)$), and closure speed ($v(t) = -dA(t)/dt$). The fully automated, training-free pipeline enables robust extraction of wound-healing dynamics without user-defined threshold tuning while preserving biologically consistent temporal evolution.%
+	}
+	\label{fig:pipeline-overview}
+\end{figure}
 
 \subsubsection{Problem Formulation}
 
@@ -66,8 +58,6 @@ function of time:
 	\label{eq:monotonic}
 \end{equation}
 
-%We enforce this constraint at the per-column edge level (Section~\ref{sec:temporal-constraint}),
-%which is strictly stronger than the aggregate area constraint.
 
 \subsubsection{Single-Frame Detection}\label{sec_single_frame}
 
@@ -133,26 +123,10 @@ The binary mask is reconstructed from smooth edges using vectorized broadcasting
 \end{equation}
 
 \textbf{Stage~7: Geometric Validation.}
-Four quality-control criteria are evaluated on each mask (Table~\ref{tab:qc-criteria}). A detection passes QC if and only if all four criteria are satisfied.
+Four quality-control criteria are evaluated on each mask (Supplementary Table~\ref{tab:qc-criteria}). A detection passes QC if and only if all four criteria are satisfied.
 When the primary pipeline fails, an optional fallback strategy is activated using constrained
 region growing from a seed at $y_c$ with morphological cleanup
 (hole filling at 500~px, small-object removal at 1000~px, disk closing at radius~5).
-
-\begin{table}[htbp]
-	\centering
-	\caption{Geometric validation criteria applied to each wound mask.}
-	\label{tab:qc-criteria}
-	\begin{tabular}{llp{6.5cm}}
-		\toprule
-		Criterion & Threshold & Rationale \\
-		\midrule
-		Width coverage $r_w$       & $> 0.75$           & Wound must span most of image width \\
-		Aspect ratio $\rho$         & $> 1.5$            & Wound is wider than tall \\
-		Y-position $\bar{y}_\text{frac}$ & $\in (0.15, 0.85)$ & Wound is roughly centered \\
-		Thickness CV                & $< 0.60$           & Consistent thickness across columns \\
-		\bottomrule
-	\end{tabular}
-\end{table}
 
 
 
@@ -174,19 +148,7 @@ At the initial timepoint $t = 0$, the detector outputs are accepted without cons
 \begin{equation}
 	u(x,0) = u_\text{det}(x,0), \qquad \ell(x,0) = \ell_\text{det}(x,0)
 \end{equation}
-These edges define the reference wound geometry for the trajectory. The corresponding uncertainty is initialized as
-\begin{equation}
-	P(x,0) = \max\!\bigl(R_\text{base}(0),\; 1.0\bigr)
-	\label{eq:P-init}
-\end{equation}
-where $R_\text{base}(0)$ is a baseline estimate of the single-frame detector noise variance at $t = 0$ (px$^2$), computed from the spatial residuals between the RANSAC-rejected edge (Stage~4, Section~\ref{sec_single_frame}) and the Savitzky--Golay smoothed edge (Stage~5):
-\begin{equation}
-	R_\text{base}(0) = \operatorname{Var}_x\!\bigl(u_\text{RANSAC}(x,0) - u_\text{det}(x,0)\bigr)
-	\label{eq:Rbase-init}
-\end{equation}
-where $u_\text{RANSAC}(x,0)$ denotes the per-column edge after RANSAC outlier rejection but before smoothing, and $u_\text{det}(x,0)$ is the final Savitzky--Golay smoothed output. This quantity captures the within-frame spatial variability of the edge estimate at baseline: large residuals indicate an irregular or noisy wound boundary, yielding higher initial uncertainty and a weaker filter dependence on the first-frame measurement.
-
-If edge residuals are unavailable (fewer than six finite-valued columns, or fallback detection at $t = 0$), $R_\text{base}(0)$ falls back to $0.1 \times Q = 40$~px$^2$ (using the default $Q_0 = 400$~px$^2$). The floor $\max(\cdot,\, 1.0)$ in Equation~\eqref{eq:P-init} prevents zero initial uncertainty, which would collapse the Kalman gain to zero on the first update step and make the filter unresponsive to all subsequent observations.
+These edges define the reference wound geometry for the trajectory. Initial per-column uncertainty $P(x,0)$ is estimated from the spatial residuals between the RANSAC-rejected and Savitzky--Golay smoothed edges at $t = 0$; derivation, fallback values, and numerical safeguards are detailed in Supplementary Table~\ref{tab:pipeline-parameters}.
 
 \textbf{Kalman-filtered constraint ($t > 0$).}
 For subsequent timepoints, the temporal integrator updates the constrained edges by combining the detector observations with the previous state under a monotonicity prior. The update proceeds in three steps.
@@ -209,7 +171,7 @@ A conservative default $Q_0 = 400$~px$^2$ is used on first run.
 
 \emph{Spatial pre-smoothing.}
 The raw detected edge is smoothed with a 1-D Gaussian kernel ($\sigma_\text{spatial} = 5$
-columns) before the Kalman update to suppress column-level artefacts:
+columns) before the Kalman update to suppress column-level artifacts:
 \begin{equation}
 	\tilde{u}_\text{det}(x, t) = \bigl(G_{\sigma} * u_\text{det}(\cdot,\, t)\bigr)(x)
 	\label{eq:spatial-smooth}
@@ -239,7 +201,7 @@ prior.
 Low $R$ (clean, high-contrast frame) implies large $K$, trusting the detector.
 
 \textbf{Hard safety net} (secondary guarantee).
-After the Kalman blend, the biological invariant is enforced unconditionally:
+After the Kalman blend, the biological axiom is enforced unconditionally:
 \begin{align}
 	u(x, t) &= \max\!\bigl(u_\text{filt}(x, t),\; u(x, t-1)\bigr) \label{eq:hard-upper} \\
 	\ell(x, t) &= \min\!\bigl(\ell_\text{filt}(x, t),\; \ell(x, t-1)\bigr) \label{eq:hard-lower}
@@ -253,71 +215,42 @@ The pipeline ultimately produces, for each trajectory, a sequence of wound masks
 When the normalized wound area satisfies $\frac{A(t-1)}{A(0)} < \theta_\text{close}$ with $\theta_\text{close} = 0.01$ the wound is considered fully closed. For all subsequent timepoints, the edge positions are held constant $u(x,t) = u(x,t-1)$ and $ \ell(x,t) = \ell(x,t-1)$, preventing numerical fluctuations after closure.
  
 
-Four safeguards prevent numerical failure from propagating across frames:
-(i) non-finite observation noise $R$ is clamped to $Q_0 = 400$~px$^2$;
-(ii) non-finite Kalman filter outputs are reset to the previous constrained edge;
-(iii) per-column uncertainty $P$ is reset to $P^-$ when the safety net overrides the Kalman
-estimate, preventing overconfidence propagation; and
-(iv) a last-resort area comparison emits a warning  and reverts to the previous
-frame if $A(t) > A(t-1)$ persists after all constraint paths.
 
 
 
-%\subsubsection{Trajectory Processing and Parallel Execution}
-%
-%For each biological sample, images are sorted by acquisition time, fed sequentially to the
-%segmenter, and results serialized.
-%Independent samples are processed in parallel using
-%\texttt{concurrent.futures.ProcessPoolExecutor} with explicitly controlled worker count
-%($n_\text{workers}$, default 4, capped at available CPU cores).
-%Each worker instantiates its own segmenter with independent state, ensuring no shared mutable
-%data.
-%
-%\subsection{Quality Control}
-%
-%Quality control operates at three hierarchical levels:
-%
-%\textbf{Level~1: Single-frame geometric validation} (Section~2.3.2, Stage~7).
-%Applied automatically to every frame; flags implausible geometry.
-%
-%\textbf{Level~2: Baseline distributional analysis.}
-%The $t = 0$ mask undergoes additional scrutiny via row- and column-wise projection analysis,
-%requiring exactly one prominent peak and satisfying skewness and flatness criteria.
-%
-%\textbf{Level~3: Manual expert curation.}
-%For high-stakes analyses, baseline images are reviewed by a human expert.
-%For a subset of images, the reviewer draws ground-truth polygon annotations enabling
-%pixel-level validation.
 
 
 
 \subsection{Wound Quantification}
 
-Once the wound boundaries have been extracted and temporally constrained, quantitative measures of wound healing can be derived from the resulting area trajectory $A(t)$ and edge positions $u(x,t)$ and $\ell(x,t)$. These metrics capture complementary aspects of the healing process, including overall closure, spatial displacement, and rate of movement. These metrics represent the inward movement of the wound boundaries at each column $x$. 
+Once the wound boundaries have been extracted and temporally constrained, quantitative measures of wound healing can be derived from the resulting area trajectory $A(t)$ and edge positions $u(x,t)$ and $\ell(x,t)$. These metrics represent the inward movement of the wound boundaries at each column $x$. 
 
 Fractional wound closure is defined as the proportion of the initial wound area that has closed over time. It ranges from 0 (no closure) to 1 (complete closure), and is given by
 \begin{equation}
 	f(t) = \frac{A(0) - A(t)}{A(0)}.
+	\label{eq:fractional-closure}
 \end{equation}
 
 
-To quantify spatial dynamics, we measure the displacement of the upper and lower wound edges between the initial timepoint $t = 0$ and a target time $t_T$ defining the edge displacement as :
+To quantify spatial dynamics, we measure the displacement of the upper and lower wound edges between the initial timepoint $t = 0$ and a target time $t_T$, defining the edge displacement as
 \begin{align}
-	\Delta u(x) &= u(x, t_T) - u(x, 0), \\
-	\Delta \ell(x) &= \ell(x, 0) - \ell(x, t_T).
+	\Delta u(x) &= u(x, t_T) - u(x, 0), \label{eq:delta-upper} \\
+	\Delta \ell(x) &= \ell(x, 0) - \ell(x, t_T). \label{eq:delta-lower}
 \end{align}
 
 
-Wound healing rate is defined by converting edge displacements into velocities through normalization by elapsed time. The mean closure speed represents the average inward movement of the wound boundaries and is defined as
+Wound healing rate is defined by converting the edge displacements of Equations~\eqref{eq:delta-upper}--\eqref{eq:delta-lower} into velocities through normalization by elapsed time. The mean closure speed represents the average inward movement of the wound boundaries and is defined as
 \begin{equation}
 	v_\text{mean} = \frac{v_\text{upper} + v_\text{lower}}{2},
+	\label{eq:closure-speed}
 \end{equation}
-where each edge velocity is computed as the average displacement per unit time across valid columns:
+where each edge velocity is computed as the average displacement per unit time across the set $\mathcal{V}$ of valid columns:
 \begin{equation}
 	v_\text{edge} = \frac{1}{|\mathcal{V}|} \sum_{x \in \mathcal{V}} \frac{|\Delta_\text{edge}(x)|}{t_T}.
+	\label{eq:edge-velocity}
 \end{equation}
 
-This metric provides a summary of the overall migration rate while reducing the influence of local irregularities along the wound boundary.
+Averaging over valid columns suppresses localized edge artifacts without discarding the per-column spatial resolution preserved throughout processing.
 
 
 \subsection{Statistical Analysis}
@@ -325,25 +258,28 @@ This metric provides a summary of the overall migration rate while reducing the 
 Pairwise treatment comparisons versus DMSO were performed using Welch's $t$-test
 (no equal-variance assumption), stratified by cell line.
 Multiple comparison correction was applied using the Bonferroni method.
-Effect sizes were quantified as Cohen's $d$ defined as  $d = \frac{\bar{x}_\text{treated} - \bar{x}_\text{control}}{s_\text{pooled}}$.
+Effect sizes were quantified as Cohen's $d$, defined as $d = \frac{\bar{x}_\text{treated} - \bar{x}_\text{control}}{s_\text{pooled}}$.
 
 The time-series analysis was performed using a linear mixed-effects model. The response variable $\mathrm{distance}_{ij}$ for trajectory $i$ at timepoint $j$ was modeled as
-\[
+\begin{equation}
+\begin{aligned}
 \mathrm{distance}_{ij}
-= \mu
+= {}& \mu
 + \beta_1 t_j
 + \beta_2 \,\mathrm{condition}_i
-+ \beta_3 \,\mathrm{cell\_line}_i
-+ \beta_4 \,(t_j \times \mathrm{condition}_i)
++ \beta_3 \,\mathrm{cell\_line}_i \\
+& + \beta_4 \,(t_j \times \mathrm{condition}_i)
 + \beta_5 \,(t_j \times \mathrm{cell\_line}_i)
 + b_{0i}
 + b_{1i} t_j
 + \varepsilon_{ij}.
-\]
+\end{aligned}
+\label{eq:mixed-model}
+\end{equation}
 
 Here, $\mu$ denotes the fixed intercept, $\beta_k$ the fixed-effect coefficients, $b_{0i}$ and $b_{1i}$ the random intercept and slope for trajectory $i$, and $\varepsilon_{ij}$ the residual error term.
 
 Model assumptions were evaluated by testing residual normality using the Shapiro--Wilk test and homogeneity of variance using Levene's test (see Supplementary Table~\ref{tab:supp-assumption-checks}).
 
 \subsection{Implementation}
-The pipeline was implemented in Python~3.11 using NumPy, OpenCV, SciPy and scikit-image \citep{vanderWalt2014}. The pipeline is fully deterministic and reproducible. The per-frame computational complexity is $O(HW)$, dominated by the variance map computation. For a typical $1024 \times 1280$ image, this corresponds to approximately $1.3 \times 10^6$ operations per stage.
+The pipeline was implemented in Python~3.11 using NumPy~2.4.2, OpenCV~4.12.0, SciPy~1.16.1, and scikit-image~0.25.2 \citep{vanderWalt2014}. The pipeline is fully deterministic and reproducible. The per-frame computational complexity is $O(HW)$, dominated by the variance map computation. For a typical $1024 \times 1280$ image, this corresponds to approximately $1.3 \times 10^6$ operations per stage.

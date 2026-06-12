@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.26)  3 APR 2026 11:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.26)  12 JUN 2026 10:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -420,21 +420,34 @@ Package: tabularx 2023/12/11 v2.12a `tabularx' package (DPC)
 y
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
-(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/parskip\parskip.sty
-Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.st
+y
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
 
-(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.
-sty
-Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
-
-(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.
-sty
-Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
-)))
+\f@nch@headwidth=\skip63
+\f@nch@offset@elh=\skip64
+\f@nch@offset@erh=\skip65
+\f@nch@offset@olh=\skip66
+\f@nch@offset@orh=\skip67
+\f@nch@offset@elf=\skip68
+\f@nch@offset@erf=\skip69
+\f@nch@offset@olf=\skip70
+\f@nch@offset@orf=\skip71
+\f@nch@height=\skip72
+\f@nch@footalignment=\skip73
+\f@nch@widthL=\skip74
+\f@nch@widthC=\skip75
+\f@nch@widthR=\skip76
+\@temptokenb=\toks32
+)
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.st
 y
 Package: hyperref 2025-07-12 v7.01o Hypertext links for LaTeX
 
+(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.
+sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+)
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdef
 inekeys.sty
 Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
@@ -456,7 +469,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\get
 titlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
-)
+
+(C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.
+sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
 \c@section@level=\count330
 )
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringen
@@ -484,7 +501,6 @@ File: puenc.def 2025-07-12 v7.01o Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 4066.
 Package hyperref Info: Hyper figures OFF on input line 4195.
 Package hyperref Info: Link nesting OFF on input line 4200.
 Package hyperref Info: Hyper index ON on input line 4203.
@@ -516,7 +532,7 @@ Package hyperref Info: Hyper figures OFF on input line 6078.
 Package hyperref Info: Link nesting OFF on input line 6083.
 Package hyperref Info: Hyper index ON on input line 6086.
 Package hyperref Info: backreferencing OFF on input line 6093.
-Package hyperref Info: Link coloring ON on input line 6096.
+Package hyperref Info: Link coloring OFF on input line 6098.
 Package hyperref Info: Link coloring with OCG OFF on input line 6103.
 Package hyperref Info: PDF/A mode OFF on input line 6108.
 \Hy@abspage=\count336
@@ -541,12 +557,12 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 84.
 )
-\Hy@SectionHShift=\skip63
+\Hy@SectionHShift=\skip77
 )
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip64
-\bibsep=\skip65
+\bibhang=\skip78
+\bibsep=\skip79
 LaTeX Info: Redefining \cite on input line 694.
 \c@NAT@ctr=\count341
 )
@@ -574,16 +590,16 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.st
 y
 Package: enumitem 2025/02/06 v3.11 Customized lists
-\labelindent=\skip66
+\labelindent=\skip80
 \enit@outerparindent=\dimen273
-\enit@toks=\toks32
+\enit@toks=\toks33
 \enit@inbox=\box69
 \enit@count@id=\count342
 \enitdp@description=\count343
 ) (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lineno\lineno.sty
 Package: lineno 2026/03/08 line numbers on paragraphs v5.9
 \linenopenalty=\count344
-\output=\toks33
+\output=\toks34
 \linenoprevgraf=\count345
 \linenumbersep=\dimen274
 \linenumberwidth=\dimen275
@@ -599,8 +615,8 @@ Package: lineno 2026/03/08 line numbers on paragraphs v5.9
 \@LN@amsmath@ams@eqpen=\count351
 )
 Package translations Info: No language package found. I am going to use `englis
-h' as default language. on input line 80.
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 80
+h' as default language. on input line 87.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 87
 .
  (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -612,31 +628,31 @@ File: l3backend-pdftex.def 2025-10-09 L3 backend support: PDF output (pdfTeX)
 ) (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 80.
-LaTeX Font Info:    ... okay on input line 80.
-LaTeX Info: Redefining \microtypecontext on input line 80.
-Package microtype Info: Applying patch `item' on input line 80.
-Package microtype Info: Applying patch `toc' on input line 80.
-Package microtype Info: Applying patch `eqnum' on input line 80.
-Package microtype Info: Applying patch `footnote' on input line 80.
-Package microtype Info: Applying patch `verbatim' on input line 80.
-LaTeX Info: Redefining \microtypesetup on input line 80.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 87.
+LaTeX Font Info:    ... okay on input line 87.
+LaTeX Info: Redefining \microtypecontext on input line 87.
+Package microtype Info: Applying patch `item' on input line 87.
+Package microtype Info: Applying patch `toc' on input line 87.
+Package microtype Info: Applying patch `eqnum' on input line 87.
+Package microtype Info: Applying patch `footnote' on input line 87.
+Package microtype Info: Applying patch `verbatim' on input line 87.
+LaTeX Info: Redefining \microtypesetup on input line 87.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -695,12 +711,12 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 \scratchbox=\box71
 \nofMPsegments=\count354
 \nofMParguments=\count355
-\everyMPshowfont=\toks34
+\everyMPshowfont=\toks35
 \MPscratchCnt=\count356
 \MPscratchDim=\dimen280
 \MPnumerator=\count357
 \makeMPintoPDFobject=\count358
-\everyMPtoPDFconversion=\toks35
+\everyMPtoPDFconversion=\toks36
 )
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopd
 f-base.sty
@@ -722,43 +738,43 @@ File: translations-basic-dictionary-english.trsl (english translation file `tra
 nslations-basic-dictionary')
 )
 Package translations Info: loading dictionary `translations-basic-dictionary' f
-or `english'. on input line 80.
-Package hyperref Info: Link coloring ON on input line 80.
+or `english'. on input line 87.
+Package hyperref Info: Link coloring OFF on input line 87.
  (main.out) (main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 8
-2.
+9.
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
-2.
+9.
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-82.
+89.
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-82.
+89.
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 82.
+(Font)              <12> on input line 89.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 82.
+(Font)              <8> on input line 89.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 82.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 82.
+(Font)              <6> on input line 89.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 89.
 
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
@@ -767,7 +783,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 82.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 89.
 
  (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -776,7 +792,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-2.
+9.
  (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -784,8 +800,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 86.
 
 (sections/abstract.tex
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -794,96 +808,57 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 5.
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
-.
+ [1{C:/Users/riccig01/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/User
+s/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}
+
+{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.e
+nc}{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.en
+c}{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy
+.enc}]) (sections/introduction.tex [2]) (sections/methods.tex
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 5.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 1
+0.
 
 (C:\Users\riccig01\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-[1
-
-{C:/Users/riccig01/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/r
-iccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/ri
-ccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users
-/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/
-riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}])
-[2] (sections/introduction.tex [3] [4]) (sections/methods.tex [5{C:/Users/ricci
-g01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
-<figures/methods_pipeline_example.png, id=265, 1032.4974pt x 713.5458pt>
+[3{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.en
+c}]
+<figures/diagram_main_figure.png, id=125, 3646.62375pt x 2631.8325pt>
+File: figures/diagram_main_figure.png Graphic file (type png)
+<use figures/diagram_main_figure.png>
+Package pdftex.def Info: figures/diagram_main_figure.png  used on input line 18
+.
+(pdftex.def)             Requested size: 472.03123pt x 340.66438pt.
+ [4 <./figures/diagram_main_figure.png>]
+<figures/methods_pipeline_example.png, id=134, 1032.4974pt x 713.5458pt>
 File: figures/methods_pipeline_example.png Graphic file (type png)
 <use figures/methods_pipeline_example.png>
 Package pdftex.def Info: figures/methods_pipeline_example.png  used on input li
-ne 78.
+ne 68.
 (pdftex.def)             Requested size: 424.82523pt x 293.59001pt.
- [6{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathe
-x.enc}]
-[7 <./figures/methods_pipeline_example.png>] [8] [9] [10] [11]
-Overfull \hbox (17.99677pt too wide) detected at line 342
-[][] \OT1/lmr/m/n/10.95 = \OML/lmm/m/it/10.95 ^^V \OT1/lmr/m/n/10.95 + \OML/lmm
-/m/it/10.95 ^^L[]t[] \OT1/lmr/m/n/10.95 + \OML/lmm/m/it/10.95 ^^L[] [][] \OT1/l
-mr/m/n/10.95 + \OML/lmm/m/it/10.95 ^^L[] [][] \OT1/lmr/m/n/10.95 + \OML/lmm/m/i
-t/10.95 ^^L[] \OT1/lmr/m/n/10.95 (\OML/lmm/m/it/10.95 t[] \OMS/lmsy/m/n/10.95 ^
-^B [][]\OT1/lmr/m/n/10.95 ) + \OML/lmm/m/it/10.95 ^^L[] \OT1/lmr/m/n/10.95 (\OM
-L/lmm/m/it/10.95 t[] \OMS/lmsy/m/n/10.95 ^^B [][]\OT1/lmr/m/n/10.95 ) + \OML/lm
-m/m/it/10.95 b[] \OT1/lmr/m/n/10.95 + \OML/lmm/m/it/10.95 b[]t[] \OT1/lmr/m/n/1
-0.95 + \OML/lmm/m/it/10.95 "[]:
- []
+ [5{C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathe
+x.enc}] [6 <./figures/methods_pipeline_example.png>] [7]
 
-) (sections/results.tex [12]
-Overfull \hbox (5.47499pt too wide) detected at line 117
-$\OT1/lmr/m/n/10.95 45$
- []
+Package hyperref Warning: Suppressing empty link on input line 145.
 
-
-Overfull \hbox (5.47499pt too wide) detected at line 117
-$\OT1/lmr/m/n/10.95 27$
- []
-
-
-Overfull \hbox (5.47499pt too wide) detected at line 118
-$\OT1/lmr/m/n/10.95 76$
- []
-
-[13]
-<figures/fig1_model_quality.pdf, id=368, 916.20296pt x 629.26768pt>
+[8] [9] [10]) (sections/results.tex [11] [12]
+<figures/fig1_model_quality.pdf, id=233, 840.80806pt x 629.26768pt>
 File: figures/fig1_model_quality.pdf Graphic file (type pdf)
 <use figures/fig1_model_quality.pdf>
-Package pdftex.def Info: figures/fig1_model_quality.pdf  used on input line 134
-.
-(pdftex.def)             Requested size: 472.03123pt x 324.1965pt.
- [14] [15 <./figures/fig1_model_quality.pdf>]
-<figures/fig2_wound_dynamics.pdf, id=492, 840.83183pt x 512.47937pt>
+Package pdftex.def Info: figures/fig1_model_quality.pdf  used on input line 66.
+
+(pdftex.def)             Requested size: 472.03123pt x 353.28047pt.
+ [13 <./figures/fig1_model_quality.pdf>]
+<figures/fig2_wound_dynamics.pdf, id=355, 840.83183pt x 512.47937pt>
 File: figures/fig2_wound_dynamics.pdf Graphic file (type pdf)
 <use figures/fig2_wound_dynamics.pdf>
-Package pdftex.def Info: figures/fig2_wound_dynamics.pdf  used on input line 21
+Package pdftex.def Info: figures/fig2_wound_dynamics.pdf  used on input line 10
 7.
 (pdftex.def)             Requested size: 472.03123pt x 287.69809pt.
- [16 <./figures/fig2_wound_dynamics.pdf>]
-Overfull \hbox (3.0417pt too wide) detected at line 268
-$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 2$
- []
-
-
-Overfull \hbox (3.0417pt too wide) detected at line 270
-$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 5$
- []
-
-
-Overfull \hbox (3.0417pt too wide) detected at line 271
-$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 2$
- []
-
-
-Overfull \hbox (50.00558pt too wide) in paragraph at lines 258--275
- [][] 
- []
-
-
-LaTeX Warning: Reference `eq:mixed-model' on page 17 undefined on input line 28
-3.
-
-) (sections/discussion.tex [17] [18] [19]) (sections/conclusions.tex) [20]
-(main.bbl [21] [22] [23] [24] [25]) (supplement.tex [26]
+ [14]) (sections/discussion.tex [15 <./figures/fig2_wound_dynamics.pdf>]
+[16]) [17] (main.bbl [18] [19] [20]) (supplement.tex [21]
 Underfull \hbox (badness 2951) in paragraph at lines 66--67
 []|\T1/lmr/m/n/10.95 (+20) Single-frame de-tec-tor $\OMS/lmsy/m/n/10.95 !$ \T1/
 lmr/m/n/10.95 (+20) raw edges $\OML/lmm/m/it/10.95 u[]\OT1/lmr/m/n/10.95 (+20) 
@@ -900,7 +875,9 @@ Overfull \hbox (36.59993pt too wide) in paragraph at lines 97--98
 []|\T1/lmtt/m/n/10.95 QuantificationSegmenter.segment| 
  []
 
+[22
 
+]
 Overfull \hbox (7.7778pt too wide) detected at line 187
 $\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 0$
  []
@@ -931,18 +908,28 @@ $\OMS/lmsy/m/n/10 ^^@\OT1/lmr/m/n/10 0$
  []
 
 
+Overfull \hbox (5.47499pt too wide) detected at line 219
+$\OT1/lmr/m/n/10.95 12$
+ []
+
+
+Overfull \hbox (5.47499pt too wide) detected at line 219
+$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 10$
+ []
+
+
 Overfull \hbox (5.47499pt too wide) detected at line 220
-$\OT1/lmr/m/n/10.95 13$
+$\OT1/lmr/m/n/10.95 14$
  []
 
 
 Overfull \hbox (8.5167pt too wide) detected at line 220
-$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 2$
+$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 3$
  []
 
 
 Overfull \hbox (5.47499pt too wide) detected at line 220
-$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 13$
+$\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 16$
  []
 
 
@@ -962,50 +949,45 @@ $\OMS/lmsy/m/n/10.95 ^^@\OT1/lmr/m/n/10.95 0$
 
 
 Overfull \hbox (5.47499pt too wide) detected at line 231
-$\OT1/lmr/m/n/10.95 11$
+$\OT1/lmr/m/n/10.95 12$
  []
 
-) [27
-
-] [28] [29] [30] (main.aux)
+[23] [24] [25]) [26] (main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2025-12-24>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5316E22C7EDA967C2CA0F50B5595BE96;6390.
+(rerunfilecheck)             Checksum: 7053644B125C9F2935AD71C8FA678819;2799.
  ) 
 Here is how much of TeX's memory you used:
- 21126 strings out of 467871
- 401916 string characters out of 5416924
- 860270 words of memory out of 5000000
- 49219 multiletter control sequences out of 15000+600000
- 719481 words of font info for 261 fonts, out of 8000000 for 9000
+ 21241 strings out of 467871
+ 404048 string characters out of 5416924
+ 857986 words of memory out of 5000000
+ 49424 multiletter control sequences out of 15000+600000
+ 721813 words of font info for 245 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 73i,14n,80p,1003b,1279s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,14n,80p,1780b,1229s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10
 .pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmb
 x12.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/
 lmex10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/public/
 lm/lmmi10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/publ
-ic/lm/lmmi8.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/lm/lmr10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/lm/lmr12.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type
-1/public/lm/lmr6.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/lm/lmr7.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/lm/lmr8.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/t
-ype1/public/lm/lmri10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/font
-s/type1/public/lm/lmsy10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/lm/lmsy7.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX
-/fonts/type1/public/lm/lmsy8.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on main.pdf (30 pages, 2376332 bytes).
+ic/lm/lmmi7.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/pu
+blic/lm/lmmi8.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/lm/lmr10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/lm/lmr12.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/ty
+pe1/public/lm/lmr6.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/lm/lmr7.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts/
+type1/public/lm/lmr8.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/lm/lmri10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX/fo
+nts/type1/public/lm/lmsy10.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/lm/lmsy7.pfb><C:/Users/riccig01/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/riccig01/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmtt10.pfb>
+Output written on main.pdf (26 pages, 5628708 bytes).
 PDF statistics:
- 808 PDF objects out of 1000 (max. 8388607)
- 177 named destinations out of 1000 (max. 500000)
- 50448 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 641 PDF objects out of 1000 (max. 8388607)
+ 122 named destinations out of 1000 (max. 500000)
+ 52373 words of extra memory for PDF output out of 61914 (max. 10000000)
 

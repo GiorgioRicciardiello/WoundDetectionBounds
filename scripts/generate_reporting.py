@@ -108,12 +108,12 @@ METHODS: Dict[str, Dict[str, object]] = {
     "kalman": {
         "label": "Kalman",
         "traj_path": _OUTPUT_DIR / "Quantification_kalman" / "trajectories.pickle",
-        "table_path": _OUTPUT_DIR / "Quantification_kalman" / "final_legacy_table.xlsx",
+        "table_path": _OUTPUT_DIR / "Quantification_kalman" / "experiments.xlsx",
     },
     "hard": {
         "label": "Hard",
         "traj_path": _OUTPUT_DIR / "Quantification_hard" / "trajectories.pickle",
-        "table_path": _OUTPUT_DIR / "Quantification_hard" / "final_legacy_table.xlsx",
+        "table_path": _OUTPUT_DIR / "Quantification_hard" / "experiments.xlsx",
     },
 }
 
