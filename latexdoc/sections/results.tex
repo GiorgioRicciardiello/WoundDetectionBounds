@@ -5,7 +5,8 @@ baseline frames acquired across two cell lines (iMC~ISOR544C and iMC~MUTR544C) a
 two independent experiments (EXP1, $n = 62$; EXP2, $n = 72$).
 Ten images (7.5\%) were excluded for containing no visible wound at $t = 0$;
 9 of 10 occurred in EXP1 and 8 of 10 in the iMC~MUTR544C line
-(Supplementary Table~\ref{tab:supp-nowound-distribution}).
+(Supplementary Table~\ref{tab:supp-nowound-distribution}). Supplementary Table~\ref{tab:tool-comparison} contextualises the pipeline against established and recent
+alternatives. 
 
 \subsection{Wound Detection Accuracy}
 
@@ -44,15 +45,16 @@ The two false positives --- incorrectly segmented images that passed QC --- were
 indistinguishable from valid segmentations by variance-based scoring alone.
 Within the wound-bearing cohort ($n = 124$), the pipeline correctly classified 123 of 124
 images (accuracy~=~99.2\%) without false negatives.
-QC is therefore a safeguard for quantitative conclusions, not a cosmetic post-filter;
-automated rejection becomes essential when trajectory counts exceed practical limits for
-manual review.
 
-\subsection{Comparison with Existing Tools}
+%QC is therefore a safeguard for quantitative conclusions, not a cosmetic post-filter;
+%automated rejection becomes essential when trajectory counts exceed practical limits for
+%manual review.
 
-Supplementary Table~\ref{tab:tool-comparison} contextualises the pipeline against established and recent
-alternatives. The pipeline proposes a training-free operation with a hard temporal
-closure constraint, and multi-level automated quality control.
+%\subsection{Comparison with Existing Tools}
+%
+%Supplementary Table~\ref{tab:tool-comparison} contextualises the pipeline against established and recent
+%alternatives. The pipeline proposes a training-free operation with a hard temporal
+%closure constraint, and multi-level automated quality control.
 
 \subsection{Wound Closure Dynamics}
 

@@ -1,17 +1,28 @@
-# Wound Healing Quantification Pipeline Configuration
-# ====================================================
+# ============================================================================
+# TEMPLATE: Wound Healing Quantification Pipeline Configuration
+# ============================================================================
 #
-# Complete example with all available options.
-# Copy this file and customize for your experiment.
+# This is a TEMPLATE with all available options documented.
+#
+# To use:
+#   1. Copy this file: cp config.example.yaml config.yaml
+#   2. Edit config.yaml with your experiment details
+#   3. Run: python -m library config.yaml
 #
 # Key Concepts:
-# - trajectory identifiers: condition, experiment, sample_name → define which images form a temporal sequence
-# - analysis factors: arbitrary domain-specific variables for statistical grouping
+# - trajectory identifiers: condition, experiment, sample_name → define which
+#   images form a temporal sequence (FIXED, universal)
+# - analysis factors: arbitrary domain-specific variables for statistical
+#   grouping (CONFIGURABLE, add as needed)
 #
-# Usage:
+# Usage in code:
 #   from library.config.pipeline_config import PipelineConfig
-#   config = PipelineConfig.from_yaml("your_config.yaml")
-#   config.validate()  # Check for typos and missing columns
+#   from library.pipeline import Pipeline
+#
+#   config = PipelineConfig.from_yaml("config.yaml")
+#   config.validate()
+#   pipeline = Pipeline(config)
+#   results = pipeline.run()
 
 # INPUT DATA
 # ==========

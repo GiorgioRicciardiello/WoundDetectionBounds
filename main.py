@@ -2,13 +2,23 @@
 Main Quantification Pipeline (Legacy Entry Point)
 ==================================================
 
-This module provides backward compatibility. The core pipeline logic
-is now in library.core.segmentation and used by both main.py and the new API.
+⚠️  This module is LEGACY. It uses hardcoded paths from config/config.py.
 
-For production use, prefer:
-    from library import Pipeline
-    config = Pipeline.from_yaml("config.yaml")
-    results = config.run()
+For production use, use the NEW YAML-based system instead:
+
+    from library.config.pipeline_config import PipelineConfig
+    from library.pipeline import Pipeline
+
+    config = PipelineConfig.from_yaml("config.yaml")
+    config.validate()
+
+    pipeline = Pipeline(config)
+    results = pipeline.run()
+
+Configuration:
+  - config.yaml — Your experiment configuration (edit this)
+  - config.example.yaml — Template with all available options
+  - config/config.py — Legacy hardcoded paths (backward compat only)
 """
 
 import re
