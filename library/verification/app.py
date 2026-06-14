@@ -68,19 +68,16 @@ logger = logging.getLogger(__name__)
 # ===================================================================
 
 def create_app(
-    pickle_path: Path,
-    gemini_root: Path,
-    output_dir: Path,
+    trajectories_path: str | Path,
+    output_dir: str | Path,
 ) -> Flask:
     """Create and configure the Flask verification application.
 
     Parameters
     ----------
-    pickle_path : Path
+    trajectories_path : str or Path
         Path to ``trajectories.pickle``.
-    gemini_root : Path
-        Root directory of gemini results (for debug PNGs).
-    output_dir : Path
+    output_dir : str or Path
         Directory for session files and exports.
 
     Returns
@@ -88,6 +85,9 @@ def create_app(
     Flask
         Configured application instance.
     """
+    trajectories_path = Path(trajectories_path)
+    output_dir = Path(output_dir)
+
     app = Flask(
         __name__,
         template_folder=str(Path(__file__).parent / "templates"),
@@ -95,11 +95,11 @@ def create_app(
     )
 
     # ---- Load data ----
-    logger.info("Loading master trajectories from %s ...", pickle_path)
-    trajectories = load_master_trajectories(pickle_path)
+    logger.info("Loading master trajectories from %s ...", trajectories_path)
+    trajectories = load_master_trajectories(trajectories_path)
     logger.info("Loaded %d trajectories.", len(trajectories))
 
-    records = extract_t0_records(trajectories, gemini_root)
+    records = extract_t0_records(trajectories, None)
     logger.info("Extracted %d t=0 records for verification.", len(records))
 
     # Index records by key for fast lookup

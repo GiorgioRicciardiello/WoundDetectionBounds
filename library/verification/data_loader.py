@@ -97,7 +97,7 @@ def _resolve_debug_png(gemini_root: Path, key: str) -> Optional[Path]:
 
 def extract_t0_records(
     trajectories: Dict[str, Any],
-    gemini_root: Path,
+    gemini_root: Optional[Path] = None,
 ) -> List[Dict[str, Any]]:
     """Extract t=0 data from every trajectory for verification.
 
@@ -105,8 +105,9 @@ def extract_t0_records(
     ----------
     trajectories : dict
         Master trajectories dictionary (from :func:`load_master_trajectories`).
-    gemini_root : Path
+    gemini_root : Path or None, optional
         Root directory containing per-sample subdirectories with debug PNGs.
+        If None, debug PNG paths are omitted.
 
     Returns
     -------
@@ -129,7 +130,7 @@ def extract_t0_records(
     Trajectories whose t=0 ``img_raw`` is ``None`` (failed processing) are
     silently skipped.
     """
-    gemini_root = Path(gemini_root)
+    gemini_root = Path(gemini_root) if gemini_root is not None else None
     records: List[Dict[str, Any]] = []
 
     for key, traj in trajectories.items():
@@ -155,7 +156,7 @@ def extract_t0_records(
             "lower_edge": r0.get("lower_edge"),
             "qc_valid": bool(qc.get("valid", False)),
             "qc_details": qc,
-            "debug_png_path": _resolve_debug_png(gemini_root, key),
+            "debug_png_path": _resolve_debug_png(gemini_root, key) if gemini_root is not None else None,
             "exposure": traj.get("exposure", ""),
             "experiment": traj.get("experiment", ""),
             "sample_name": traj.get("sample_name", ""),
