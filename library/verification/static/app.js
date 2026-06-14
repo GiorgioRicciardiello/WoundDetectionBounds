@@ -250,7 +250,16 @@ async function selectImage(idx) {
     currentKeyEl.textContent = rec.trajectory_key;
     currentFilenameEl.textContent = rec.original_filename || "";
 
-    // Load debug PNG
+    // Load debug PNG if available, fall back to raw image
+    debugImg.onerror = () => {
+        // Debug PNG not available, show raw image instead
+        debugImg.src = `/api/image/${encodeURIComponent(currentKey)}`;
+        debugImg.alt = "Raw image (6-panel debug not available)";
+        debugImg.title = "6-panel debug visualization not available; showing raw image";
+    };
+    debugImg.onload = () => {
+        debugImg.style.opacity = "1";
+    };
     debugImg.src = `/api/debug_png/${encodeURIComponent(currentKey)}`;
 
     // Reset all drawing state
