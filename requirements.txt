@@ -1,0 +1,28 @@
+# Wound Detection Bounds — Python dependencies
+# Install with: pip install -r requirements.txt
+# Python 3.11 required
+
+# Numerical core
+numpy>=1.24
+scipy>=1.10
+
+# Data handling
+pandas>=2.0
+openpyxl>=3.1       # Excel read/write
+
+# Image processing
+scikit-image>=0.21
+Pillow>=10.0
+
+# Visualisation
+matplotlib>=3.7
+
+# Statistics
+statsmodels>=0.14   # Mixed-effects models
+
+# Pipeline utilities
+PyYAML>=6.0         # Config parsing
+tqdm>=4.65          # Progress bars
+
+# Verification GUI (optional — only needed for run_verification_app.py)
+flask>=3.0

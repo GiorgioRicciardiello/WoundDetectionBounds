@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "wound-detection-bounds"
+version = "1.0.0"
+description = "Annotation-free wound healing quantification pipeline for scratch-wound assays"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+    { name = "Giorgio Ricciardiello", email = "giorgio.crm6@gmail.com" },
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "openpyxl>=3.1",
+    "scikit-image>=0.21",
+    "matplotlib>=3.7",
+    "Pillow>=10.0",
+    "flask>=3.0",
+    "PyYAML>=6.0",
+    "tqdm>=4.65",
+    "statsmodels>=0.14",
+]
+
+[project.urls]
+Repository = "https://github.com/GiorgioRicciardiello/WoundDetectionBounds"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["library*", "scripts*", "grant_reporting*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.html", "*.css", "*.js"]

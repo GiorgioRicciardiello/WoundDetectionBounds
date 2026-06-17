@@ -1,3 +1,12 @@
+import warnings
+warnings.warn(
+    "config/config.py uses hardcoded personal paths and is retained for legacy "
+    "compatibility only. Use the YAML-based system instead: copy config.example.yaml "
+    "to config.yaml, fill in your paths, then run: python run_pipeline.py",
+    DeprecationWarning,
+    stacklevel=2,
+)
+
 from pathlib import Path
 project_root_path = Path(__file__).resolve().parents[1]
 res_dir = project_root_path.joinpath('results')
@@ -27,7 +36,7 @@ config = {
 
     # Segmentation pipeline outputs
     'trajectories_pickle': _model_output_dir / 'trajectories.pickle',
-    'final_legacy_table': _model_output_dir / 'experiments.xlsx',
+    'final_legacy_table': _model_output_dir / 'final_legacy_table.xlsx',
     'aligned_legacy_table': _model_output_dir / 'aligned_legacy_table.xlsx',
 
     # Manual verification results (human ground-truth annotations at t=0)
