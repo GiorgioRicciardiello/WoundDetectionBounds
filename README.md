@@ -3,6 +3,8 @@
 Annotation-free, open-source pipeline for quantifying wound closure in scratch-wound
 healing assays from brightfield Incucyte images.
 
+![Wound healing segmentation demo](static/wound_healing_demo.gif)
+
 ## Overview
 
 WoundDetectionBounds segments wound boundaries frame-by-frame using a variance-based
@@ -56,8 +58,7 @@ Each row is one image. The minimum required columns are:
 | `sample_name`         | Well/sample identifier (e.g., `A1`, `A2`) |
 | `cell_line`           | Cell line name |
 
-See `data/README.md` for full column specification.
-See `experiments.xlsx` for a real-data example showing the expected format.
+See `data/README.md` for full column specification and an example of the expected format.
 
 ### 2. Configure
 
@@ -122,18 +123,14 @@ WoundDetectionBounds/
 │       ├── generate_tables.py        # Statistical tables
 │       └── figure_panels.py          # Panel-level builders
 ├── grant_reporting/
-│   └── stat_test.py                  # Statistical tests (used by generate_tables.py)
-├── latexdoc/                         # LaTeX manuscript source
+│   └── stat_test.py                  # Statistical tests (imported by generate_tables.py)
 ├── data/                             # Input format documentation
 ├── tests/                            # Unit and integration tests
-├── docs/                             # Extended documentation
+├── static/                           # Demo assets
 ├── config.example.yaml               # Configuration template
-├── experiments.xlsx                  # Example input (real-data template)
 ├── run_pipeline.py                   # Production entry point
 ├── run_verification_app.py           # Interactive QC GUI launcher
-├── run_ablation_verification.py      # Ablation study launcher
-├── ablation_study.py                 # Ablation analysis script
-└── example_usage.py                  # Code examples
+└── example_usage.py                  # Minimal usage examples
 ```
 
 ---
@@ -194,23 +191,6 @@ segmentation:
 
 ```bash
 python -m pytest tests/ -v
-```
-
----
-
-## Manuscript
-
-The LaTeX source is in `latexdoc/`. Compile with:
-
-```bash
-cd latexdoc
-pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
-```
-
-Publication figures are regenerated with:
-
-```bash
-python -m scripts.publication.generate_figures
 ```
 
 ---
