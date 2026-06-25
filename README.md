@@ -8,7 +8,7 @@ cp config.example.yaml config.yaml   # set your image folder and output path
 python run_pipeline.py               # segmentation + statistics
 ```
 
-![Wound healing segmentation demo](static/wound_healing_demo.gif)
+<img src="static/wound_healing_demo.gif" width="480" alt="Wound healing segmentation demo"/>
 
 ## What it does
 
@@ -17,6 +17,10 @@ Segments wound boundaries in every frame using a variance-based detector, enforc
 **You get:** per-frame wound area trajectories, QC labels, and a ready-to-submit Excel table of statistics.
 
 **You need:** `.tif` brightfield images and an Excel file listing their paths and metadata. No labels, no GPU, no model training.
+
+## Method overview
+
+<img src="static/diagram_main_figure.png" alt="Pipeline overview: experimental workflow, single-frame detector, temporal integration with monotonic closure constraint, and quantitative metrics"/>
 
 ---
 
