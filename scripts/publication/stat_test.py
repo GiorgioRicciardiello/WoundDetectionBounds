@@ -63,7 +63,12 @@ def analyze_migration_dynamics(
         re_formula=f"~{time_col}",
     )
 
-    mixed_result = model.fit(method="lbfgs")
+    # NOTE: the default "lbfgs" optimizer fails to converge on the random-slope
+    # (re_formula="~t") specification for this cohort (Hessian not positive
+    # definite), which silently inflates the time-effect SE and collapses its
+    # p-value. "bfgs"/"cg"/"powell" all converge cleanly and agree to 4 d.p.;
+    # we pass a ladder so statsmodels falls through to the first that converges.
+    mixed_result = model.fit(method=["bfgs", "cg", "powell", "lbfgs"])
 
     model_summary = {
         "params": mixed_result.params,

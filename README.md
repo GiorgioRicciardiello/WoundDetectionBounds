@@ -1,22 +1,22 @@
 # WoundDetectionBounds
 
-Annotation-free, open-source pipeline for quantifying wound closure in scratch-wound
-healing assays from brightfield Incucyte images.
+**Turn brightfield Incucyte images into publication-ready wound-closure statistics — no annotation, no training, three commands.**
+
+```bash
+pip install -r requirements.txt
+cp config.example.yaml config.yaml   # set your image folder and output path
+python run_pipeline.py               # segmentation + statistics
+```
 
 ![Wound healing segmentation demo](static/wound_healing_demo.gif)
 
-## Overview
+## What it does
 
-WoundDetectionBounds segments wound boundaries frame-by-frame using a variance-based
-detector, then enforces the biological monotonicity constraint (wound can only close)
-via a per-column Kalman filter. The result is publication-ready wound area trajectories,
-QC-validated per frame, with pairwise statistical analysis across conditions.
+Segments wound boundaries in every frame using a variance-based detector, enforces the biological constraint that wounds can only close (Kalman filter per column), flags bad frames automatically via QC, then runs pairwise statistical comparisons (Welch's t-test, Bonferroni correction, Cohen's d) across your conditions.
 
-**Key properties:**
-- No annotation or training data required
-- Minimal parameter tuning — hyperparameters are fixed, not learned per dataset
-- Temporal constraint integrated into segmentation (not post-hoc smoothing)
-- Freely available to the research community
+**You get:** per-frame wound area trajectories, QC labels, and a ready-to-submit Excel table of statistics.
+
+**You need:** `.tif` brightfield images and an Excel file listing their paths and metadata. No labels, no GPU, no model training.
 
 ---
 
@@ -121,9 +121,8 @@ WoundDetectionBounds/
 │   └── publication/                  # Reproducible figure and table generation
 │       ├── generate_figures.py       # Fig 1 + Fig 2 orchestrator
 │       ├── generate_tables.py        # Statistical tables
-│       └── figure_panels.py          # Panel-level builders
-├── grant_reporting/
-│   └── stat_test.py                  # Statistical tests (imported by generate_tables.py)
+│       ├── figure_panels.py          # Panel-level builders
+│       └── stat_test.py              # Statistical tests (Welch's t-test, Bonferroni, Cohen's d)
 ├── data/                             # Input format documentation
 ├── tests/                            # Unit and integration tests
 ├── static/                           # Demo assets

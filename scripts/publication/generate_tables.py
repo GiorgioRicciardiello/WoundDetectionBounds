@@ -83,7 +83,7 @@ def export_statistics_tables(
         Root publication directory.  The file is written to
         ``output_dir / "tables" / "statistics.xlsx"``.
     """
-    from grant_reporting.stat_test import (
+    from scripts.publication.stat_test import (
         analyze_final_timepoint,
         analyze_migration_dynamics,
     )
@@ -704,7 +704,12 @@ def export_figure_captions(
         f"semi-transparent filled regions. Boundaries are shown cumulatively: "
         f"earlier timepoints appear as faint dashed outlines, the current "
         f"timepoint as solid fill.  "
-        f"Representative trajectory: {rep_key}. "
+        # The representative well is the most-average DMSO control trajectory.
+        # Its internal storage key is deliberately NOT printed: the well was
+        # acquired on a plate whose folder name references an excluded arm, and
+        # the manuscript reports no drug-arm provenance. rep_key is retained in
+        # the signature for traceability/logging only.
+        f"A representative DMSO control trajectory is shown. "
         f"Images were acquired at a calibrated scale of 1.24 um/px. "
         f"(D) Normalised wound area over time, expressed as a fraction of "
         f"the t = 0 wound area. Error bands represent {error_label}. "
